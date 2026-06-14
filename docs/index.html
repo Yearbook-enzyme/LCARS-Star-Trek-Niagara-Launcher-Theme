@@ -6,28 +6,68 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main>
-    <h1>LCARS Niagara Launcher Theme</h1>
+  <main class="layout">
+    <section class="panel">
+      <h1>LCARS Niagara Launcher Theme</h1>
+      <p>Download the Niagara theme file and generate matching LCARS wallpapers.</p>
 
-    <p>
-      Download the Niagara Launcher theme file and generate matching LCARS-style wallpapers.
-    </p>
+      <a class="button" href="downloads/shared_theme_20260423_121613.nlt" download>
+        Download Theme File
+      </a>
 
-    <a
-      class="button"
-      href="downloads/shared_theme_20260423_121613.nlt"
-      download
-    >
-      Download Niagara Theme
-    </a>
+      <h2>Wallpaper Generator</h2>
 
-    <h2>Wallpaper Generator</h2>
+      <label>
+        Device preset
+        <select id="preset">
+          <option value="1080x2400">Modern Android — 1080×2400</option>
+          <option value="1440x3200">Flagship Android — 1440×3200</option>
+          <option value="1080x2340">19.5:9 Phone — 1080×2340</option>
+          <option value="1080x2520">Tall Phone — 1080×2520</option>
+          <option value="1080x1920">Legacy / DAP — 1080×1920</option>
+          <option value="2208x1840">Foldable Inner — 2208×1840</option>
+          <option value="904x2316">Foldable Outer — 904×2316</option>
+          <option value="2560x1600">Android Tablet — 2560×1600</option>
+          <option value="2732x2048">iPad Landscape — 2732×2048</option>
+        </select>
+      </label>
 
-    <p>
-      Wallpaper generation tools are coming next.
-    </p>
+      <label>
+        Palette
+        <select id="palette">
+          <option value="classic">Classic Warm LCARS</option>
+          <option value="red">Red Alert</option>
+          <option value="voyager">Voyager Soft</option>
+          <option value="muted">Muted OLED</option>
+        </select>
+      </label>
 
-    <button id="download">Test Generator Button</button>
+      <label>
+        Spine position
+        <input id="spineX" type="range" min="45" max="82" value="67">
+      </label>
+
+      <label>
+        Horizontal line height
+        <input id="barY" type="range" min="10" max="45" value="19">
+      </label>
+
+      <label>
+        Thickness
+        <input id="thickness" type="range" min="10" max="60" value="24">
+      </label>
+
+      <label>
+        Roundedness
+        <input id="radius" type="range" min="0" max="120" value="70">
+      </label>
+
+      <button id="download">Download Wallpaper PNG</button>
+    </section>
+
+    <section class="previewWrap">
+      <canvas id="preview"></canvas>
+    </section>
   </main>
 
   <script src="app.js"></script>
