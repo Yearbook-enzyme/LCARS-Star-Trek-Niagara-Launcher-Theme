@@ -117,3 +117,8 @@ canvas {
 .customSize[hidden] {
   display: none !important;
 }
+
+[hidden],
+.customSize[hidden] {
+  display: none !important;
+}
