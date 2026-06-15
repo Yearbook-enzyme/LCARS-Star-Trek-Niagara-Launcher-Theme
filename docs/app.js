@@ -22,27 +22,23 @@ const palettes = {
   highContrast: ["#ffffff", "#ff9f1c", "#ff2e2e", "#ffd23f", "#f7f7f7"]
 };
 
-// Reference measurements from your source image.
-// These are treated as LCARS proportions, not separate user sliders.
 const REF = {
   docW: 690,
   docH: 1536,
-  innerCurveW: 66.673,
-  innerCurveH: 77.433,
-  outerCurveW: 101.697,
-  outerCurveH: 113.301,
-  centerGap: 20.466,
   railThickness: 26,
+  centerGap: 20.466,
   leftSeg1W: 145,
   leftSeg2W: 145,
   leftGap: 7,
   topOrangeH: 126,
+  topRedH: 194,
+  lowerRedH: 186,
   midOrangeH: 84,
   goldH: 255,
-  creamH: 235
+  creamH: 235,
+  elbowRadius: 77.433,
+  topCornerRadius: 113.301
 };
-
-const K = 0.5522847498307936;
 
 function getSize() {
   const preset = document.getElementById("preset").value;
@@ -63,33 +59,226 @@ function value(id, fallback) {
   return el ? Number(el.value) : fallback;
 }
 
-function rect(c, x, y, w, h, color) {
-  c.fillStyle = color;
-  c.fillRect(x, y, w, h);
+function fillRect(context, x, y, w, h, color) {
+  if (w <= 0 || h <= 0) {
+    return;
+  }
+
+  context.fillStyle = color;
+  context.fillRect(x, y, w, h);
 }
 
-function qLB_RT(c, x0, yTop, x1, yBottom) {
-  const dx = x1 - x0;
-  const dy = yBottom - yTop;
-  c.bezierCurveTo(x0 + K * dx, yBottom, x1, yTop + K * dy, x1, yTop);
+function moveTo(context, x, y) {
+  context.moveTo(Math.round(x) + 0.5, Math.round(y) + 0.5);
 }
 
-function qRT_LB(c, x0, yTop, x1, yBottom) {
-  const dx = x1 - x0;
-  const dy = yBottom - yTop;
-  c.bezierCurveTo(x1, yTop + K * dy, x0 + K * dx, yBottom, x0, yBottom);
+function lineTo(context, x, y) {
+  context.lineTo(Math.round(x) + 0.5, Math.round(y) + 0.5);
 }
 
-function qLT_RB(c, x0, yTop, x1, yBottom) {
-  const dx = x1 - x0;
-  const dy = yBottom - yTop;
-  c.bezierCurveTo(x0 + K * dx, yTop, x1, yBottom - K * dy, x1, yBottom);
+function clamp(number, min, max) {
+  return Math.max(min, Math.min(max, number));
 }
 
-function qRB_LT(c, x0, yTop, x1, yBottom) {
-  const dx = x1 - x0;
-  const dy = yBottom - yTop;
-  c.bezierCurveTo(x1, yBottom - K * dy, x0 + K * dx, yTop, x0, yTop);
+function quarterArc(context, cx, cy, r, start, end, anticlockwise = false) {
+  if (r <= 0) {
+    context.lineTo(cx, cy);
+    return;
+  }
+
+  context.arc(cx, cy, r, start, end, anticlockwise);
+}
+
+function getControls() {
+  return {
+    spinePct: value("spineX", 67) / 100,
+    barPct: value("barY", 19) / 100,
+    thicknessPx: value("thickness", 26),
+    segmentPct: value("segmentScale", 100) / 100
+  };
+}
+
+function getGeometry(w, h, controls) {
+  const sx = w / REF.docW;
+  const sy = h / REF.docH;
+  const baseScale = Math.min(sx, sy);
+  const motifScale = controls.thicknessPx / REF.railThickness;
+
+  const railH = Math.max(8, controls.thicknessPx * baseScale);
+  const gap = Math.max(6, REF.centerGap * baseScale * motifScale);
+  const divider = Math.max(3, Math.round(railH * 0.18));
+
+  const leftGap = Math.max(2, REF.leftGap * baseScale * motifScale);
+  const leftSeg1W = REF.leftSeg1W * sx * controls.segmentPct;
+  const leftSeg2W = REF.leftSeg2W * sx * controls.segmentPct;
+  const railStart = leftSeg1W + leftGap + leftSeg2W + leftGap;
+
+  const minSpineX = railStart + 40 * baseScale;
+  const maxSpineX = w - 80 * baseScale;
+  const spineX = clamp(w * controls.spinePct, minSpineX, maxSpineX);
+  const spineW = Math.max(40 * baseScale, w - spineX);
+
+  const elbowRadius = clamp(
+    REF.elbowRadius * baseScale * motifScale,
+    railH * 0.85,
+    Math.max(railH * 1.2, spineW * 0.8)
+  );
+
+  const topCornerRadius = clamp(
+    REF.topCornerRadius * baseScale * motifScale,
+    railH * 1.25,
+    Math.max(railH * 1.8, spineW * 1.6)
+  );
+
+  const topOrangeH = Math.max(30 * baseScale, REF.topOrangeH * sy * motifScale);
+  const topRedTop = topOrangeH + divider;
+  const topRedBottomRef = topRedTop + REF.topRedH * sy * motifScale;
+
+  const barCenterY = h * controls.barPct;
+  const upperBarTop = barCenterY - gap / 2 - railH;
+  const upperBarBottom = upperBarTop + railH;
+  const lowerBarTop = upperBarBottom + gap;
+  const lowerBarBottom = lowerBarTop + railH;
+
+  const minBarTop = topRedTop + topCornerRadius + railH * 0.5;
+  const maxBarTop = h - railH * 6;
+  const adjustedUpperBarTop = clamp(upperBarTop, minBarTop, maxBarTop);
+  const adjustedUpperBarBottom = adjustedUpperBarTop + railH;
+  const adjustedLowerBarTop = adjustedUpperBarBottom + gap;
+  const adjustedLowerBarBottom = adjustedLowerBarTop + railH;
+
+  const upperJoinRadius = clamp(
+    elbowRadius,
+    railH * 0.8,
+    Math.max(railH, adjustedUpperBarTop - topRedTop - railH * 0.25)
+  );
+
+  const topRedBottom = Math.max(topRedBottomRef, adjustedUpperBarBottom);
+  const lowerRedTop = adjustedLowerBarTop;
+  const lowerRedBottom = lowerRedTop + Math.max(railH + divider, REF.lowerRedH * sy * motifScale);
+
+  const blockGap = divider;
+  const midOrangeY = lowerRedBottom + blockGap;
+  const midOrangeH = Math.max(18 * baseScale, REF.midOrangeH * sy * motifScale);
+  const goldY = midOrangeY + midOrangeH + blockGap;
+  const goldH = Math.max(40 * baseScale, REF.goldH * sy * motifScale);
+  const creamY = goldY + goldH + blockGap;
+  const creamH = Math.max(40 * baseScale, REF.creamH * sy * motifScale);
+  const bottomRedY = creamY + creamH + blockGap;
+
+  return {
+    w,
+    h,
+    railH,
+    gap,
+    divider,
+    leftGap,
+    leftSeg1W,
+    leftSeg2W,
+    railStart,
+    spineX,
+    spineW,
+    topOrangeH,
+    topRedTop,
+    topRedBottom,
+    upperBarTop: adjustedUpperBarTop,
+    upperBarBottom: adjustedUpperBarBottom,
+    lowerBarTop: adjustedLowerBarTop,
+    lowerBarBottom: adjustedLowerBarBottom,
+    upperJoinRadius,
+    topCornerRadius,
+    lowerRedTop,
+    lowerRedBottom,
+    midOrangeY,
+    midOrangeH,
+    goldY,
+    goldH,
+    creamY,
+    creamH,
+    bottomRedY
+  };
+}
+
+function drawUpperRed(context, geometry, color) {
+  const rTop = clamp(
+    geometry.topCornerRadius,
+    0,
+    Math.max(0, geometry.topRedBottom - geometry.topRedTop - 1)
+  );
+
+  const rJoin = clamp(
+    geometry.upperJoinRadius,
+    0,
+    Math.max(
+      0,
+      Math.min(
+        geometry.spineX - geometry.railStart - 1,
+        geometry.upperBarTop - geometry.topRedTop - 1
+      )
+    )
+  );
+
+  context.fillStyle = color;
+  context.beginPath();
+  moveTo(context, geometry.railStart, geometry.upperBarTop);
+  lineTo(context, geometry.spineX - rJoin, geometry.upperBarTop);
+  quarterArc(
+    context,
+    geometry.spineX - rJoin,
+    geometry.upperBarTop - rJoin,
+    rJoin,
+    Math.PI / 2,
+    0,
+    true
+  );
+  lineTo(context, geometry.spineX, geometry.topRedTop + rTop);
+  quarterArc(
+    context,
+    geometry.spineX + rTop,
+    geometry.topRedTop + rTop,
+    rTop,
+    Math.PI,
+    Math.PI * 1.5
+  );
+  lineTo(context, geometry.w, geometry.topRedTop);
+  lineTo(context, geometry.w, geometry.topRedBottom);
+  lineTo(context, geometry.railStart, geometry.topRedBottom);
+  context.closePath();
+  context.fill();
+}
+
+function drawLowerRed(context, geometry, color) {
+  const rJoin = clamp(
+    geometry.upperJoinRadius,
+    0,
+    Math.max(
+      0,
+      Math.min(
+        geometry.spineX - geometry.railStart - 1,
+        geometry.lowerRedBottom - geometry.lowerBarTop - 1
+      )
+    )
+  );
+
+  context.fillStyle = color;
+  context.beginPath();
+  moveTo(context, geometry.railStart, geometry.lowerBarTop);
+  lineTo(context, geometry.w, geometry.lowerBarTop);
+  lineTo(context, geometry.w, geometry.lowerRedBottom);
+  lineTo(context, geometry.spineX, geometry.lowerRedBottom);
+  lineTo(context, geometry.spineX, geometry.lowerBarTop + rJoin);
+  quarterArc(
+    context,
+    geometry.spineX - rJoin,
+    geometry.lowerBarTop + rJoin,
+    rJoin,
+    0,
+    Math.PI * 1.5,
+    true
+  );
+  lineTo(context, geometry.railStart, geometry.lowerBarTop);
+  context.closePath();
+  context.fill();
 }
 
 function drawWallpaper(targetCanvas) {
@@ -97,99 +286,44 @@ function drawWallpaper(targetCanvas) {
   targetCanvas.width = w;
   targetCanvas.height = h;
 
-  const c = targetCanvas.getContext("2d");
+  const context = targetCanvas.getContext("2d");
   const palette = palettes[document.getElementById("palette").value] || palettes.classic;
+  const controls = getControls();
+  const geometry = getGeometry(w, h, controls);
 
-  const sx = w / REF.docW;
-  const sy = h / REF.docH;
+  context.clearRect(0, 0, w, h);
+  context.fillStyle = "#000";
+  context.fillRect(0, 0, w, h);
 
-  const spinePercent = value("spineX", 67) / 100;
-  const barPercent = value("barY", 19) / 100;
-  const thicknessScale = value("thickness", 26) / REF.railThickness;
-  const segmentScale = value("segmentScale", 100) / 100;
-  const columnX = w * spinePercent;
-  const rightW = w - columnX;
+  fillRect(context, geometry.spineX, 0, geometry.spineW, geometry.topOrangeH, palette[1]);
 
-  const barY = h * barPercent;
+  fillRect(context, 0, geometry.upperBarTop, geometry.leftSeg1W, geometry.railH, palette[0]);
+  fillRect(
+    context,
+    geometry.leftSeg1W + geometry.leftGap,
+    geometry.upperBarTop,
+    geometry.leftSeg2W,
+    geometry.railH,
+    palette[1]
+  );
 
-  // Thickness slider scales the whole LCARS language together.
-  const railH = REF.railThickness * sy * thicknessScale;
-  const centerGap = REF.centerGap * sy * thicknessScale;
-  const innerW = REF.innerCurveW * sx * thicknessScale;
-  const innerH = REF.innerCurveH * sy * thicknessScale;
-  const outerW = REF.outerCurveW * sx * thicknessScale;
-  const outerH = REF.outerCurveH * sy * thicknessScale;
-  const leftGap = REF.leftGap * sx * thicknessScale;
+  fillRect(context, 0, geometry.lowerBarTop, geometry.leftSeg1W, geometry.railH, palette[0]);
+  fillRect(
+    context,
+    geometry.leftSeg1W + geometry.leftGap,
+    geometry.lowerBarTop,
+    geometry.leftSeg2W,
+    geometry.railH,
+    palette[1]
+  );
 
-  const leftSeg1W = REF.leftSeg1W * sx * segmentScale;
-  const leftSeg2W = REF.leftSeg2W * sx * segmentScale;
+  drawUpperRed(context, geometry, palette[2]);
+  drawLowerRed(context, geometry, palette[2]);
 
-  const topOrangeH = REF.topOrangeH * sy * thicknessScale;
-  const midOrangeH = REF.midOrangeH * sy * thicknessScale;
-  const goldH = REF.goldH * sy * thicknessScale;
-  const creamH = REF.creamH * sy * thicknessScale;
-
-  c.fillStyle = "#000";
-  c.fillRect(0, 0, w, h);
-
-  const railTopY = barY - centerGap / 2 - railH;
-  const railBottomY = barY + centerGap / 2;
-  const railStart = leftSeg1W + leftGap + leftSeg2W + leftGap;
-
-  // Left segmented rails
-  rect(c, 0, railTopY, leftSeg1W, railH, palette[0]);
-  rect(c, leftSeg1W + leftGap, railTopY, leftSeg2W, railH, palette[1]);
-
-  rect(c, 0, railBottomY, leftSeg1W, railH, palette[0]);
-  rect(c, leftSeg1W + leftGap, railBottomY, leftSeg2W, railH, palette[1]);
-
-  const topRedY = railTopY - innerH;
-  const topRedBottom = railTopY + railH;
-
-  const lowerRedTop = railBottomY;
-  const lowerRedBottom = railBottomY + railH + innerH;
-
-  const blockGap = centerGap;
-  const midOrangeY = lowerRedBottom + blockGap;
-  const goldY = midOrangeY + midOrangeH + blockGap;
-  const creamY = goldY + goldH + blockGap;
-  const bottomRedY = creamY + creamH + blockGap;
-  const bottomRedH = Math.max(0, h - bottomRedY);
-
-  // Top orange block
-  rect(c, columnX, 0, rightW, topOrangeH, palette[1]);
-
-  // Upper red elbow
-  c.fillStyle = palette[2];
-  c.beginPath();
-  c.moveTo(railStart, railTopY);
-  c.lineTo(columnX - innerW, railTopY);
-  qLB_RT(c, columnX - innerW, topRedY, columnX, railTopY);
-  c.lineTo(w, topRedY);
-  c.lineTo(w, topRedBottom - outerH);
-  qRT_LB(c, w - outerW, topRedBottom - outerH, w, topRedBottom);
-  c.lineTo(railStart, topRedBottom);
-  c.closePath();
-  c.fill();
-
-  // Lower red elbow
-  c.fillStyle = palette[2];
-  c.beginPath();
-  c.moveTo(railStart, lowerRedTop);
-  c.lineTo(w - outerW, lowerRedTop);
-  qLT_RB(c, w - outerW, lowerRedTop, w, lowerRedTop + outerH);
-  c.lineTo(w, lowerRedBottom);
-  c.lineTo(columnX, lowerRedBottom);
-  qRB_LT(c, columnX - innerW, railBottomY + railH, columnX, lowerRedBottom);
-  c.lineTo(railStart, railBottomY + railH);
-  c.closePath();
-  c.fill();
-
-  // Remaining right blocks
-  rect(c, columnX, midOrangeY, rightW, midOrangeH, palette[1]);
-  rect(c, columnX, goldY, rightW, goldH, palette[3]);
-  rect(c, columnX, creamY, rightW, creamH, palette[4]);
-  rect(c, columnX, bottomRedY, rightW, bottomRedH, palette[2]);
+  fillRect(context, geometry.spineX, geometry.midOrangeY, geometry.spineW, geometry.midOrangeH, palette[1]);
+  fillRect(context, geometry.spineX, geometry.goldY, geometry.spineW, geometry.goldH, palette[3]);
+  fillRect(context, geometry.spineX, geometry.creamY, geometry.spineW, geometry.creamH, palette[4]);
+  fillRect(context, geometry.spineX, geometry.bottomRedY, geometry.spineW, h - geometry.bottomRedY, palette[2]);
 }
 
 function redrawPreview() {
@@ -199,19 +333,24 @@ function redrawPreview() {
   const maxPreviewH = Math.min(window.innerHeight * 0.88, 900);
   const scale = Math.min(maxPreviewW / w, maxPreviewH / h);
 
-  canvas.width = Math.round(w * scale);
-  canvas.height = Math.round(h * scale);
+  canvas.width = Math.max(1, Math.round(w * scale));
+  canvas.height = Math.max(1, Math.round(h * scale));
 
   const temp = document.createElement("canvas");
   drawWallpaper(temp);
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.imageSmoothingEnabled = true;
   ctx.drawImage(temp, 0, 0, canvas.width, canvas.height);
 }
 
 function updateCustomVisibility() {
   const customSize = document.getElementById("customSize");
-  if (!customSize) return;
+
+  if (!customSize) {
+    return;
+  }
+
   customSize.hidden = document.getElementById("preset").value !== "custom";
 }
 
@@ -220,9 +359,9 @@ function updateAll() {
   redrawPreview();
 }
 
-document.querySelectorAll("select, input").forEach(el => {
-  el.addEventListener("input", updateAll);
-  el.addEventListener("change", updateAll);
+document.querySelectorAll("select, input").forEach((element) => {
+  element.addEventListener("input", updateAll);
+  element.addEventListener("change", updateAll);
 });
 
 window.addEventListener("resize", redrawPreview);
