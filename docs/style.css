@@ -122,3 +122,80 @@ canvas {
 .customSize[hidden] {
   display: none !important;
 }
+
+.secondary {
+  margin-top: 0.75rem;
+  background: #e09a3f;
+}
+
+textarea {
+  width: 100%;
+  background: #111;
+  color: #ffd0a0;
+  border: 1px solid #a44;
+  border-radius: 1rem;
+  padding: 0.8rem;
+  resize: vertical;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+input[type="file"] {
+  color: #ffd0a0;
+}
+
+.widePreview {
+  place-items: start stretch;
+}
+
+.iconPreview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.iconPreviewItem {
+  width: 86px;
+  font-size: 0.75rem;
+  color: #f2c18a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.generatedIcon {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  margin-bottom: 0.35rem;
+  box-shadow: 0 0 18px rgba(255, 120, 60, 0.12);
+}
+
+.generatedIcon.mini {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th,
+td {
+  border-bottom: 1px solid #2a1a14;
+  padding: 0.5rem;
+  text-align: left;
+  vertical-align: middle;
+}
+
+td select {
+  min-width: 190px;
+}

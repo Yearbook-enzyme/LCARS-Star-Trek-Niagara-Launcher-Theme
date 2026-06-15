@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>LCARS Icon Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="layout">
+    <section class="panel">
+      <h1>LCARS Icon Generator</h1>
+      <p>Generate blank rounded-square icon sets from an app list. Everything runs locally in your browser.</p>
+
+      <a class="button secondary" href="index.html">Back to Wallpaper Generator</a>
+
+      <h2>Input</h2>
+
+      <label>
+        Upload app list
+        <input id="appFile" type="file" accept=".txt,.csv,.json">
+      </label>
+
+      <label>
+        Or paste app list
+        <textarea id="appText" rows="10" placeholder="com.discord&#10;com.brave.browser&#10;com.openai.chatgpt"></textarea>
+      </label>
+
+      <button id="parseApps">Parse App List</button>
+
+      <h2>Icon Style</h2>
+
+      <label>
+        Theme palette
+        <select id="palette">
+          <option value="classic">Classic Warm LCARS</option>
+          <option value="tng">TNG Pastel LCARS</option>
+          <option value="ds9">DS9 Muted Station</option>
+          <option value="voyager">Voyager Soft</option>
+          <option value="command">Command Gold</option>
+          <option value="red">Red Alert</option>
+          <option value="science">Science Blue/Purple</option>
+          <option value="medical">Medical Teal</option>
+          <option value="romulan">Romulan Green</option>
+          <option value="muted">Muted OLED</option>
+          <option value="eink">E-Ink Soft</option>
+          <option value="terminal">Terminal Green</option>
+        </select>
+      </label>
+
+      <label>
+        Color mode
+        <select id="colorMode">
+          <option value="themeMono">Theme-matched monochrome</option>
+          <option value="categoryPalette">Theme palette by category</option>
+          <option value="rainbow">Rainbow category mode</option>
+        </select>
+      </label>
+
+      <label>
+        Icon size
+        <select id="iconSize">
+          <option value="432">432×432 PNG</option>
+          <option value="512">512×512 PNG</option>
+          <option value="1024">1024×1024 PNG</option>
+        </select>
+      </label>
+
+      <button id="downloadZip">Download Icon ZIP</button>
+      <button id="copyUnknowns">Copy Unknown-App JSON</button>
+
+      <p id="status" class="hint">No app list loaded yet.</p>
+    </section>
+
+    <section class="previewWrap widePreview">
+      <div>
+        <h2>Parsed Apps</h2>
+        <div id="summary" class="hint"></div>
+        <div id="iconPreview" class="iconPreview"></div>
+
+        <div class="tableWrap">
+          <table id="appsTable">
+            <thead>
+              <tr>
+                <th>Icon</th>
+                <th>App</th>
+                <th>Package</th>
+                <th>Category</th>
+                <th>Source</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="icon-generator.js?v=1"></script>
+</body>
+</html>

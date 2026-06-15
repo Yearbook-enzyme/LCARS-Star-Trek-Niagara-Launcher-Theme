@@ -1,0 +1,25 @@
+{
+  "com.discord": { "label": "Discord", "category": "communication" },
+  "org.telegram.messenger": { "label": "Telegram", "category": "communication" },
+  "org.thoughtcrime.securesms": { "label": "Signal", "category": "communication" },
+  "com.reddit.frontpage": { "label": "Reddit", "category": "communication" },
+  "com.google.android.gm": { "label": "Gmail", "category": "communication" },
+
+  "com.brave.browser": { "label": "Brave", "category": "browser" },
+  "com.android.chrome": { "label": "Chrome", "category": "browser" },
+  "org.mozilla.firefox": { "label": "Firefox", "category": "browser" },
+
+  "com.openai.chatgpt": { "label": "ChatGPT", "category": "ai" },
+
+  "com.spotify.music": { "label": "Spotify", "category": "media" },
+  "com.maxmpz.audioplayer": { "label": "Poweramp", "category": "media" },
+  "com.google.android.youtube": { "label": "YouTube", "category": "media" },
+
+  "com.fitbit.FitbitMobile": { "label": "Fitbit", "category": "health" },
+  "com.withings.wiscale2": { "label": "Withings", "category": "health" },
+
+  "com.google.android.apps.maps": { "label": "Google Maps", "category": "maps" },
+  "com.google.android.calendar": { "label": "Calendar", "category": "productivity" },
+  "com.google.android.keep": { "label": "Keep Notes", "category": "productivity" },
+  "com.termux": { "label": "Termux", "category": "tools" }
+}
