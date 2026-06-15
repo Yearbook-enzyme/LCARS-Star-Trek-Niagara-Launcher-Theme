@@ -67,10 +67,6 @@ function clamp(number, min, max) {
   return Math.max(min, Math.min(max, number));
 }
 
-function lerp(a, b, t) {
-  return a + (b - a) * t;
-}
-
 function fillRect(context, x, y, w, h, color) {
   if (w <= 0 || h <= 0) return;
   context.fillStyle = color;
@@ -112,26 +108,20 @@ function getControls() {
 
 function getRefGeometry(controls) {
   const rawT = clamp(controls.thicknessRaw, 0.7, 1.45);
-  const thicknessT = 1 + (rawT - 1) * 0.22;
-  const curveT = 1 + (rawT - 1) * 0.14;
-  const blockT = 1 + (rawT - 1) * 0.12;
-  const gapT = 1 + (rawT - 1) * 0.18;
+  const motifScale = 1 + (rawT - 1) * 0.32;
+  const segmentScale = 1 + (clamp(controls.segmentPct, 0.7, 1.35) - 1) * 1.15;
 
-  const segmentRaw = clamp(controls.segmentPct, 0.75, 1.25);
-  const segmentT = 1 + (segmentRaw - 1) * 0.8;
+  const railH = REF.railThickness * motifScale;
+  const gap = REF.centerGap * motifScale;
+  const divider = REF.divider * motifScale;
+  const innerW = REF.innerCurveW * motifScale;
+  const innerH = REF.innerCurveH * motifScale;
+  const outerW = REF.outerCurveW * motifScale;
+  const outerH = REF.outerCurveH * motifScale;
 
-  const railH = REF.railThickness * thicknessT;
-  const gap = REF.centerGap * gapT;
-  const divider = REF.divider * (1 + (rawT - 1) * 0.08);
-
-  const innerW = REF.innerCurveW * curveT;
-  const innerH = REF.innerCurveH * curveT;
-  const outerW = REF.outerCurveW * curveT;
-  const outerH = REF.outerCurveH * curveT;
-
-  const leftGap = REF.leftGap * thicknessT;
-  const leftSeg1W = REF.leftSeg1W * segmentT;
-  const leftSeg2W = REF.leftSeg2W * segmentT;
+  const leftGap = REF.leftGap * motifScale;
+  const leftSeg1W = REF.leftSeg1W * segmentScale;
+  const leftSeg2W = REF.leftSeg2W * segmentScale;
   const railStart = leftSeg1W + leftGap + leftSeg2W + leftGap;
 
   const minSpineX = railStart + innerW + 12;
@@ -139,38 +129,40 @@ function getRefGeometry(controls) {
   const spineX = clamp(controls.spinePct * REF.docW, minSpineX, maxSpineX);
   const spineW = REF.docW - spineX;
 
-  const topOrangeH = REF.topOrangeH * blockT;
+  const topOrangeH = REF.topOrangeH * motifScale;
   const topRedTop = topOrangeH + divider;
-  const topRedBottomBase = topRedTop + REF.topRedH * blockT;
+  const topRedBottom = topRedTop + REF.topRedH * motifScale;
 
-  const lowerRedH = REF.lowerRedH * blockT;
-  const midOrangeH = REF.midOrangeH * blockT;
-  const goldH = REF.goldH * blockT;
-  const creamH = REF.creamH * blockT;
+  const lowerRedH = REF.lowerRedH * motifScale;
+  const midOrangeH = REF.midOrangeH * motifScale;
+  const goldH = REF.goldH * motifScale;
+  const creamH = REF.creamH * motifScale;
 
-  const motifTopMin = topRedTop;
-  const motifBottomMax = REF.docH - (midOrangeH + goldH + creamH + lowerRedH + divider * 4 + 40);
+  const baseJunctionCenter = topRedTop + innerH + railH + gap * 0.5;
 
-  const junctionMin = motifTopMin + innerH + railH + gap / 2;
-  const junctionMax = Math.max(
-    junctionMin,
-    motifBottomMax
-  );
+  const groupHeight =
+    REF.lowerRedH * motifScale +
+    divider +
+    midOrangeH +
+    divider +
+    goldH +
+    divider +
+    creamH +
+    divider +
+    120 * motifScale;
 
-  const baseJunctionY = clamp(controls.barPct * REF.docH, junctionMin, junctionMax);
+  const minGroupShift = -(baseJunctionCenter - (topRedTop + innerH + railH + gap / 2));
+  const maxGroupShift = REF.docH - groupHeight - baseJunctionCenter;
+  const desiredCenter = controls.barPct * REF.docH;
+  const groupShift = clamp(desiredCenter - baseJunctionCenter, minGroupShift, maxGroupShift);
 
-  const topSlack = baseJunctionY - junctionMin;
-  const bottomSlack = junctionMax - baseJunctionY;
-  const desiredUpperBarTop = baseJunctionY - gap / 2 - railH;
-
-  const upperCurveTopY = Math.max(topRedTop, desiredUpperBarTop - innerH);
-  const upperBarTop = upperCurveTopY + innerH;
+  const upperBarTop = baseJunctionCenter + groupShift - gap / 2 - railH;
   const upperBarBottom = upperBarTop + railH;
-
   const lowerBarTop = upperBarBottom + gap;
   const lowerBarBottom = lowerBarTop + railH;
 
-  const topRedBottom = Math.max(topRedBottomBase, upperBarBottom);
+  const upperCurveTopY = upperBarTop - innerH;
+  const actualTopRedBottom = Math.max(topRedBottom + groupShift, upperBarBottom);
   const lowerRedTop = lowerBarTop;
   const lowerRedBottom = lowerRedTop + lowerRedH;
 
@@ -178,13 +170,6 @@ function getRefGeometry(controls) {
   const goldY = midOrangeY + midOrangeH + divider;
   const creamY = goldY + goldH + divider;
   const bottomRedY = creamY + creamH + divider;
-
-  const overflow = bottomRedY - (REF.docH - 20);
-  let shiftUp = 0;
-
-  if (overflow > 0) {
-    shiftUp = overflow;
-  }
 
   return {
     railH,
@@ -201,22 +186,22 @@ function getRefGeometry(controls) {
     spineX,
     spineW,
     topOrangeH,
-    topRedTop,
-    topRedBottom: topRedBottom - shiftUp,
-    upperCurveTopY: upperCurveTopY - shiftUp,
-    upperBarTop: upperBarTop - shiftUp,
-    upperBarBottom: upperBarBottom - shiftUp,
-    lowerBarTop: lowerBarTop - shiftUp,
-    lowerBarBottom: lowerBarBottom - shiftUp,
-    lowerRedTop: lowerRedTop - shiftUp,
-    lowerRedBottom: lowerRedBottom - shiftUp,
-    midOrangeY: midOrangeY - shiftUp,
+    topRedTop: topRedTop + groupShift,
+    topRedBottom: actualTopRedBottom,
+    upperCurveTopY,
+    upperBarTop,
+    upperBarBottom,
+    lowerBarTop,
+    lowerBarBottom,
+    lowerRedTop,
+    lowerRedBottom,
+    midOrangeY,
     midOrangeH,
-    goldY: goldY - shiftUp,
+    goldY,
     goldH,
-    creamY: creamY - shiftUp,
+    creamY,
     creamH,
-    bottomRedY: bottomRedY - shiftUp
+    bottomRedY
   };
 }
 
@@ -252,12 +237,10 @@ function drawReferenceWallpaper(context, palette, controls) {
   const g = getRefGeometry(controls);
 
   fillRect(context, 0, 0, REF.docW, REF.docH, "#000");
-
   fillRect(context, g.spineX, 0, g.spineW, g.topOrangeH, palette[1]);
 
   fillRect(context, 0, g.upperBarTop, g.leftSeg1W, g.railH, palette[0]);
   fillRect(context, g.leftSeg1W + g.leftGap, g.upperBarTop, g.leftSeg2W, g.railH, palette[1]);
-
   fillRect(context, 0, g.lowerBarTop, g.leftSeg1W, g.railH, palette[0]);
   fillRect(context, g.leftSeg1W + g.leftGap, g.lowerBarTop, g.leftSeg2W, g.railH, palette[1]);
 
