@@ -1,3 +1,5 @@
+// /home/logan/LCARS-Star-Trek-Niagara-Launcher-Theme/docs/app.js
+
 const canvas = document.getElementById("preview");
 const ctx = canvas.getContext("2d");
 
@@ -31,13 +33,13 @@ const REF = {
   leftSeg2W: 145,
   leftGap: 7,
   topOrangeH: 126,
-  topRedH: 194,
   lowerRedH: 186,
   midOrangeH: 84,
   goldH: 255,
   creamH: 235,
-  elbowRadius: 77.433,
-  topCornerRadius: 113.301
+  innerRadius: 77.433,
+  spineMinW: 110,
+  divider: 8
 };
 
 function getSize() {
@@ -55,8 +57,12 @@ function getSize() {
 }
 
 function value(id, fallback) {
-  const el = document.getElementById(id);
-  return el ? Number(el.value) : fallback;
+  const element = document.getElementById(id);
+  return element ? Number(element.value) : fallback;
+}
+
+function clamp(number, min, max) {
+  return Math.max(min, Math.min(max, number));
 }
 
 function fillRect(context, x, y, w, h, color) {
@@ -68,110 +74,77 @@ function fillRect(context, x, y, w, h, color) {
   context.fillRect(x, y, w, h);
 }
 
-function moveTo(context, x, y) {
-  context.moveTo(Math.round(x) + 0.5, Math.round(y) + 0.5);
-}
-
-function lineTo(context, x, y) {
-  context.lineTo(Math.round(x) + 0.5, Math.round(y) + 0.5);
-}
-
-function clamp(number, min, max) {
-  return Math.max(min, Math.min(max, number));
-}
-
-function quarterArc(context, cx, cy, r, start, end, anticlockwise = false) {
-  if (r <= 0) {
-    context.lineTo(cx, cy);
-    return;
-  }
-
-  context.arc(cx, cy, r, start, end, anticlockwise);
-}
-
 function getControls() {
   return {
     spinePct: value("spineX", 67) / 100,
     barPct: value("barY", 19) / 100,
-    thicknessPx: value("thickness", 26),
+    thicknessScale: value("thickness", 26) / REF.railThickness,
     segmentPct: value("segmentScale", 100) / 100
   };
 }
 
-function getGeometry(w, h, controls) {
-  const sx = w / REF.docW;
-  const sy = h / REF.docH;
-  const baseScale = Math.min(sx, sy);
-  const motifScale = controls.thicknessPx / REF.railThickness;
+function getRefGeometry(controls) {
+  const t = clamp(controls.thicknessScale, 0.6, 2.5);
+  const segmentPct = clamp(controls.segmentPct, 0.2, 1.5);
 
-  const railH = Math.max(8, controls.thicknessPx * baseScale);
-  const gap = Math.max(6, REF.centerGap * baseScale * motifScale);
-  const divider = Math.max(3, Math.round(railH * 0.18));
+  const railH = REF.railThickness * t;
+  const gap = REF.centerGap * t;
+  const divider = REF.divider * t;
+  const innerR = REF.innerRadius * t;
 
-  const leftGap = Math.max(2, REF.leftGap * baseScale * motifScale);
-  const leftSeg1W = REF.leftSeg1W * sx * controls.segmentPct;
-  const leftSeg2W = REF.leftSeg2W * sx * controls.segmentPct;
+  const leftGap = REF.leftGap * t;
+  const leftSeg1W = REF.leftSeg1W * segmentPct;
+  const leftSeg2W = REF.leftSeg2W * segmentPct;
   const railStart = leftSeg1W + leftGap + leftSeg2W + leftGap;
 
-  const minSpineX = railStart + 40 * baseScale;
-  const maxSpineX = w - 80 * baseScale;
-  const spineX = clamp(w * controls.spinePct, minSpineX, maxSpineX);
-  const spineW = Math.max(40 * baseScale, w - spineX);
+  const minSpineX = railStart + innerR + 12;
+  const maxSpineX = REF.docW - REF.spineMinW;
+  const spineX = clamp(controls.spinePct * REF.docW, minSpineX, maxSpineX);
+  const spineW = REF.docW - spineX;
 
-  const elbowRadius = clamp(
-    REF.elbowRadius * baseScale * motifScale,
-    railH * 0.85,
-    Math.max(railH * 1.2, spineW * 0.8)
-  );
-
-  const topCornerRadius = clamp(
-    REF.topCornerRadius * baseScale * motifScale,
-    railH * 1.25,
-    Math.max(railH * 1.8, spineW * 1.6)
-  );
-
-  const topOrangeH = Math.max(30 * baseScale, REF.topOrangeH * sy * motifScale);
+  const topOrangeH = REF.topOrangeH * t;
   const topRedTop = topOrangeH + divider;
-  const topRedBottomRef = topRedTop + REF.topRedH * sy * motifScale;
 
-  const barCenterY = h * controls.barPct;
+  const midOrangeH = REF.midOrangeH * t;
+  const goldH = REF.goldH * t;
+  const creamH = REF.creamH * t;
+  const lowerRedH = Math.max(REF.lowerRedH * t, railH + innerR);
+
+  const minBarCenterY = topRedTop + innerR + railH + gap / 2;
+  const requiredBelow =
+    lowerRedH +
+    divider +
+    midOrangeH +
+    divider +
+    goldH +
+    divider +
+    creamH +
+    divider +
+    80 * t;
+  const maxBarCenterY = REF.docH - requiredBelow;
+  const safeMaxBarCenterY = Math.max(minBarCenterY, maxBarCenterY);
+
+  const barCenterY = clamp(controls.barPct * REF.docH, minBarCenterY, safeMaxBarCenterY);
+
   const upperBarTop = barCenterY - gap / 2 - railH;
   const upperBarBottom = upperBarTop + railH;
-  const lowerBarTop = upperBarBottom + gap;
+  const lowerBarTop = barCenterY + gap / 2;
   const lowerBarBottom = lowerBarTop + railH;
 
-  const minBarTop = topRedTop + topCornerRadius + railH * 0.5;
-  const maxBarTop = h - railH * 6;
-  const adjustedUpperBarTop = clamp(upperBarTop, minBarTop, maxBarTop);
-  const adjustedUpperBarBottom = adjustedUpperBarTop + railH;
-  const adjustedLowerBarTop = adjustedUpperBarBottom + gap;
-  const adjustedLowerBarBottom = adjustedLowerBarTop + railH;
+  const topRedBottom = upperBarBottom;
+  const lowerRedTop = lowerBarTop;
+  const lowerRedBottom = lowerRedTop + lowerRedH;
 
-  const upperJoinRadius = clamp(
-    elbowRadius,
-    railH * 0.8,
-    Math.max(railH, adjustedUpperBarTop - topRedTop - railH * 0.25)
-  );
-
-  const topRedBottom = Math.max(topRedBottomRef, adjustedUpperBarBottom);
-  const lowerRedTop = adjustedLowerBarTop;
-  const lowerRedBottom = lowerRedTop + Math.max(railH + divider, REF.lowerRedH * sy * motifScale);
-
-  const blockGap = divider;
-  const midOrangeY = lowerRedBottom + blockGap;
-  const midOrangeH = Math.max(18 * baseScale, REF.midOrangeH * sy * motifScale);
-  const goldY = midOrangeY + midOrangeH + blockGap;
-  const goldH = Math.max(40 * baseScale, REF.goldH * sy * motifScale);
-  const creamY = goldY + goldH + blockGap;
-  const creamH = Math.max(40 * baseScale, REF.creamH * sy * motifScale);
-  const bottomRedY = creamY + creamH + blockGap;
+  const midOrangeY = lowerRedBottom + divider;
+  const goldY = midOrangeY + midOrangeH + divider;
+  const creamY = goldY + goldH + divider;
+  const bottomRedY = creamY + creamH + divider;
 
   return {
-    w,
-    h,
     railH,
     gap,
     divider,
+    innerR,
     leftGap,
     leftSeg1W,
     leftSeg2W,
@@ -181,12 +154,10 @@ function getGeometry(w, h, controls) {
     topOrangeH,
     topRedTop,
     topRedBottom,
-    upperBarTop: adjustedUpperBarTop,
-    upperBarBottom: adjustedUpperBarBottom,
-    lowerBarTop: adjustedLowerBarTop,
-    lowerBarBottom: adjustedLowerBarBottom,
-    upperJoinRadius,
-    topCornerRadius,
+    upperBarTop,
+    upperBarBottom,
+    lowerBarTop,
+    lowerBarBottom,
     lowerRedTop,
     lowerRedBottom,
     midOrangeY,
@@ -199,149 +170,109 @@ function getGeometry(w, h, controls) {
   };
 }
 
-function drawUpperRed(context, geometry, color) {
-  const rTop = clamp(
-    geometry.topCornerRadius,
-    0,
-    Math.max(0, geometry.topRedBottom - geometry.topRedTop - 1)
-  );
-
-  const rJoin = clamp(
-    geometry.upperJoinRadius,
-    0,
-    Math.max(
-      0,
-      Math.min(
-        geometry.spineX - geometry.railStart - 1,
-        geometry.upperBarTop - geometry.topRedTop - 1
-      )
-    )
-  );
-
+function drawUpperRed(context, g, color) {
   context.fillStyle = color;
   context.beginPath();
-  moveTo(context, geometry.railStart, geometry.upperBarTop);
-  lineTo(context, geometry.spineX - rJoin, geometry.upperBarTop);
-  quarterArc(
-    context,
-    geometry.spineX - rJoin,
-    geometry.upperBarTop - rJoin,
-    rJoin,
+  context.moveTo(g.railStart, g.upperBarTop);
+  context.lineTo(g.spineX - g.innerR, g.upperBarTop);
+  context.arc(
+    g.spineX - g.innerR,
+    g.upperBarTop - g.innerR,
+    g.innerR,
     Math.PI / 2,
     0,
     true
   );
-  lineTo(context, geometry.spineX, geometry.topRedTop + rTop);
-  quarterArc(
-    context,
-    geometry.spineX + rTop,
-    geometry.topRedTop + rTop,
-    rTop,
-    Math.PI,
-    Math.PI * 1.5
-  );
-  lineTo(context, geometry.w, geometry.topRedTop);
-  lineTo(context, geometry.w, geometry.topRedBottom);
-  lineTo(context, geometry.railStart, geometry.topRedBottom);
+  context.lineTo(g.spineX, g.topRedTop);
+  context.lineTo(REF.docW, g.topRedTop);
+  context.lineTo(REF.docW, g.topRedBottom);
+  context.lineTo(g.railStart, g.topRedBottom);
   context.closePath();
   context.fill();
 }
 
-function drawLowerRed(context, geometry, color) {
-  const rJoin = clamp(
-    geometry.upperJoinRadius,
-    0,
-    Math.max(
-      0,
-      Math.min(
-        geometry.spineX - geometry.railStart - 1,
-        geometry.lowerRedBottom - geometry.lowerBarTop - 1
-      )
-    )
-  );
-
+function drawLowerRed(context, g, color) {
   context.fillStyle = color;
   context.beginPath();
-  moveTo(context, geometry.railStart, geometry.lowerBarTop);
-  lineTo(context, geometry.w, geometry.lowerBarTop);
-  lineTo(context, geometry.w, geometry.lowerRedBottom);
-  lineTo(context, geometry.spineX, geometry.lowerRedBottom);
-  lineTo(context, geometry.spineX, geometry.lowerBarTop + rJoin);
-  quarterArc(
-    context,
-    geometry.spineX - rJoin,
-    geometry.lowerBarTop + rJoin,
-    rJoin,
+  context.moveTo(g.railStart, g.lowerRedTop);
+  context.lineTo(REF.docW, g.lowerRedTop);
+  context.lineTo(REF.docW, g.lowerRedBottom);
+  context.lineTo(g.spineX, g.lowerRedBottom);
+  context.lineTo(g.spineX, g.lowerBarBottom + g.innerR);
+  context.arc(
+    g.spineX - g.innerR,
+    g.lowerBarBottom + g.innerR,
+    g.innerR,
     0,
-    Math.PI * 1.5,
+    -Math.PI / 2,
     true
   );
-  lineTo(context, geometry.railStart, geometry.lowerBarTop);
+  context.lineTo(g.railStart, g.lowerBarBottom);
   context.closePath();
   context.fill();
+}
+
+function drawReferenceWallpaper(context, palette, controls) {
+  const g = getRefGeometry(controls);
+
+  fillRect(context, 0, 0, REF.docW, REF.docH, "#000");
+
+  fillRect(context, g.spineX, 0, g.spineW, g.topOrangeH, palette[1]);
+
+  fillRect(context, 0, g.upperBarTop, g.leftSeg1W, g.railH, palette[0]);
+  fillRect(context, g.leftSeg1W + g.leftGap, g.upperBarTop, g.leftSeg2W, g.railH, palette[1]);
+
+  fillRect(context, 0, g.lowerBarTop, g.leftSeg1W, g.railH, palette[0]);
+  fillRect(context, g.leftSeg1W + g.leftGap, g.lowerBarTop, g.leftSeg2W, g.railH, palette[1]);
+
+  drawUpperRed(context, g, palette[2]);
+  drawLowerRed(context, g, palette[2]);
+
+  fillRect(context, g.spineX, g.midOrangeY, g.spineW, g.midOrangeH, palette[1]);
+  fillRect(context, g.spineX, g.goldY, g.spineW, g.goldH, palette[3]);
+  fillRect(context, g.spineX, g.creamY, g.spineW, g.creamH, palette[4]);
+  fillRect(context, g.spineX, g.bottomRedY, g.spineW, REF.docH - g.bottomRedY, palette[2]);
 }
 
 function drawWallpaper(targetCanvas) {
   const { w, h } = getSize();
+  const palette = palettes[document.getElementById("palette").value] || palettes.classic;
+  const controls = getControls();
+
   targetCanvas.width = w;
   targetCanvas.height = h;
 
   const context = targetCanvas.getContext("2d");
-  const palette = palettes[document.getElementById("palette").value] || palettes.classic;
-  const controls = getControls();
-  const geometry = getGeometry(w, h, controls);
-
   context.clearRect(0, 0, w, h);
   context.fillStyle = "#000";
   context.fillRect(0, 0, w, h);
 
-  fillRect(context, geometry.spineX, 0, geometry.spineW, geometry.topOrangeH, palette[1]);
+  const scale = Math.min(w / REF.docW, h / REF.docH);
+  const offsetX = w - REF.docW * scale;
+  const offsetY = 0;
 
-  fillRect(context, 0, geometry.upperBarTop, geometry.leftSeg1W, geometry.railH, palette[0]);
-  fillRect(
-    context,
-    geometry.leftSeg1W + geometry.leftGap,
-    geometry.upperBarTop,
-    geometry.leftSeg2W,
-    geometry.railH,
-    palette[1]
-  );
-
-  fillRect(context, 0, geometry.lowerBarTop, geometry.leftSeg1W, geometry.railH, palette[0]);
-  fillRect(
-    context,
-    geometry.leftSeg1W + geometry.leftGap,
-    geometry.lowerBarTop,
-    geometry.leftSeg2W,
-    geometry.railH,
-    palette[1]
-  );
-
-  drawUpperRed(context, geometry, palette[2]);
-  drawLowerRed(context, geometry, palette[2]);
-
-  fillRect(context, geometry.spineX, geometry.midOrangeY, geometry.spineW, geometry.midOrangeH, palette[1]);
-  fillRect(context, geometry.spineX, geometry.goldY, geometry.spineW, geometry.goldH, palette[3]);
-  fillRect(context, geometry.spineX, geometry.creamY, geometry.spineW, geometry.creamH, palette[4]);
-  fillRect(context, geometry.spineX, geometry.bottomRedY, geometry.spineW, h - geometry.bottomRedY, palette[2]);
+  context.save();
+  context.translate(offsetX, offsetY);
+  context.scale(scale, scale);
+  drawReferenceWallpaper(context, palette, controls);
+  context.restore();
 }
 
 function redrawPreview() {
   const { w, h } = getSize();
-
   const maxPreviewW = 520;
   const maxPreviewH = Math.min(window.innerHeight * 0.88, 900);
-  const scale = Math.min(maxPreviewW / w, maxPreviewH / h);
+  const previewScale = Math.min(maxPreviewW / w, maxPreviewH / h);
 
-  canvas.width = Math.max(1, Math.round(w * scale));
-  canvas.height = Math.max(1, Math.round(h * scale));
+  canvas.width = Math.max(1, Math.round(w * previewScale));
+  canvas.height = Math.max(1, Math.round(h * previewScale));
 
-  const temp = document.createElement("canvas");
-  drawWallpaper(temp);
+  const exportCanvas = document.createElement("canvas");
+  drawWallpaper(exportCanvas);
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.imageSmoothingEnabled = true;
-  ctx.drawImage(temp, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(exportCanvas, 0, 0, canvas.width, canvas.height);
 }
 
 function updateCustomVisibility() {
