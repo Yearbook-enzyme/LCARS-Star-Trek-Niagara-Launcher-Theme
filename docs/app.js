@@ -25,13 +25,17 @@ function drawWallpaper(targetCanvas) {
   const barY = h * (Number(document.getElementById("barY").value) / 100);
   const t = Number(document.getElementById("thickness").value);
   const gap = Math.max(8, t * 0.45);
-  const curveSlider = document.getElementById("curveSize") || document.getElementById("radius");
+
+  const curveSlider =
+    document.getElementById("curveSize") || document.getElementById("radius");
   const curve = Math.max(t * 2, Number(curveSlider.value) * 2.4);
 
   const railStart = w * 0.44;
   const railTopY = barY - t - gap / 2;
   const railBottomY = barY + gap / 2;
   const right = w;
+  const rightW = w - spineX;
+  const outerR = curve;
 
   c.fillStyle = "#000";
   c.fillRect(0, 0, w, h);
@@ -41,59 +45,71 @@ function drawWallpaper(targetCanvas) {
     c.fillRect(x, y, rw, rh);
   }
 
-  function topElbow() {
-    c.fillStyle = palette[2];
-    c.beginPath();
-    c.moveTo(railStart, railTopY);
-    c.lineTo(spineX - curve, railTopY);
-    c.quadraticCurveTo(spineX, railTopY, spineX, railTopY - curve);
-    c.lineTo(right, railTopY - curve);
-    c.lineTo(right, railTopY + t);
-    c.lineTo(railStart, railTopY + t);
-    c.closePath();
-    c.fill();
-  }
-
-  function bottomElbow() {
-    c.fillStyle = palette[2];
-    c.beginPath();
-    c.moveTo(railStart, railBottomY);
-    c.lineTo(right, railBottomY);
-    c.lineTo(right, railBottomY + t + curve);
-    c.lineTo(spineX, railBottomY + t + curve);
-    c.quadraticCurveTo(spineX, railBottomY + t, spineX - curve, railBottomY + t);
-    c.lineTo(railStart, railBottomY + t);
-    c.closePath();
-    c.fill();
-  }
-
-  // left segmented rails
+  // ---- left segmented rails ----
   rect(0, railTopY, w * 0.24, t, palette[0]);
   rect(w * 0.25, railTopY, w * 0.18, t, palette[1]);
+
   rect(0, railBottomY, w * 0.24, t, palette[0]);
   rect(w * 0.25, railBottomY, w * 0.18, t, palette[1]);
 
-  topElbow();
-  bottomElbow();
-
-  // right vertical blocks, straight rectangles
-  const rightW = w - spineX;
+  // ---- right-side block layout ----
   const blockGap = gap * 1.2;
-  let y = 0;
 
-  const blocks = [
-    [h * 0.085, palette[1]],
-    [h * 0.23, palette[2]],
-    [h * 0.08, palette[1]],
-    [h * 0.23, palette[3]],
-    [h * 0.17, palette[4]],
-    [h * 0.27, palette[2]]
-  ];
+  const topOrangeH = h * 0.085;
+  const midOrangeH = h * 0.08;
+  const goldH = h * 0.23;
+  const creamH = h * 0.17;
+  const bottomRedH = h * 0.27;
 
-  for (const [bh, color] of blocks) {
-    rect(spineX, y, rightW, bh, color);
-    y += bh + blockGap;
-  }
+  const topOrangeY = 0;
+  const topRedY = topOrangeY + topOrangeH + blockGap;
+
+  // top elbow ends at the top center rail
+  const topRedBottom = railTopY + t;
+
+  // lower elbow starts at lower center rail and ends before the short orange block
+  const lowerRedTop = railBottomY;
+  const lowerRedBottom = railBottomY + t + curve;
+
+  const midOrangeY = lowerRedBottom + blockGap;
+  const goldY = midOrangeY + midOrangeH + blockGap;
+  const creamY = goldY + goldH + blockGap;
+  const bottomRedY = creamY + creamH + blockGap;
+
+  // ---- top orange block ----
+  rect(spineX, topOrangeY, rightW, topOrangeH, palette[1]);
+
+  // ---- top elbow / upper red section ----
+  c.fillStyle = palette[2];
+  c.beginPath();
+  c.moveTo(railStart, railTopY);                         // inner top rail start
+  c.lineTo(spineX - curve, railTopY);                   // toward inner curve
+  c.quadraticCurveTo(spineX, railTopY, spineX, topRedY); // inner elbow curve
+  c.lineTo(right, topRedY);                             // top edge across
+  c.lineTo(right, topRedBottom - outerR);               // down right side
+  c.quadraticCurveTo(right, topRedBottom, right - outerR, topRedBottom); // outer rounded corner
+  c.lineTo(railStart, topRedBottom);                    // bottom edge back left
+  c.closePath();
+  c.fill();
+
+  // ---- bottom elbow / lower red section ----
+  c.fillStyle = palette[2];
+  c.beginPath();
+  c.moveTo(railStart, lowerRedTop);                     // top-left at lower rail
+  c.lineTo(right - outerR, lowerRedTop);                // across top
+  c.quadraticCurveTo(right, lowerRedTop, right, lowerRedTop + outerR); // outer rounded corner
+  c.lineTo(right, lowerRedBottom);                      // down right edge
+  c.lineTo(spineX, lowerRedBottom);                     // bottom edge to spine
+  c.quadraticCurveTo(spineX, railBottomY + t, spineX - curve, railBottomY + t); // inner elbow curve
+  c.lineTo(railStart, railBottomY + t);                 // back left
+  c.closePath();
+  c.fill();
+
+  // ---- remaining straight right-side blocks ----
+  rect(spineX, midOrangeY, rightW, midOrangeH, palette[1]);
+  rect(spineX, goldY, rightW, goldH, palette[3]);
+  rect(spineX, creamY, rightW, creamH, palette[4]);
+  rect(spineX, bottomRedY, rightW, bottomRedH, palette[2]);
 }
 
 function redrawPreview() {
