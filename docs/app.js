@@ -25,9 +25,13 @@ function drawWallpaper(targetCanvas) {
   const barY = h * (Number(document.getElementById("barY").value) / 100);
   const t = Number(document.getElementById("thickness").value);
 
-  // Fixed LCARS design language:
-  // gap is not user-configurable, and curvature is derived from the layout.
+  // Fixed LCARS language
   const gap = Math.max(8, Math.round(t * 0.45));
+  const rightW = w - spineX;
+
+  // Locked curvature from the reference proportion.
+  // For the 720px-wide reference, this lands visually close to the original elbow.
+  const r = Math.round(rightW * 0.22);
 
   c.fillStyle = "#000";
   c.fillRect(0, 0, w, h);
@@ -37,13 +41,13 @@ function drawWallpaper(targetCanvas) {
     c.fillRect(x, y, rw, rh);
   }
 
-  // ---- main horizontal rail positions ----
+  // ---- rail positions ----
   const railTopY = barY - t - gap / 2;
   const railBottomY = barY + gap / 2;
 
-  // ---- left segmented rails with consistent gaps ----
-  const leftSeg1W = w * 0.22;
-  const leftSeg2W = w * 0.14;
+  // ---- left segmented rails ----
+  const leftSeg1W = Math.round(w * 0.205);
+  const leftSeg2W = Math.round(w * 0.205);
   const railStart = leftSeg1W + gap + leftSeg2W + gap;
 
   rect(0, railTopY, leftSeg1W, t, palette[0]);
@@ -52,32 +56,20 @@ function drawWallpaper(targetCanvas) {
   rect(0, railBottomY, leftSeg1W, t, palette[0]);
   rect(leftSeg1W + gap, railBottomY, leftSeg2W, t, palette[1]);
 
-  // ---- right column / elbow geometry ----
-  const right = w;
-  const rightW = w - spineX;
-
-  // fixed top block
+  // ---- right-side vertical layout ----
   const topOrangeH = Math.round(h * 0.085);
-
-  // the upper red elbow starts after a normal gap below the top orange block
   const topRedY = topOrangeH + gap;
   const topRedBottom = railTopY + t;
 
-  // derive the elbow depth from the actual layout
-  const elbowDepth = Math.max(60, topRedBottom - topRedY);
-  const innerCurveX = Math.min(rightW * 0.42, elbowDepth * 0.34);
-  const outerCurveR = innerCurveX;
-
-  // lower red elbow mirrors the upper one, with the center gap extending fully right
+  // Make the lower red elbow mirror the upper one
+  const elbowDepth = topRedBottom - topRedY;
   const lowerRedTop = railBottomY;
   const lowerRedBottom = lowerRedTop + elbowDepth;
 
-  // Remaining blocks below lower elbow, using consistent gaps
-  const remaining = Math.max(0, h - lowerRedBottom - gap * 4);
-
-  const midOrangeH = Math.round(remaining * 0.12);
-  const goldH = Math.round(remaining * 0.36);
-  const creamH = Math.round(remaining * 0.24);
+  const remainingH = Math.max(0, h - lowerRedBottom - gap * 4);
+  const midOrangeH = Math.round(remainingH * 0.12);
+  const goldH = Math.round(remainingH * 0.36);
+  const creamH = Math.round(remainingH * 0.24);
 
   const midOrangeY = lowerRedBottom + gap;
   const goldY = midOrangeY + midOrangeH + gap;
@@ -92,11 +84,12 @@ function drawWallpaper(targetCanvas) {
   c.fillStyle = palette[2];
   c.beginPath();
   c.moveTo(railStart, railTopY);
-  c.lineTo(spineX - innerCurveX, railTopY);
-  c.quadraticCurveTo(spineX, railTopY, spineX, topRedY);
-  c.lineTo(right, topRedY);
-  c.lineTo(right, topRedBottom - outerCurveR);
-  c.quadraticCurveTo(right, topRedBottom, right - outerCurveR, topRedBottom);
+  c.lineTo(spineX - r, railTopY);
+  c.arcTo(spineX, railTopY, spineX, topRedY, r);
+  c.lineTo(spineX, topRedY);
+  c.lineTo(w, topRedY);
+  c.lineTo(w, topRedBottom - r);
+  c.arcTo(w, topRedBottom, w - r, topRedBottom, r);
   c.lineTo(railStart, topRedBottom);
   c.closePath();
   c.fill();
@@ -105,11 +98,12 @@ function drawWallpaper(targetCanvas) {
   c.fillStyle = palette[2];
   c.beginPath();
   c.moveTo(railStart, lowerRedTop);
-  c.lineTo(right - outerCurveR, lowerRedTop);
-  c.quadraticCurveTo(right, lowerRedTop, right, lowerRedTop + outerCurveR);
-  c.lineTo(right, lowerRedBottom);
+  c.lineTo(w - r, lowerRedTop);
+  c.arcTo(w, lowerRedTop, w, lowerRedTop + r, r);
+  c.lineTo(w, lowerRedBottom);
   c.lineTo(spineX, lowerRedBottom);
-  c.quadraticCurveTo(spineX, railBottomY + t, spineX - innerCurveX, railBottomY + t);
+  c.lineTo(spineX, railBottomY + t + r);
+  c.arcTo(spineX, railBottomY + t, spineX - r, railBottomY + t, r);
   c.lineTo(railStart, railBottomY + t);
   c.closePath();
   c.fill();
