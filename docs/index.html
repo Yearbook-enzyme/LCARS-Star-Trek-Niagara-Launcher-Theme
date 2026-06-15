@@ -19,7 +19,81 @@
 
       <label>
         Device preset
-        <select id="preset"></select>
+        <select id="preset">
+          <optgroup label="Popular Android phones">
+            <option value="1080x2400">Modern Android — 1080×2400 — 20:9</option>
+            <option value="1440x3200">Flagship Android — 1440×3200 — 20:9</option>
+            <option value="1080x2340">Android / Pixel style — 1080×2340 — 19.5:9</option>
+            <option value="1440x3120">QHD Android — 1440×3120 — 19.5:9</option>
+            <option value="1080x2520">Tall Android / Xperia style — 1080×2520 — 21:9</option>
+            <option value="1644x3840">Sony Xperia 4K style — 1644×3840 — 21:9</option>
+            <option value="1080x2280">Older Android — 1080×2280 — 19:9</option>
+            <option value="1080x2220">Samsung S8/S9 style — 1080×2220 — 18.5:9</option>
+            <option value="1080x2160">Older Android — 1080×2160 — 18:9</option>
+            <option value="1080x1920">Legacy Android — 1080×1920 — 16:9</option>
+          </optgroup>
+
+          <optgroup label="iPhone">
+            <option value="1179x2556">iPhone Pro — 1179×2556</option>
+            <option value="1290x2796">iPhone Pro Max — 1290×2796</option>
+            <option value="1170x2532">iPhone 12/13/14 style — 1170×2532</option>
+            <option value="1284x2778">iPhone Max style — 1284×2778</option>
+            <option value="1125x2436">iPhone X/XS/11 Pro style — 1125×2436</option>
+            <option value="828x1792">iPhone XR/11 style — 828×1792</option>
+            <option value="750x1334">Legacy iPhone — 750×1334</option>
+          </optgroup>
+
+          <optgroup label="Foldables">
+            <option value="904x2316">Foldable outer narrow — 904×2316</option>
+            <option value="968x2376">Foldable outer tall — 968×2376</option>
+            <option value="1812x2176">Foldable inner portrait — 1812×2176</option>
+            <option value="2176x1812">Foldable inner landscape — 2176×1812</option>
+            <option value="1840x2208">Galaxy Fold inner portrait — 1840×2208</option>
+            <option value="2208x1840">Galaxy Fold inner landscape — 2208×1840</option>
+            <option value="2232x3184">Trifold portrait — 2232×3184</option>
+            <option value="3184x2232">Trifold landscape — 3184×2232</option>
+          </optgroup>
+
+          <optgroup label="Android tablets">
+            <option value="1200x1920">Small tablet portrait — 1200×1920</option>
+            <option value="1920x1200">Small tablet landscape — 1920×1200</option>
+            <option value="1600x2560">Android tablet portrait — 1600×2560</option>
+            <option value="2560x1600">Android tablet landscape — 2560×1600</option>
+            <option value="1752x2800">Large tablet portrait — 1752×2800</option>
+            <option value="2800x1752">Large tablet landscape — 2800×1752</option>
+            <option value="2000x3200">Ultra tablet portrait — 2000×3200</option>
+            <option value="3200x2000">Ultra tablet landscape — 3200×2000</option>
+          </optgroup>
+
+          <optgroup label="iPad">
+            <option value="1620x2160">iPad 10.2 portrait — 1620×2160</option>
+            <option value="2160x1620">iPad 10.2 landscape — 2160×1620</option>
+            <option value="1640x2360">iPad Air portrait — 1640×2360</option>
+            <option value="2360x1640">iPad Air landscape — 2360×1640</option>
+            <option value="1668x2388">iPad Pro 11 portrait — 1668×2388</option>
+            <option value="2388x1668">iPad Pro 11 landscape — 2388×1668</option>
+            <option value="2048x2732">iPad Pro 12.9 portrait — 2048×2732</option>
+            <option value="2732x2048">iPad Pro 12.9 landscape — 2732×2048</option>
+          </optgroup>
+
+          <optgroup label="DAP / e-reader / unusual">
+            <option value="480x800">Small DAP — 480×800</option>
+            <option value="720x1280">Common DAP — 720×1280</option>
+            <option value="1080x1920">Full HD DAP — 1080×1920</option>
+            <option value="1080x2160">Tall DAP — 1080×2160</option>
+            <option value="1440x2560">Premium DAP — 1440×2560</option>
+            <option value="1072x1448">Small e-reader portrait — 1072×1448</option>
+            <option value="1264x1680">Medium e-reader portrait — 1264×1680</option>
+            <option value="1860x2480">Premium e-reader portrait — 1860×2480</option>
+            <option value="1080x1080">Square test — 1080×1080</option>
+            <option value="1920x1080">Desktop / DeX — 1920×1080</option>
+            <option value="3440x1440">Ultrawide / DeX — 3440×1440</option>
+          </optgroup>
+
+          <optgroup label="Custom">
+            <option value="custom">Custom exact size</option>
+          </optgroup>
+        </select>
       </label>
 
       <div id="customSize" class="customSize" hidden>
@@ -36,17 +110,36 @@
 
       <label>
         Palette
-        <select id="palette"></select>
+        <select id="palette">
+          <option value="classic">Classic Warm LCARS</option>
+          <option value="tng">TNG Pastel LCARS</option>
+          <option value="ds9">DS9 Muted Station</option>
+          <option value="voyager">Voyager Soft</option>
+          <option value="command">Command Gold</option>
+          <option value="red">Red Alert</option>
+          <option value="security">Security Red</option>
+          <option value="science">Science Blue/Purple</option>
+          <option value="medical">Medical Teal</option>
+          <option value="opsBlue">Operations Blue</option>
+          <option value="lowerDecks">Lower Decks Bright</option>
+          <option value="latinum">Latinum Gold</option>
+          <option value="romulan">Romulan Green</option>
+          <option value="muted">Muted OLED</option>
+          <option value="grayscale">Grayscale LCARS</option>
+          <option value="eink">E-Ink Soft</option>
+          <option value="terminal">Terminal Green</option>
+          <option value="highContrast">High Contrast</option>
+        </select>
       </label>
 
       <label>
         Spine position
-        <input id="spineX" type="range" min="58" max="82" value="67">
+        <input id="spineX" type="range" min="45" max="82" value="67">
       </label>
 
       <label>
         Horizontal line height
-        <input id="barY" type="range" min="16" max="45" value="19">
+        <input id="barY" type="range" min="10" max="45" value="19">
       </label>
 
       <label>
@@ -71,6 +164,6 @@
     </section>
   </main>
 
-  <script src="app.js?v=11"></script>
+  <script src="app.js?v=12"></script>
 </body>
 </html>
