@@ -65,13 +65,38 @@ function drawWallpaper(targetCanvas, exportScale = 1) {
   rect(w * 0.25, barY + gap / 2, w * 0.18, t, palette[1]);
   rect(w * 0.44, barY + gap / 2, leftEnd - w * 0.44, t, palette[2]);
 
-  // LCARS curved junction
-  roundRect(leftEnd, barY - t * 3.5, rightW + t * 2, t * 3.5, r, palette[2]);
-  roundRect(leftEnd, barY + gap / 2, rightW + t * 2, t * 3.5, r, palette[2]);
+  // LCARS curved junction - cleaner two rail shape
+  function lcarsRail(y, flip, color) {
+    c.fillStyle = color;
+    c.beginPath();
 
-  // mask inner curve bite with black to create two separated rails
-  c.fillStyle = "#000";
-  c.fillRect(leftEnd - 2, barY - gap / 2, rightW + t * 4, gap + t);
+    const curveStart = spineX - t * 1.8;
+    const curveEnd = spineX;
+    const railH = t * 3.0;
+    const yy = y;
+
+    if (!flip) {
+      c.moveTo(leftEnd, yy);
+      c.lineTo(curveStart, yy);
+      c.quadraticCurveTo(curveEnd, yy, curveEnd, yy - railH);
+      c.lineTo(w, yy - railH);
+      c.lineTo(w, yy);
+      c.lineTo(leftEnd, yy);
+    } else {
+      c.moveTo(leftEnd, yy);
+      c.lineTo(w, yy);
+      c.lineTo(w, yy + railH);
+      c.lineTo(curveEnd, yy + railH);
+      c.quadraticCurveTo(curveEnd, yy, curveStart, yy);
+      c.lineTo(leftEnd, yy);
+    }
+
+    c.closePath();
+    c.fill();
+  }
+
+  lcarsRail(barY - gap / 2, false, palette[2]);
+  lcarsRail(barY + gap / 2 + t, true, palette[2]);
 
   // right vertical blocks
   const x = spineX;
