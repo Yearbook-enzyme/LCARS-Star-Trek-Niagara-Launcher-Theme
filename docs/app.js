@@ -22,26 +22,24 @@ const palettes = {
   highContrast: ["#ffffff", "#ff9f1c", "#ff2e2e", "#ffd23f", "#f7f7f7"]
 };
 
-// Reference-locked geometry from the version that was working well.
+// Reference measurements from your source image.
+// These are treated as LCARS proportions, not separate user sliders.
 const REF = {
   docW: 690,
   docH: 1536,
-
   innerCurveW: 66.673,
   innerCurveH: 77.433,
   outerCurveW: 101.697,
   outerCurveH: 113.301,
   centerGap: 20.466,
-
-  railThickness: 26.0,
-  leftSeg1W: 145.0,
-  leftSeg2W: 145.0,
-  leftGap: 7.0,
-
-  topOrangeH: 126.0,
-  midOrangeH: 84.0,
-  goldH: 255.0,
-  creamH: 235.0
+  railThickness: 26,
+  leftSeg1W: 145,
+  leftSeg2W: 145,
+  leftGap: 7,
+  topOrangeH: 126,
+  midOrangeH: 84,
+  goldH: 255,
+  creamH: 235
 };
 
 const K = 0.5522847498307936;
@@ -50,13 +48,19 @@ function getSize() {
   const preset = document.getElementById("preset").value;
 
   if (preset === "custom") {
-    const w = Math.max(200, Number(document.getElementById("customW").value) || 1080);
-    const h = Math.max(200, Number(document.getElementById("customH").value) || 2400);
-    return { w, h };
+    return {
+      w: Math.max(200, Number(document.getElementById("customW").value) || 1080),
+      h: Math.max(200, Number(document.getElementById("customH").value) || 2400)
+    };
   }
 
   const [w, h] = preset.split("x").map(Number);
   return { w, h };
+}
+
+function value(id, fallback) {
+  const el = document.getElementById(id);
+  return el ? Number(el.value) : fallback;
 }
 
 function rect(c, x, y, w, h, color) {
@@ -67,41 +71,25 @@ function rect(c, x, y, w, h, color) {
 function qLB_RT(c, x0, yTop, x1, yBottom) {
   const dx = x1 - x0;
   const dy = yBottom - yTop;
-  c.bezierCurveTo(
-    x0 + K * dx, yBottom,
-    x1, yTop + K * dy,
-    x1, yTop
-  );
+  c.bezierCurveTo(x0 + K * dx, yBottom, x1, yTop + K * dy, x1, yTop);
 }
 
 function qRT_LB(c, x0, yTop, x1, yBottom) {
   const dx = x1 - x0;
   const dy = yBottom - yTop;
-  c.bezierCurveTo(
-    x1, yTop + K * dy,
-    x0 + K * dx, yBottom,
-    x0, yBottom
-  );
+  c.bezierCurveTo(x1, yTop + K * dy, x0 + K * dx, yBottom, x0, yBottom);
 }
 
 function qLT_RB(c, x0, yTop, x1, yBottom) {
   const dx = x1 - x0;
   const dy = yBottom - yTop;
-  c.bezierCurveTo(
-    x0 + K * dx, yTop,
-    x1, yBottom - K * dy,
-    x1, yBottom
-  );
+  c.bezierCurveTo(x0 + K * dx, yTop, x1, yBottom - K * dy, x1, yBottom);
 }
 
 function qRB_LT(c, x0, yTop, x1, yBottom) {
   const dx = x1 - x0;
   const dy = yBottom - yTop;
-  c.bezierCurveTo(
-    x1, yBottom - K * dy,
-    x0 + K * dx, yTop,
-    x0, yTop
-  );
+  c.bezierCurveTo(x1, yBottom - K * dy, x0 + K * dx, yTop, x0, yTop);
 }
 
 function drawWallpaper(targetCanvas) {
@@ -115,33 +103,43 @@ function drawWallpaper(targetCanvas) {
   const sx = w / REF.docW;
   const sy = h / REF.docH;
 
-  const spineX = w * (Number(document.getElementById("spineX").value) / 100);
-  const barY = h * (Number(document.getElementById("barY").value) / 100);
+  const spinePercent = value("spineX", 67) / 100;
+  const barPercent = value("barY", 19) / 100;
+  const thicknessScale = value("thickness", 26) / REF.railThickness;
+  const segmentScale = value("segmentScale", 100) / 100;
+  const columnPercent = value("columnWidth", 33) / 100;
 
-  const innerW = REF.innerCurveW * sx;
-  const innerH = REF.innerCurveH * sy;
-  const outerW = REF.outerCurveW * sx;
-  const outerH = REF.outerCurveH * sy;
-  const centerGap = REF.centerGap * sy;
+  const rightW = w * columnPercent;
+  const spineX = w * spinePercent;
+  const columnX = Math.min(spineX, w - rightW);
 
-  const railH = REF.railThickness * sy;
-  const leftSeg1W = REF.leftSeg1W * sx;
-  const leftSeg2W = REF.leftSeg2W * sx;
-  const leftGap = REF.leftGap * sx;
+  const barY = h * barPercent;
 
-  const topOrangeH = REF.topOrangeH * sy;
-  const midOrangeH = REF.midOrangeH * sy;
-  const goldH = REF.goldH * sy;
-  const creamH = REF.creamH * sy;
+  // Thickness slider scales the whole LCARS language together.
+  const railH = REF.railThickness * sy * thicknessScale;
+  const centerGap = REF.centerGap * sy * thicknessScale;
+  const innerW = REF.innerCurveW * sx * thicknessScale;
+  const innerH = REF.innerCurveH * sy * thicknessScale;
+  const outerW = REF.outerCurveW * sx * thicknessScale;
+  const outerH = REF.outerCurveH * sy * thicknessScale;
+  const leftGap = REF.leftGap * sx * thicknessScale;
+
+  const leftSeg1W = REF.leftSeg1W * sx * segmentScale;
+  const leftSeg2W = REF.leftSeg2W * sx * segmentScale;
+
+  const topOrangeH = REF.topOrangeH * sy * thicknessScale;
+  const midOrangeH = REF.midOrangeH * sy * thicknessScale;
+  const goldH = REF.goldH * sy * thicknessScale;
+  const creamH = REF.creamH * sy * thicknessScale;
 
   c.fillStyle = "#000";
   c.fillRect(0, 0, w, h);
 
   const railTopY = barY - centerGap / 2 - railH;
   const railBottomY = barY + centerGap / 2;
-
   const railStart = leftSeg1W + leftGap + leftSeg2W + leftGap;
 
+  // Left segmented rails
   rect(c, 0, railTopY, leftSeg1W, railH, palette[0]);
   rect(c, leftSeg1W + leftGap, railTopY, leftSeg2W, railH, palette[1]);
 
@@ -154,22 +152,22 @@ function drawWallpaper(targetCanvas) {
   const lowerRedTop = railBottomY;
   const lowerRedBottom = railBottomY + railH + innerH;
 
-  const rightW = w - spineX;
   const blockGap = centerGap;
-
   const midOrangeY = lowerRedBottom + blockGap;
   const goldY = midOrangeY + midOrangeH + blockGap;
   const creamY = goldY + goldH + blockGap;
   const bottomRedY = creamY + creamH + blockGap;
   const bottomRedH = Math.max(0, h - bottomRedY);
 
-  rect(c, spineX, 0, rightW, topOrangeH, palette[1]);
+  // Top orange block
+  rect(c, columnX, 0, rightW, topOrangeH, palette[1]);
 
+  // Upper red elbow
   c.fillStyle = palette[2];
   c.beginPath();
   c.moveTo(railStart, railTopY);
-  c.lineTo(spineX - innerW, railTopY);
-  qLB_RT(c, spineX - innerW, topRedY, spineX, railTopY);
+  c.lineTo(columnX - innerW, railTopY);
+  qLB_RT(c, columnX - innerW, topRedY, columnX, railTopY);
   c.lineTo(w, topRedY);
   c.lineTo(w, topRedBottom - outerH);
   qRT_LB(c, w - outerW, topRedBottom - outerH, w, topRedBottom);
@@ -177,22 +175,24 @@ function drawWallpaper(targetCanvas) {
   c.closePath();
   c.fill();
 
+  // Lower red elbow
   c.fillStyle = palette[2];
   c.beginPath();
   c.moveTo(railStart, lowerRedTop);
   c.lineTo(w - outerW, lowerRedTop);
   qLT_RB(c, w - outerW, lowerRedTop, w, lowerRedTop + outerH);
   c.lineTo(w, lowerRedBottom);
-  c.lineTo(spineX, lowerRedBottom);
-  qRB_LT(c, spineX - innerW, railBottomY + railH, spineX, lowerRedBottom);
+  c.lineTo(columnX, lowerRedBottom);
+  qRB_LT(c, columnX - innerW, railBottomY + railH, columnX, lowerRedBottom);
   c.lineTo(railStart, railBottomY + railH);
   c.closePath();
   c.fill();
 
-  rect(c, spineX, midOrangeY, rightW, midOrangeH, palette[1]);
-  rect(c, spineX, goldY, rightW, goldH, palette[3]);
-  rect(c, spineX, creamY, rightW, creamH, palette[4]);
-  rect(c, spineX, bottomRedY, rightW, bottomRedH, palette[2]);
+  // Remaining right blocks
+  rect(c, columnX, midOrangeY, rightW, midOrangeH, palette[1]);
+  rect(c, columnX, goldY, rightW, goldH, palette[3]);
+  rect(c, columnX, creamY, rightW, creamH, palette[4]);
+  rect(c, columnX, bottomRedY, rightW, bottomRedH, palette[2]);
 }
 
 function redrawPreview() {
@@ -215,7 +215,6 @@ function redrawPreview() {
 function updateCustomVisibility() {
   const customSize = document.getElementById("customSize");
   if (!customSize) return;
-
   customSize.hidden = document.getElementById("preset").value !== "custom";
 }
 
