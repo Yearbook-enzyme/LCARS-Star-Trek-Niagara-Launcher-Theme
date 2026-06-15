@@ -1,5 +1,3 @@
-// /home/logan/LCARS-Star-Trek-Niagara-Launcher-Theme/docs/app.js
-
 const canvas = document.getElementById("preview");
 const ctx = canvas.getContext("2d");
 
@@ -33,25 +31,29 @@ const REF = {
   leftSeg2W: 145,
   leftGap: 7,
   topOrangeH: 126,
+  topRedH: 194,
   lowerRedH: 186,
   midOrangeH: 84,
   goldH: 255,
   creamH: 235,
-  innerRadius: 77.433,
-  spineMinW: 110,
+  innerCurveW: 66.673,
+  innerCurveH: 77.433,
+  outerCurveW: 101.697,
+  outerCurveH: 113.301,
+  spineMinW: 115,
   divider: 8
 };
 
+const K = 0.5522847498307936;
+
 function getSize() {
   const preset = document.getElementById("preset").value;
-
   if (preset === "custom") {
     return {
       w: Math.max(200, Number(document.getElementById("customW").value) || 1080),
       h: Math.max(200, Number(document.getElementById("customH").value) || 2400)
     };
   }
-
   const [w, h] = preset.split("x").map(Number);
   return { w, h };
 }
@@ -66,72 +68,97 @@ function clamp(number, min, max) {
 }
 
 function fillRect(context, x, y, w, h, color) {
-  if (w <= 0 || h <= 0) {
-    return;
-  }
-
+  if (w <= 0 || h <= 0) return;
   context.fillStyle = color;
   context.fillRect(x, y, w, h);
+}
+
+function qLB_RT(context, x0, yTop, x1, yBottom) {
+  const dx = x1 - x0;
+  const dy = yBottom - yTop;
+  context.bezierCurveTo(x0 + K * dx, yBottom, x1, yTop + K * dy, x1, yTop);
+}
+
+function qRT_LB(context, x0, yTop, x1, yBottom) {
+  const dx = x1 - x0;
+  const dy = yBottom - yTop;
+  context.bezierCurveTo(x1, yTop + K * dy, x0 + K * dx, yBottom, x0, yBottom);
+}
+
+function qLT_RB(context, x0, yTop, x1, yBottom) {
+  const dx = x1 - x0;
+  const dy = yBottom - yTop;
+  context.bezierCurveTo(x0 + K * dx, yTop, x1, yBottom - K * dy, x1, yBottom);
+}
+
+function qRB_LT(context, x0, yTop, x1, yBottom) {
+  const dx = x1 - x0;
+  const dy = yBottom - yTop;
+  context.bezierCurveTo(x1, yBottom - K * dy, x0 + K * dx, yTop, x0, yTop);
 }
 
 function getControls() {
   return {
     spinePct: value("spineX", 67) / 100,
     barPct: value("barY", 19) / 100,
-    thicknessScale: value("thickness", 26) / REF.railThickness,
+    thicknessRaw: value("thickness", 26) / REF.railThickness,
     segmentPct: value("segmentScale", 100) / 100
   };
 }
 
 function getRefGeometry(controls) {
-  const t = clamp(controls.thicknessScale, 0.6, 2.5);
-  const segmentPct = clamp(controls.segmentPct, 0.2, 1.5);
+  const rawT = clamp(controls.thicknessRaw, 0.75, 1.5);
+  const thicknessT = 1 + (rawT - 1) * 0.16;
+  const curveT = 1 + (rawT - 1) * 0.08;
+  const blockT = 1 + (rawT - 1) * 0.04;
+  const gapT = 1 + (rawT - 1) * 0.08;
+  const segmentT = 1 + (clamp(controls.segmentPct, 0.75, 1.25) - 1) * 0.45;
 
-  const railH = REF.railThickness * t;
-  const gap = REF.centerGap * t;
-  const divider = REF.divider * t;
-  const innerR = REF.innerRadius * t;
+  const railH = REF.railThickness * thicknessT;
+  const gap = REF.centerGap * gapT;
+  const divider = REF.divider;
+  const innerW = REF.innerCurveW * curveT;
+  const innerH = REF.innerCurveH * curveT;
+  const outerW = REF.outerCurveW * curveT;
+  const outerH = REF.outerCurveH * curveT;
 
-  const leftGap = REF.leftGap * t;
-  const leftSeg1W = REF.leftSeg1W * segmentPct;
-  const leftSeg2W = REF.leftSeg2W * segmentPct;
+  const leftGap = REF.leftGap;
+  const leftSeg1W = REF.leftSeg1W * segmentT;
+  const leftSeg2W = REF.leftSeg2W * segmentT;
   const railStart = leftSeg1W + leftGap + leftSeg2W + leftGap;
 
-  const minSpineX = railStart + innerR + 12;
+  const minSpineX = railStart + innerW + 12;
   const maxSpineX = REF.docW - REF.spineMinW;
   const spineX = clamp(controls.spinePct * REF.docW, minSpineX, maxSpineX);
   const spineW = REF.docW - spineX;
 
-  const topOrangeH = REF.topOrangeH * t;
+  const topOrangeH = REF.topOrangeH * blockT;
   const topRedTop = topOrangeH + divider;
+  const topRedBottomNominal = topRedTop + REF.topRedH * blockT;
 
-  const midOrangeH = REF.midOrangeH * t;
-  const goldH = REF.goldH * t;
-  const creamH = REF.creamH * t;
-  const lowerRedH = Math.max(REF.lowerRedH * t, railH + innerR);
-
-  const minBarCenterY = topRedTop + innerR + railH + gap / 2;
+  const minBarCenterY = topRedTop + innerH + railH + gap / 2;
+  const lowerRedH = REF.lowerRedH * blockT;
+  const midOrangeH = REF.midOrangeH * blockT;
+  const goldH = REF.goldH * blockT;
+  const creamH = REF.creamH * blockT;
   const requiredBelow =
-    lowerRedH +
-    divider +
-    midOrangeH +
-    divider +
-    goldH +
-    divider +
-    creamH +
-    divider +
-    80 * t;
-  const maxBarCenterY = REF.docH - requiredBelow;
-  const safeMaxBarCenterY = Math.max(minBarCenterY, maxBarCenterY);
+    lowerRedH + divider +
+    midOrangeH + divider +
+    goldH + divider +
+    creamH + divider +
+    90;
 
-  const barCenterY = clamp(controls.barPct * REF.docH, minBarCenterY, safeMaxBarCenterY);
+  const maxBarCenterY = REF.docH - requiredBelow;
+  const barCenterY = clamp(controls.barPct * REF.docH, minBarCenterY, Math.max(minBarCenterY, maxBarCenterY));
 
   const upperBarTop = barCenterY - gap / 2 - railH;
   const upperBarBottom = upperBarTop + railH;
   const lowerBarTop = barCenterY + gap / 2;
   const lowerBarBottom = lowerBarTop + railH;
 
-  const topRedBottom = upperBarBottom;
+  const upperCurveTopY = upperBarTop - innerH;
+  const topRedBottom = Math.max(topRedBottomNominal, upperBarBottom);
+
   const lowerRedTop = lowerBarTop;
   const lowerRedBottom = lowerRedTop + lowerRedH;
 
@@ -144,7 +171,10 @@ function getRefGeometry(controls) {
     railH,
     gap,
     divider,
-    innerR,
+    innerW,
+    innerH,
+    outerW,
+    outerH,
     leftGap,
     leftSeg1W,
     leftSeg2W,
@@ -154,6 +184,7 @@ function getRefGeometry(controls) {
     topOrangeH,
     topRedTop,
     topRedBottom,
+    upperCurveTopY,
     upperBarTop,
     upperBarBottom,
     lowerBarTop,
@@ -174,18 +205,11 @@ function drawUpperRed(context, g, color) {
   context.fillStyle = color;
   context.beginPath();
   context.moveTo(g.railStart, g.upperBarTop);
-  context.lineTo(g.spineX - g.innerR, g.upperBarTop);
-  context.arc(
-    g.spineX - g.innerR,
-    g.upperBarTop - g.innerR,
-    g.innerR,
-    Math.PI / 2,
-    0,
-    true
-  );
-  context.lineTo(g.spineX, g.topRedTop);
-  context.lineTo(REF.docW, g.topRedTop);
-  context.lineTo(REF.docW, g.topRedBottom);
+  context.lineTo(g.spineX - g.innerW, g.upperBarTop);
+  qLB_RT(context, g.spineX - g.innerW, g.upperCurveTopY, g.spineX, g.upperBarTop);
+  context.lineTo(REF.docW, g.upperCurveTopY);
+  context.lineTo(REF.docW, g.topRedBottom - g.outerH);
+  qRT_LB(context, REF.docW - g.outerW, g.topRedBottom - g.outerH, REF.docW, g.topRedBottom);
   context.lineTo(g.railStart, g.topRedBottom);
   context.closePath();
   context.fill();
@@ -195,18 +219,11 @@ function drawLowerRed(context, g, color) {
   context.fillStyle = color;
   context.beginPath();
   context.moveTo(g.railStart, g.lowerRedTop);
-  context.lineTo(REF.docW, g.lowerRedTop);
+  context.lineTo(REF.docW - g.outerW, g.lowerRedTop);
+  qLT_RB(context, REF.docW - g.outerW, g.lowerRedTop, REF.docW, g.lowerRedTop + g.outerH);
   context.lineTo(REF.docW, g.lowerRedBottom);
   context.lineTo(g.spineX, g.lowerRedBottom);
-  context.lineTo(g.spineX, g.lowerBarBottom + g.innerR);
-  context.arc(
-    g.spineX - g.innerR,
-    g.lowerBarBottom + g.innerR,
-    g.innerR,
-    0,
-    -Math.PI / 2,
-    true
-  );
+  qRB_LT(context, g.spineX - g.innerW, g.lowerBarBottom, g.spineX, g.lowerRedBottom);
   context.lineTo(g.railStart, g.lowerBarBottom);
   context.closePath();
   context.fill();
@@ -277,11 +294,7 @@ function redrawPreview() {
 
 function updateCustomVisibility() {
   const customSize = document.getElementById("customSize");
-
-  if (!customSize) {
-    return;
-  }
-
+  if (!customSize) return;
   customSize.hidden = document.getElementById("preset").value !== "custom";
 }
 
