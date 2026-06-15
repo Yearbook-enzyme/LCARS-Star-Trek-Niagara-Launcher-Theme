@@ -25,7 +25,12 @@ function drawWallpaper(targetCanvas) {
   const barY = h * (Number(document.getElementById("barY").value) / 100);
   const t = Number(document.getElementById("thickness").value);
   const gap = Math.max(8, t * 0.45);
-  const curve = Number(document.getElementById("curveSize").value) * 2.4;
+  const curve = Math.max(t * 2, Number(document.getElementById("curveSize").value) * 2.4);
+
+  const railStart = w * 0.44;
+  const railTopY = barY - t - gap / 2;
+  const railBottomY = barY + gap / 2;
+  const right = w;
 
   c.fillStyle = "#000";
   c.fillRect(0, 0, w, h);
@@ -35,50 +40,45 @@ function drawWallpaper(targetCanvas) {
     c.fillRect(x, y, rw, rh);
   }
 
-  // left segmented rails
-  const railTopY = barY - t - gap / 2;
-  const railBottomY = barY + gap / 2;
+  function topElbow() {
+    c.fillStyle = palette[2];
+    c.beginPath();
+    c.moveTo(railStart, railTopY);
+    c.lineTo(spineX - curve, railTopY);
+    c.quadraticCurveTo(spineX, railTopY, spineX, railTopY - curve);
+    c.lineTo(right, railTopY - curve);
+    c.lineTo(right, railTopY + t);
+    c.lineTo(railStart, railTopY + t);
+    c.closePath();
+    c.fill();
+  }
 
+  function bottomElbow() {
+    c.fillStyle = palette[2];
+    c.beginPath();
+    c.moveTo(railStart, railBottomY);
+    c.lineTo(right, railBottomY);
+    c.lineTo(right, railBottomY + t + curve);
+    c.lineTo(spineX, railBottomY + t + curve);
+    c.quadraticCurveTo(spineX, railBottomY + t, spineX - curve, railBottomY + t);
+    c.lineTo(railStart, railBottomY + t);
+    c.closePath();
+    c.fill();
+  }
+
+  // left segmented rails
   rect(0, railTopY, w * 0.24, t, palette[0]);
   rect(w * 0.25, railTopY, w * 0.18, t, palette[1]);
-
   rect(0, railBottomY, w * 0.24, t, palette[0]);
   rect(w * 0.25, railBottomY, w * 0.18, t, palette[1]);
 
-  // main LCARS junction: one continuous structural shape
-  const railStart = w * 0.44;
-  const right = w;
-  const topY = railTopY - curve;
-  const midTop = railTopY + t;
-  const midBottom = railBottomY;
-  const bottomY = railBottomY + t + curve;
+  topElbow();
+  bottomElbow();
 
-  c.fillStyle = palette[2];
-  c.beginPath();
-
-  // upper rail from left into large curve
-  c.moveTo(railStart, railTopY);
-  c.lineTo(spineX - curve, railTopY);
-  c.quadraticCurveTo(spineX, railTopY, spineX, railTopY - curve);
-  c.lineTo(right, topY);
-  c.lineTo(right, midTop);
-  c.lineTo(railStart, midTop);
-
-  // move around center black gap by drawing lower rail as same color path
-  c.moveTo(railStart, midBottom);
-  c.lineTo(right, midBottom);
-  c.lineTo(right, bottomY);
-  c.lineTo(spineX, bottomY);
-  c.quadraticCurveTo(spineX, railBottomY + t, spineX - curve, railBottomY + t);
-  c.lineTo(railStart, railBottomY + t);
-  c.closePath();
-
-  c.fill();
-
-  // right vertical blocks, all straight rectangles
+  // right vertical blocks, straight rectangles
   const rightW = w - spineX;
-  let y = 0;
   const blockGap = gap * 1.2;
+  let y = 0;
 
   const blocks = [
     [h * 0.085, palette[1]],
