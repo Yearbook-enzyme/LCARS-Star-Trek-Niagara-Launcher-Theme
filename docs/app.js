@@ -22,7 +22,7 @@ const palettes = {
   highContrast: ["#ffffff", "#ff9f1c", "#ff2e2e", "#ffd23f", "#f7f7f7"]
 };
 
-// Locked reference geometry from the source wallpaper
+// Reference-locked geometry from the version that was working well.
 const REF = {
   docW: 690,
   docH: 1536,
@@ -64,7 +64,6 @@ function rect(c, x, y, w, h, color) {
   c.fillRect(x, y, w, h);
 }
 
-// Quarter-ellipse helpers
 function qLB_RT(c, x0, yTop, x1, yBottom) {
   const dx = x1 - x0;
   const dy = yBottom - yTop;
@@ -111,7 +110,7 @@ function drawWallpaper(targetCanvas) {
   targetCanvas.height = h;
 
   const c = targetCanvas.getContext("2d");
-  const palette = palettes[document.getElementById("palette").value];
+  const palette = palettes[document.getElementById("palette").value] || palettes.classic;
 
   const sx = w / REF.docW;
   const sy = h / REF.docH;
@@ -198,11 +197,13 @@ function drawWallpaper(targetCanvas) {
 
 function redrawPreview() {
   const { w, h } = getSize();
-  const previewHeight = 900;
-  const scale = previewHeight / h;
 
-  canvas.width = w * scale;
-  canvas.height = h * scale;
+  const maxPreviewW = 520;
+  const maxPreviewH = Math.min(window.innerHeight * 0.88, 900);
+  const scale = Math.min(maxPreviewW / w, maxPreviewH / h);
+
+  canvas.width = Math.round(w * scale);
+  canvas.height = Math.round(h * scale);
 
   const temp = document.createElement("canvas");
   drawWallpaper(temp);
@@ -212,16 +213,23 @@ function redrawPreview() {
 }
 
 function updateCustomVisibility() {
-  const isCustom = document.getElementById("preset").value === "custom";
-  document.getElementById("customSize").hidden = !isCustom;
+  const customSize = document.getElementById("customSize");
+  if (!customSize) return;
+
+  customSize.hidden = document.getElementById("preset").value !== "custom";
+}
+
+function updateAll() {
+  updateCustomVisibility();
+  redrawPreview();
 }
 
 document.querySelectorAll("select, input").forEach(el => {
-  el.addEventListener("input", () => {
-    updateCustomVisibility();
-    redrawPreview();
-  });
+  el.addEventListener("input", updateAll);
+  el.addEventListener("change", updateAll);
 });
+
+window.addEventListener("resize", redrawPreview);
 
 document.getElementById("download").addEventListener("click", () => {
   const exportCanvas = document.createElement("canvas");
@@ -236,5 +244,4 @@ document.getElementById("download").addEventListener("click", () => {
   link.click();
 });
 
-updateCustomVisibility();
-redrawPreview();
+updateAll();
