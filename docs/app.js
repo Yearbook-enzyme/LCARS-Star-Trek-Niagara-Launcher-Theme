@@ -25,7 +25,8 @@ function drawWallpaper(targetCanvas) {
   const barY = h * (Number(document.getElementById("barY").value) / 100);
   const t = Number(document.getElementById("thickness").value);
   const gap = Math.max(8, t * 0.45);
-  const curve = Math.max(t * 2, Number(document.getElementById("curveSize").value) * 2.4);
+  const curveSlider = document.getElementById("curveSize") || document.getElementById("radius");
+  const curve = Math.max(t * 2, Number(curveSlider.value) * 2.4);
 
   const railStart = w * 0.44;
   const railTopY = barY - t - gap / 2;
