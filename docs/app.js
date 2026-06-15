@@ -67,6 +67,10 @@ function clamp(number, min, max) {
   return Math.max(min, Math.min(max, number));
 }
 
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
 function fillRect(context, x, y, w, h, color) {
   if (w <= 0 || h <= 0) return;
   context.fillStyle = color;
@@ -107,22 +111,25 @@ function getControls() {
 }
 
 function getRefGeometry(controls) {
-  const rawT = clamp(controls.thicknessRaw, 0.75, 1.5);
-  const thicknessT = 1 + (rawT - 1) * 0.16;
-  const curveT = 1 + (rawT - 1) * 0.08;
-  const blockT = 1 + (rawT - 1) * 0.04;
-  const gapT = 1 + (rawT - 1) * 0.08;
-  const segmentT = 1 + (clamp(controls.segmentPct, 0.75, 1.25) - 1) * 0.45;
+  const rawT = clamp(controls.thicknessRaw, 0.7, 1.45);
+  const thicknessT = 1 + (rawT - 1) * 0.22;
+  const curveT = 1 + (rawT - 1) * 0.14;
+  const blockT = 1 + (rawT - 1) * 0.12;
+  const gapT = 1 + (rawT - 1) * 0.18;
+
+  const segmentRaw = clamp(controls.segmentPct, 0.75, 1.25);
+  const segmentT = 1 + (segmentRaw - 1) * 0.8;
 
   const railH = REF.railThickness * thicknessT;
   const gap = REF.centerGap * gapT;
-  const divider = REF.divider;
+  const divider = REF.divider * (1 + (rawT - 1) * 0.08);
+
   const innerW = REF.innerCurveW * curveT;
   const innerH = REF.innerCurveH * curveT;
   const outerW = REF.outerCurveW * curveT;
   const outerH = REF.outerCurveH * curveT;
 
-  const leftGap = REF.leftGap;
+  const leftGap = REF.leftGap * thicknessT;
   const leftSeg1W = REF.leftSeg1W * segmentT;
   const leftSeg2W = REF.leftSeg2W * segmentT;
   const railStart = leftSeg1W + leftGap + leftSeg2W + leftGap;
@@ -134,31 +141,36 @@ function getRefGeometry(controls) {
 
   const topOrangeH = REF.topOrangeH * blockT;
   const topRedTop = topOrangeH + divider;
-  const topRedBottomNominal = topRedTop + REF.topRedH * blockT;
+  const topRedBottomBase = topRedTop + REF.topRedH * blockT;
 
-  const minBarCenterY = topRedTop + innerH + railH + gap / 2;
   const lowerRedH = REF.lowerRedH * blockT;
   const midOrangeH = REF.midOrangeH * blockT;
   const goldH = REF.goldH * blockT;
   const creamH = REF.creamH * blockT;
-  const requiredBelow =
-    lowerRedH + divider +
-    midOrangeH + divider +
-    goldH + divider +
-    creamH + divider +
-    90;
 
-  const maxBarCenterY = REF.docH - requiredBelow;
-  const barCenterY = clamp(controls.barPct * REF.docH, minBarCenterY, Math.max(minBarCenterY, maxBarCenterY));
+  const motifTopMin = topRedTop;
+  const motifBottomMax = REF.docH - (midOrangeH + goldH + creamH + lowerRedH + divider * 4 + 40);
 
-  const upperBarTop = barCenterY - gap / 2 - railH;
+  const junctionMin = motifTopMin + innerH + railH + gap / 2;
+  const junctionMax = Math.max(
+    junctionMin,
+    motifBottomMax
+  );
+
+  const baseJunctionY = clamp(controls.barPct * REF.docH, junctionMin, junctionMax);
+
+  const topSlack = baseJunctionY - junctionMin;
+  const bottomSlack = junctionMax - baseJunctionY;
+  const desiredUpperBarTop = baseJunctionY - gap / 2 - railH;
+
+  const upperCurveTopY = Math.max(topRedTop, desiredUpperBarTop - innerH);
+  const upperBarTop = upperCurveTopY + innerH;
   const upperBarBottom = upperBarTop + railH;
-  const lowerBarTop = barCenterY + gap / 2;
+
+  const lowerBarTop = upperBarBottom + gap;
   const lowerBarBottom = lowerBarTop + railH;
 
-  const upperCurveTopY = upperBarTop - innerH;
-  const topRedBottom = Math.max(topRedBottomNominal, upperBarBottom);
-
+  const topRedBottom = Math.max(topRedBottomBase, upperBarBottom);
   const lowerRedTop = lowerBarTop;
   const lowerRedBottom = lowerRedTop + lowerRedH;
 
@@ -166,6 +178,13 @@ function getRefGeometry(controls) {
   const goldY = midOrangeY + midOrangeH + divider;
   const creamY = goldY + goldH + divider;
   const bottomRedY = creamY + creamH + divider;
+
+  const overflow = bottomRedY - (REF.docH - 20);
+  let shiftUp = 0;
+
+  if (overflow > 0) {
+    shiftUp = overflow;
+  }
 
   return {
     railH,
@@ -183,21 +202,21 @@ function getRefGeometry(controls) {
     spineW,
     topOrangeH,
     topRedTop,
-    topRedBottom,
-    upperCurveTopY,
-    upperBarTop,
-    upperBarBottom,
-    lowerBarTop,
-    lowerBarBottom,
-    lowerRedTop,
-    lowerRedBottom,
-    midOrangeY,
+    topRedBottom: topRedBottom - shiftUp,
+    upperCurveTopY: upperCurveTopY - shiftUp,
+    upperBarTop: upperBarTop - shiftUp,
+    upperBarBottom: upperBarBottom - shiftUp,
+    lowerBarTop: lowerBarTop - shiftUp,
+    lowerBarBottom: lowerBarBottom - shiftUp,
+    lowerRedTop: lowerRedTop - shiftUp,
+    lowerRedBottom: lowerRedBottom - shiftUp,
+    midOrangeY: midOrangeY - shiftUp,
     midOrangeH,
-    goldY,
+    goldY: goldY - shiftUp,
     goldH,
-    creamY,
+    creamY: creamY - shiftUp,
     creamH,
-    bottomRedY
+    bottomRedY: bottomRedY - shiftUp
   };
 }
 
@@ -266,10 +285,9 @@ function drawWallpaper(targetCanvas) {
 
   const scale = Math.min(w / REF.docW, h / REF.docH);
   const offsetX = w - REF.docW * scale;
-  const offsetY = 0;
 
   context.save();
-  context.translate(offsetX, offsetY);
+  context.translate(offsetX, 0);
   context.scale(scale, scale);
   drawReferenceWallpaper(context, palette, controls);
   context.restore();
