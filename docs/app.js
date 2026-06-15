@@ -107,11 +107,8 @@ function drawWallpaper(targetCanvas) {
   const barPercent = value("barY", 19) / 100;
   const thicknessScale = value("thickness", 26) / REF.railThickness;
   const segmentScale = value("segmentScale", 100) / 100;
-  const columnPercent = value("columnWidth", 33) / 100;
-
-  const rightW = w * columnPercent;
-  const spineX = w * spinePercent;
-  const columnX = Math.min(spineX, w - rightW);
+  const columnX = w * spinePercent;
+  const rightW = w - columnX;
 
   const barY = h * barPercent;
 
