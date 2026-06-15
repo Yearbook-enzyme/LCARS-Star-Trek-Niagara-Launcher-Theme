@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>How to Use LCARS Icons</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="layout">
+    <section class="panel">
+      <h1>How to Use the LCARS Icon Generator</h1>
+
+      <p>
+        The icon generator is privacy-first. It does not read your device, scan your apps,
+        or upload your app list. You provide only the list you want to use.
+      </p>
+
+      <a class="button secondary" href="icon-generator.html">Open Icon Generator</a>
+      <a class="button secondary" href="index.html">Back to Wallpaper Generator</a>
+    </section>
+
+    <section class="previewWrap widePreview">
+      <div class="infoPage">
+        <h2>Recommended method</h2>
+
+        <div class="infoCard">
+          <h3>Simple manual list</h3>
+          <p>
+            Type or paste one app name per line. This works on Android, iPhone, iPad,
+            desktop, and any other device.
+          </p>
+
+          <pre>Discord
+Brave
+ChatGPT
+Photos
+Music
+Calendar</pre>
+
+          <p>
+            This is the safest and easiest method. The generator will guess categories,
+            and you can edit them before downloading icons.
+          </p>
+        </div>
+
+        <h2>Android</h2>
+
+        <div class="infoCard">
+          <h3>App names or package names</h3>
+          <p>
+            Android icon packs work best with package names, but you do not need them
+            for basic generated icons.
+          </p>
+
+          <p>App names are fine:</p>
+
+          <pre>Discord
+Brave
+ChatGPT</pre>
+
+          <p>Package names are more precise if you already have them:</p>
+
+          <pre>com.discord
+com.brave.browser
+com.openai.chatgpt</pre>
+
+          <p>
+            If you already know how to export package names from your launcher, backup tool,
+            desktop tools, or another trusted method, you can upload that list. This site
+            does not require you to install anything or connect your phone to a computer.
+          </p>
+        </div>
+
+        <h2>iPhone and iPad</h2>
+
+        <div class="infoCard">
+          <h3>Use app names</h3>
+          <p>
+            Paste app names manually, generate PNG icons, then use Apple Shortcuts to add
+            custom icons to your Home Screen.
+          </p>
+
+          <pre>Messages
+Safari
+Music
+Photos
+Discord
+ChatGPT</pre>
+
+          <p>
+            On iPhone and iPad, generated icons are meant for Shortcuts/Home Screen setup,
+            not Android-style icon packs.
+          </p>
+        </div>
+
+        <h2>Accepted input formats</h2>
+
+        <div class="infoCard">
+          <h3>One item per line</h3>
+
+          <pre>Discord
+com.brave.browser
+ChatGPT
+com.spotify.music</pre>
+
+          <h3>CSV-style rows</h3>
+
+          <pre>Discord,com.discord
+Brave,com.brave.browser
+ChatGPT,com.openai.chatgpt</pre>
+
+          <p>
+            You can mix app names and package names. The generator will deduplicate entries
+            and let you correct categories before export.
+          </p>
+        </div>
+
+        <h2>Privacy note</h2>
+
+        <div class="infoCard">
+          <p>
+            Your app list can reveal personal habits, so the generator runs locally in your
+            browser. Unknown app contribution JSON is copied only when you choose to copy it.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

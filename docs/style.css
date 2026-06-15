@@ -199,3 +199,30 @@ td {
 td select {
   min-width: 190px;
 }
+
+.infoPage {
+  max-width: 900px;
+  width: 100%;
+}
+
+.infoCard {
+  background: #080808;
+  border: 1px solid #2a1a14;
+  border-radius: 1.25rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.infoCard h3 {
+  color: #ffd0a0;
+  margin-top: 0;
+}
+
+pre {
+  background: #111;
+  color: #ffd0a0;
+  border: 1px solid #2a1a14;
+  border-radius: 1rem;
+  padding: 0.9rem;
+  overflow-x: auto;
+}
