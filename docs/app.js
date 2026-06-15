@@ -13,95 +13,68 @@ function getSize() {
   return { w, h };
 }
 
-function drawWallpaper(targetCanvas, exportScale = 1) {
+function drawWallpaper(targetCanvas) {
   const { w, h } = getSize();
-  targetCanvas.width = w * exportScale;
-  targetCanvas.height = h * exportScale;
+  targetCanvas.width = w;
+  targetCanvas.height = h;
 
   const c = targetCanvas.getContext("2d");
-  c.setTransform(exportScale, 0, 0, exportScale, 0, 0);
-
   const palette = palettes[document.getElementById("palette").value];
 
   const spineX = w * (Number(document.getElementById("spineX").value) / 100);
   const barY = h * (Number(document.getElementById("barY").value) / 100);
   const t = Number(document.getElementById("thickness").value);
   const gap = Math.max(8, t * 0.45);
-  const r = Number(document.getElementById("radius").value);
+  const curve = Number(document.getElementById("radius").value) * 1.8;
 
   c.fillStyle = "#000";
   c.fillRect(0, 0, w, h);
-
-  const rightW = w - spineX;
-  const leftEnd = spineX - t * 1.7;
 
   function rect(x, y, rw, rh, color) {
     c.fillStyle = color;
     c.fillRect(x, y, rw, rh);
   }
 
-  function roundRect(x, y, rw, rh, radius, color) {
-    const rr = Math.min(radius, rw / 2, rh / 2);
-    c.fillStyle = color;
+  function topCurve() {
+    c.fillStyle = palette[2];
     c.beginPath();
-    c.moveTo(x + rr, y);
-    c.lineTo(x + rw - rr, y);
-    c.quadraticCurveTo(x + rw, y, x + rw, y + rr);
-    c.lineTo(x + rw, y + rh - rr);
-    c.quadraticCurveTo(x + rw, y + rh, x + rw - rr, y + rh);
-    c.lineTo(x + rr, y + rh);
-    c.quadraticCurveTo(x, y + rh, x, y + rh - rr);
-    c.lineTo(x, y + rr);
-    c.quadraticCurveTo(x, y, x + rr, y);
-    c.fill();
-  }
-
-  // left horizontal segmented rails
-  rect(0, barY - t - gap / 2, w * 0.24, t, palette[0]);
-  rect(w * 0.25, barY - t - gap / 2, w * 0.18, t, palette[1]);
-  rect(w * 0.44, barY - t - gap / 2, leftEnd - w * 0.44, t, palette[2]);
-
-  rect(0, barY + gap / 2, w * 0.24, t, palette[0]);
-  rect(w * 0.25, barY + gap / 2, w * 0.18, t, palette[1]);
-  rect(w * 0.44, barY + gap / 2, leftEnd - w * 0.44, t, palette[2]);
-
-  // LCARS curved junction - cleaner two rail shape
-  function lcarsRail(y, flip, color) {
-    c.fillStyle = color;
-    c.beginPath();
-
-    const curveStart = spineX - t * 1.8;
-    const curveEnd = spineX;
-    const railH = t * 3.0;
-    const yy = y;
-
-    if (!flip) {
-      c.moveTo(leftEnd, yy);
-      c.lineTo(curveStart, yy);
-      c.quadraticCurveTo(curveEnd, yy, curveEnd, yy - railH);
-      c.lineTo(w, yy - railH);
-      c.lineTo(w, yy);
-      c.lineTo(leftEnd, yy);
-    } else {
-      c.moveTo(leftEnd, yy);
-      c.lineTo(w, yy);
-      c.lineTo(w, yy + railH);
-      c.lineTo(curveEnd, yy + railH);
-      c.quadraticCurveTo(curveEnd, yy, curveStart, yy);
-      c.lineTo(leftEnd, yy);
-    }
-
+    c.moveTo(w * 0.44, barY - t - gap / 2);
+    c.lineTo(spineX - curve, barY - t - gap / 2);
+    c.quadraticCurveTo(spineX, barY - t - gap / 2, spineX, barY - t - gap / 2 - curve);
+    c.lineTo(w, barY - t - gap / 2 - curve);
+    c.lineTo(w, barY - gap / 2);
+    c.lineTo(w * 0.44, barY - gap / 2);
     c.closePath();
     c.fill();
   }
 
-  lcarsRail(barY - gap / 2, false, palette[2]);
-  lcarsRail(barY + gap / 2 + t, true, palette[2]);
+  function bottomCurve() {
+    c.fillStyle = palette[2];
+    c.beginPath();
+    c.moveTo(w * 0.44, barY + gap / 2);
+    c.lineTo(w, barY + gap / 2);
+    c.lineTo(w, barY + gap / 2 + curve);
+    c.lineTo(spineX, barY + gap / 2 + curve);
+    c.quadraticCurveTo(spineX, barY + gap / 2 + t, spineX - curve, barY + gap / 2 + t);
+    c.lineTo(w * 0.44, barY + gap / 2 + t);
+    c.closePath();
+    c.fill();
+  }
 
-  // right vertical blocks
-  const x = spineX;
-  const blockGap = gap * 1.2;
+  // Left rails
+  rect(0, barY - t - gap / 2, w * 0.24, t, palette[0]);
+  rect(w * 0.25, barY - t - gap / 2, w * 0.18, t, palette[1]);
+
+  rect(0, barY + gap / 2, w * 0.24, t, palette[0]);
+  rect(w * 0.25, barY + gap / 2, w * 0.18, t, palette[1]);
+
+  topCurve();
+  bottomCurve();
+
+  // Right blocks
+  const rightW = w - spineX;
   let y = 0;
+  const blockGap = gap * 1.2;
 
   const blocks = [
     [h * 0.085, palette[1]],
@@ -113,7 +86,7 @@ function drawWallpaper(targetCanvas, exportScale = 1) {
   ];
 
   for (const [bh, color] of blocks) {
-    rect(x, y, rightW, bh, color);
+    rect(spineX, y, rightW, bh, color);
     y += bh + blockGap;
   }
 }
@@ -127,9 +100,8 @@ function redrawPreview() {
   canvas.height = h * scale;
 
   const temp = document.createElement("canvas");
-  drawWallpaper(temp, 1);
+  drawWallpaper(temp);
 
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(temp, 0, 0, canvas.width, canvas.height);
 }
@@ -140,7 +112,7 @@ document.querySelectorAll("select, input").forEach(el => {
 
 document.getElementById("download").addEventListener("click", () => {
   const exportCanvas = document.createElement("canvas");
-  drawWallpaper(exportCanvas, 1);
+  drawWallpaper(exportCanvas);
 
   const { w, h } = getSize();
   const palette = document.getElementById("palette").value;
