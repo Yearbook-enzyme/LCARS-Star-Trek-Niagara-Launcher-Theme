@@ -25,272 +25,197 @@ const palettes = {
 const REF = {
   docW: 690,
   docH: 1536,
+
   railThickness: 26,
   centerGap: 20.466,
-  leftSeg1W: 145,
-  leftSeg2W: 145,
-  leftGap: 7,
-  topOrangeH: 126,
-  topRedH: 194,
-  lowerRedH: 186,
-  midOrangeH: 84,
-  goldH: 255,
-  creamH: 235,
+
   innerCurveW: 66.673,
   innerCurveH: 77.433,
   outerCurveW: 101.697,
   outerCurveH: 113.301,
-  spineMinW: 115,
-  divider: 8
+
+  leftSeg1W: 145,
+  leftSeg2W: 145,
+  leftGap: 7,
+
+  topOrangeH: 126,
+  midOrangeH: 84,
+  goldH: 255,
+  creamH: 235
 };
 
 const K = 0.5522847498307936;
 
 function getSize() {
   const preset = document.getElementById("preset").value;
+
   if (preset === "custom") {
     return {
       w: Math.max(200, Number(document.getElementById("customW").value) || 1080),
       h: Math.max(200, Number(document.getElementById("customH").value) || 2400)
     };
   }
+
   const [w, h] = preset.split("x").map(Number);
   return { w, h };
 }
 
 function value(id, fallback) {
-  const element = document.getElementById(id);
-  return element ? Number(element.value) : fallback;
+  const el = document.getElementById(id);
+  return el ? Number(el.value) : fallback;
 }
 
-function clamp(number, min, max) {
-  return Math.max(min, Math.min(max, number));
-}
-
-function fillRect(context, x, y, w, h, color) {
+function rect(c, x, y, w, h, color) {
   if (w <= 0 || h <= 0) return;
-  context.fillStyle = color;
-  context.fillRect(x, y, w, h);
+  c.fillStyle = color;
+  c.fillRect(x, y, w, h);
 }
 
-function qLB_RT(context, x0, yTop, x1, yBottom) {
+function qLB_RT(c, x0, yTop, x1, yBottom) {
   const dx = x1 - x0;
   const dy = yBottom - yTop;
-  context.bezierCurveTo(x0 + K * dx, yBottom, x1, yTop + K * dy, x1, yTop);
+  c.bezierCurveTo(x0 + K * dx, yBottom, x1, yTop + K * dy, x1, yTop);
 }
 
-function qRT_LB(context, x0, yTop, x1, yBottom) {
+function qRT_LB(c, x0, yTop, x1, yBottom) {
   const dx = x1 - x0;
   const dy = yBottom - yTop;
-  context.bezierCurveTo(x1, yTop + K * dy, x0 + K * dx, yBottom, x0, yBottom);
+  c.bezierCurveTo(x1, yTop + K * dy, x0 + K * dx, yBottom, x0, yBottom);
 }
 
-function qLT_RB(context, x0, yTop, x1, yBottom) {
+function qLT_RB(c, x0, yTop, x1, yBottom) {
   const dx = x1 - x0;
   const dy = yBottom - yTop;
-  context.bezierCurveTo(x0 + K * dx, yTop, x1, yBottom - K * dy, x1, yBottom);
+  c.bezierCurveTo(x0 + K * dx, yTop, x1, yBottom - K * dy, x1, yBottom);
 }
 
-function qRB_LT(context, x0, yTop, x1, yBottom) {
+function qRB_LT(c, x0, yTop, x1, yBottom) {
   const dx = x1 - x0;
   const dy = yBottom - yTop;
-  context.bezierCurveTo(x1, yBottom - K * dy, x0 + K * dx, yTop, x0, yTop);
-}
-
-function getControls() {
-  return {
-    spinePct: value("spineX", 67) / 100,
-    barPct: value("barY", 19) / 100,
-    thicknessRaw: value("thickness", 26) / REF.railThickness,
-    segmentPct: value("segmentScale", 100) / 100
-  };
-}
-
-function getRefGeometry(controls) {
-  const rawT = clamp(controls.thicknessRaw, 0.7, 1.45);
-  const motifScale = 1 + (rawT - 1) * 0.32;
-  const segmentScale = 1 + (clamp(controls.segmentPct, 0.7, 1.35) - 1) * 1.15;
-
-  const railH = REF.railThickness * motifScale;
-  const gap = REF.centerGap * motifScale;
-  const divider = REF.divider * motifScale;
-  const innerW = REF.innerCurveW * motifScale;
-  const innerH = REF.innerCurveH * motifScale;
-  const outerW = REF.outerCurveW * motifScale;
-  const outerH = REF.outerCurveH * motifScale;
-
-  const leftGap = REF.leftGap * motifScale;
-  const leftSeg1W = REF.leftSeg1W * segmentScale;
-  const leftSeg2W = REF.leftSeg2W * segmentScale;
-  const railStart = leftSeg1W + leftGap + leftSeg2W + leftGap;
-
-  const minSpineX = railStart + innerW + 12;
-  const maxSpineX = REF.docW - REF.spineMinW;
-  const spineX = clamp(controls.spinePct * REF.docW, minSpineX, maxSpineX);
-  const spineW = REF.docW - spineX;
-
-  const topOrangeH = REF.topOrangeH * motifScale;
-  const topRedTop = topOrangeH + divider;
-  const topRedBottom = topRedTop + REF.topRedH * motifScale;
-
-  const lowerRedH = REF.lowerRedH * motifScale;
-  const midOrangeH = REF.midOrangeH * motifScale;
-  const goldH = REF.goldH * motifScale;
-  const creamH = REF.creamH * motifScale;
-
-  const baseJunctionCenter = topRedTop + innerH + railH + gap * 0.5;
-
-  const groupHeight =
-    REF.lowerRedH * motifScale +
-    divider +
-    midOrangeH +
-    divider +
-    goldH +
-    divider +
-    creamH +
-    divider +
-    120 * motifScale;
-
-  const minGroupShift = -(baseJunctionCenter - (topRedTop + innerH + railH + gap / 2));
-  const maxGroupShift = REF.docH - groupHeight - baseJunctionCenter;
-  const desiredCenter = controls.barPct * REF.docH;
-  const groupShift = clamp(desiredCenter - baseJunctionCenter, minGroupShift, maxGroupShift);
-
-  const upperBarTop = baseJunctionCenter + groupShift - gap / 2 - railH;
-  const upperBarBottom = upperBarTop + railH;
-  const lowerBarTop = upperBarBottom + gap;
-  const lowerBarBottom = lowerBarTop + railH;
-
-  const upperCurveTopY = upperBarTop - innerH;
-  const actualTopRedBottom = Math.max(topRedBottom + groupShift, upperBarBottom);
-  const lowerRedTop = lowerBarTop;
-  const lowerRedBottom = lowerRedTop + lowerRedH;
-
-  const midOrangeY = lowerRedBottom + divider;
-  const goldY = midOrangeY + midOrangeH + divider;
-  const creamY = goldY + goldH + divider;
-  const bottomRedY = creamY + creamH + divider;
-
-  return {
-    railH,
-    gap,
-    divider,
-    innerW,
-    innerH,
-    outerW,
-    outerH,
-    leftGap,
-    leftSeg1W,
-    leftSeg2W,
-    railStart,
-    spineX,
-    spineW,
-    topOrangeH,
-    topRedTop: topRedTop + groupShift,
-    topRedBottom: actualTopRedBottom,
-    upperCurveTopY,
-    upperBarTop,
-    upperBarBottom,
-    lowerBarTop,
-    lowerBarBottom,
-    lowerRedTop,
-    lowerRedBottom,
-    midOrangeY,
-    midOrangeH,
-    goldY,
-    goldH,
-    creamY,
-    creamH,
-    bottomRedY
-  };
-}
-
-function drawUpperRed(context, g, color) {
-  context.fillStyle = color;
-  context.beginPath();
-  context.moveTo(g.railStart, g.upperBarTop);
-  context.lineTo(g.spineX - g.innerW, g.upperBarTop);
-  qLB_RT(context, g.spineX - g.innerW, g.upperCurveTopY, g.spineX, g.upperBarTop);
-  context.lineTo(REF.docW, g.upperCurveTopY);
-  context.lineTo(REF.docW, g.topRedBottom - g.outerH);
-  qRT_LB(context, REF.docW - g.outerW, g.topRedBottom - g.outerH, REF.docW, g.topRedBottom);
-  context.lineTo(g.railStart, g.topRedBottom);
-  context.closePath();
-  context.fill();
-}
-
-function drawLowerRed(context, g, color) {
-  context.fillStyle = color;
-  context.beginPath();
-  context.moveTo(g.railStart, g.lowerRedTop);
-  context.lineTo(REF.docW - g.outerW, g.lowerRedTop);
-  qLT_RB(context, REF.docW - g.outerW, g.lowerRedTop, REF.docW, g.lowerRedTop + g.outerH);
-  context.lineTo(REF.docW, g.lowerRedBottom);
-  context.lineTo(g.spineX, g.lowerRedBottom);
-  qRB_LT(context, g.spineX - g.innerW, g.lowerBarBottom, g.spineX, g.lowerRedBottom);
-  context.lineTo(g.railStart, g.lowerBarBottom);
-  context.closePath();
-  context.fill();
-}
-
-function drawReferenceWallpaper(context, palette, controls) {
-  const g = getRefGeometry(controls);
-
-  fillRect(context, 0, 0, REF.docW, REF.docH, "#000");
-  fillRect(context, g.spineX, 0, g.spineW, g.topOrangeH, palette[1]);
-
-  fillRect(context, 0, g.upperBarTop, g.leftSeg1W, g.railH, palette[0]);
-  fillRect(context, g.leftSeg1W + g.leftGap, g.upperBarTop, g.leftSeg2W, g.railH, palette[1]);
-  fillRect(context, 0, g.lowerBarTop, g.leftSeg1W, g.railH, palette[0]);
-  fillRect(context, g.leftSeg1W + g.leftGap, g.lowerBarTop, g.leftSeg2W, g.railH, palette[1]);
-
-  drawUpperRed(context, g, palette[2]);
-  drawLowerRed(context, g, palette[2]);
-
-  fillRect(context, g.spineX, g.midOrangeY, g.spineW, g.midOrangeH, palette[1]);
-  fillRect(context, g.spineX, g.goldY, g.spineW, g.goldH, palette[3]);
-  fillRect(context, g.spineX, g.creamY, g.spineW, g.creamH, palette[4]);
-  fillRect(context, g.spineX, g.bottomRedY, g.spineW, REF.docH - g.bottomRedY, palette[2]);
+  c.bezierCurveTo(x1, yBottom - K * dy, x0 + K * dx, yTop, x0, yTop);
 }
 
 function drawWallpaper(targetCanvas) {
   const { w, h } = getSize();
-  const palette = palettes[document.getElementById("palette").value] || palettes.classic;
-  const controls = getControls();
-
   targetCanvas.width = w;
   targetCanvas.height = h;
 
-  const context = targetCanvas.getContext("2d");
-  context.clearRect(0, 0, w, h);
-  context.fillStyle = "#000";
-  context.fillRect(0, 0, w, h);
+  const c = targetCanvas.getContext("2d");
+  const palette = palettes[document.getElementById("palette").value] || palettes.classic;
 
-  const scale = Math.min(w / REF.docW, h / REF.docH);
-  const offsetX = w - REF.docW * scale;
+  const sx = w / REF.docW;
+  const sy = h / REF.docH;
 
-  context.save();
-  context.translate(offsetX, 0);
-  context.scale(scale, scale);
-  drawReferenceWallpaper(context, palette, controls);
-  context.restore();
+  const spineX = w * (value("spineX", 67) / 100);
+  const barY = h * (value("barY", 19) / 100);
+  const thicknessScale = value("thickness", REF.railThickness) / REF.railThickness;
+  const segmentScale = value("segmentScale", 100) / 100;
+
+  const t = REF.railThickness * sy * thicknessScale;
+  const gap = REF.centerGap * sy * thicknessScale;
+
+  const innerW = REF.innerCurveW * sx * thicknessScale;
+  const innerH = REF.innerCurveH * sy * thicknessScale;
+  const outerW = REF.outerCurveW * sx * thicknessScale;
+  const outerH = REF.outerCurveH * sy * thicknessScale;
+
+  const leftGap = REF.leftGap * sx * thicknessScale;
+  const leftSeg1W = REF.leftSeg1W * sx * segmentScale;
+  const leftSeg2W = REF.leftSeg2W * sx * segmentScale;
+  const railStart = leftSeg1W + leftGap + leftSeg2W + leftGap;
+
+  const right = w;
+  const rightW = right - spineX;
+
+  const railTopY = barY - t - gap / 2;
+  const railBottomY = barY + gap / 2;
+
+  const topOrangeY = 0;
+  const topOrangeH = REF.topOrangeH * sy;
+  const topRedY = topOrangeY + topOrangeH + gap;
+  const topRedBottom = railTopY + t;
+
+  const lowerRedTop = railBottomY;
+  const lowerRedBottom = railBottomY + t + innerH;
+
+  const midOrangeH = REF.midOrangeH * sy;
+  const goldH = REF.goldH * sy;
+  const creamH = REF.creamH * sy;
+
+  const midOrangeY = lowerRedBottom + gap;
+  const goldY = midOrangeY + midOrangeH + gap;
+  const creamY = goldY + goldH + gap;
+  const bottomRedY = creamY + creamH + gap;
+  const bottomRedH = Math.max(0, h - bottomRedY);
+
+  c.fillStyle = "#000";
+  c.fillRect(0, 0, w, h);
+
+  // Left segmented rails
+  rect(c, 0, railTopY, leftSeg1W, t, palette[0]);
+  rect(c, leftSeg1W + leftGap, railTopY, leftSeg2W, t, palette[1]);
+  rect(c, 0, railBottomY, leftSeg1W, t, palette[0]);
+  rect(c, leftSeg1W + leftGap, railBottomY, leftSeg2W, t, palette[1]);
+
+  // Top orange stays anchored to the top.
+  rect(c, spineX, topOrangeY, rightW, topOrangeH, palette[1]);
+
+  // Upper red dynamically stretches from top orange down to the rail.
+  c.fillStyle = palette[2];
+  c.beginPath();
+  c.moveTo(railStart, railTopY);
+  c.lineTo(spineX - innerW, railTopY);
+
+  // fixed inner curve near the rail, then vertical wall up to the anchored top red block
+  qLB_RT(c, spineX - innerW, railTopY - innerH, spineX, railTopY);
+  c.lineTo(spineX, topRedY);
+
+  c.lineTo(right, topRedY);
+
+  // fixed outer curve near the rail bottom
+  c.lineTo(right, topRedBottom - outerH);
+  qRT_LB(c, right - outerW, topRedBottom - outerH, right, topRedBottom);
+
+  c.lineTo(railStart, topRedBottom);
+  c.closePath();
+  c.fill();
+
+  // Lower red elbow
+  c.fillStyle = palette[2];
+  c.beginPath();
+  c.moveTo(railStart, lowerRedTop);
+  c.lineTo(right - outerW, lowerRedTop);
+  qLT_RB(c, right - outerW, lowerRedTop, right, lowerRedTop + outerH);
+  c.lineTo(right, lowerRedBottom);
+  c.lineTo(spineX, lowerRedBottom);
+  qRB_LT(c, spineX - innerW, railBottomY + t, spineX, lowerRedBottom);
+  c.lineTo(railStart, railBottomY + t);
+  c.closePath();
+  c.fill();
+
+  // Lower blocks fill downward from the moving lower elbow.
+  rect(c, spineX, midOrangeY, rightW, midOrangeH, palette[1]);
+  rect(c, spineX, goldY, rightW, goldH, palette[3]);
+  rect(c, spineX, creamY, rightW, creamH, palette[4]);
+  rect(c, spineX, bottomRedY, rightW, bottomRedH, palette[2]);
 }
 
 function redrawPreview() {
   const { w, h } = getSize();
+
   const maxPreviewW = 520;
   const maxPreviewH = Math.min(window.innerHeight * 0.88, 900);
-  const previewScale = Math.min(maxPreviewW / w, maxPreviewH / h);
+  const scale = Math.min(maxPreviewW / w, maxPreviewH / h);
 
-  canvas.width = Math.max(1, Math.round(w * previewScale));
-  canvas.height = Math.max(1, Math.round(h * previewScale));
+  canvas.width = Math.max(1, Math.round(w * scale));
+  canvas.height = Math.max(1, Math.round(h * scale));
 
-  const exportCanvas = document.createElement("canvas");
-  drawWallpaper(exportCanvas);
+  const temp = document.createElement("canvas");
+  drawWallpaper(temp);
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.imageSmoothingEnabled = true;
-  ctx.drawImage(exportCanvas, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(temp, 0, 0, canvas.width, canvas.height);
 }
 
 function updateCustomVisibility() {
@@ -304,9 +229,9 @@ function updateAll() {
   redrawPreview();
 }
 
-document.querySelectorAll("select, input").forEach((element) => {
-  element.addEventListener("input", updateAll);
-  element.addEventListener("change", updateAll);
+document.querySelectorAll("select, input").forEach((el) => {
+  el.addEventListener("input", updateAll);
+  el.addEventListener("change", updateAll);
 });
 
 window.addEventListener("resize", redrawPreview);
