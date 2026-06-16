@@ -226,3 +226,8 @@ pre {
   padding: 0.9rem;
   overflow-x: auto;
 }
+
+.smallInfo {
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
