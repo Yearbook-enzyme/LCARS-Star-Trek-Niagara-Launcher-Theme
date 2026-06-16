@@ -60,22 +60,34 @@ function normalizeHex(color, fallback = "#d62b18") {
 }
 
 function componentFor(app) {
-  if (app.component) {
-    const c = String(app.component).trim();
-    if (c.startsWith("ComponentInfo{")) return c;
-    if (c.includes("/")) return `ComponentInfo{${c}}`;
-    if (app.package && c.startsWith(".")) return `ComponentInfo{${app.package}/${c}}`;
-    if (app.package) return `ComponentInfo{${app.package}/${c}}`;
+  function expandComponent(raw, fallbackPackage) {
+    let c = String(raw || "").trim();
+
+    if (c.startsWith("ComponentInfo{") && c.endsWith("}")) {
+      c = c.slice("ComponentInfo{".length, -1);
+    }
+
+    if (c.includes("/")) {
+      const parts = c.split("/");
+      const pkg = parts[0];
+      let activity = parts.slice(1).join("/");
+      if (activity.startsWith(".")) activity = pkg + activity;
+      return `ComponentInfo{${pkg}/${activity}}`;
+    }
+
+    if (fallbackPackage && c.startsWith(".")) {
+      return `ComponentInfo{${fallbackPackage}/${fallbackPackage}${c}}`;
+    }
+
+    if (fallbackPackage && c) {
+      return `ComponentInfo{${fallbackPackage}/${c}}`;
+    }
+
     return c;
   }
 
-  if (app.package && app.activity) {
-    const a = String(app.activity).trim();
-    if (a.startsWith("ComponentInfo{")) return a;
-    if (a.includes("/")) return `ComponentInfo{${a}}`;
-    return `ComponentInfo{${app.package}/${a}}`;
-  }
-
+  if (app.component) return expandComponent(app.component, app.package);
+  if (app.package && app.activity) return expandComponent(app.activity, app.package);
   if (app.package) return `ComponentInfo{${app.package}/${app.package}}`;
   return "";
 }
