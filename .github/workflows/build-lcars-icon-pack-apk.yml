@@ -1,0 +1,89 @@
+name: Build LCARS Icon Pack APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_source:
+        description: "Use sample unless a job_url is supplied"
+        required: true
+        default: "sample"
+      job_url:
+        description: "Optional URL to job JSON"
+        required: false
+        default: ""
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v4
+
+      - name: Prepare job JSON
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p builder/work
+
+          if [ -n "${{ github.event.inputs.job_url }}" ]; then
+            curl -fsSL "${{ github.event.inputs.job_url }}" -o builder/work/job.json
+          else
+            cp builder/input/sample-job.json builder/work/job.json
+          fi
+
+          node -e "JSON.parse(require('fs').readFileSync('builder/work/job.json', 'utf8')); console.log('Job JSON is valid.')"
+
+      - name: Generate icon pack resources
+        run: node builder/scripts/generate-icon-pack.js builder/work/job.json builder/android-template
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK packages
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v5
+        with:
+          gradle-version: '8.10'
+
+      - name: Decode signing keystore
+        shell: bash
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          set -euo pipefail
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > builder/android-template/app/lcars-iconpack-release.jks
+
+      - name: Build signed release APK
+        working-directory: builder/android-template
+        env:
+          SIGNING_STORE_FILE: app/lcars-iconpack-release.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: gradle :app:assembleRelease
+
+      - name: Rename APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p builder/output
+          cp builder/android-template/app/build/outputs/apk/release/app-release.apk builder/output/lcars-niagara-icon-pack.apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lcars-niagara-icon-pack-apk
+          path: builder/output/lcars-niagara-icon-pack.apk
+          if-no-files-found: error

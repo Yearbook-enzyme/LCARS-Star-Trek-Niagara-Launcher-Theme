@@ -1,0 +1,12 @@
+{
+  "iconPackName": "LCARS Niagara Icons",
+  "applicationId": "com.yearbookenzyme.lcarsiconpack.generated",
+  "palette": "classic",
+  "colorMode": "themeMono",
+  "apps": [
+    { "package": "com.discord", "label": "Discord", "category": "communication", "color": "#d62b18" },
+    { "package": "com.brave.browser", "label": "Brave", "category": "browser", "color": "#df5a1f" },
+    { "package": "com.openai.chatgpt", "label": "ChatGPT", "category": "ai", "color": "#e09a3f" },
+    { "package": "com.spotify.music", "label": "Spotify", "category": "media", "color": "#dfb98a" }
+  ]
+}
