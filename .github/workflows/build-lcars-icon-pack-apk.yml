@@ -11,6 +11,18 @@ on:
         description: "Optional URL to job JSON"
         required: false
         default: ""
+      job_id:
+        description: "Optional external builder job ID"
+        required: false
+        default: ""
+      status_url:
+        description: "Optional cPanel status callback URL"
+        required: false
+        default: ""
+      upload_url:
+        description: "Optional cPanel APK upload callback URL"
+        required: false
+        default: ""
 
 jobs:
   build:
@@ -36,6 +48,28 @@ jobs:
           fi
 
           node -e "JSON.parse(require('fs').readFileSync('builder/work/job.json', 'utf8')); console.log('Job JSON is valid.')"
+
+      - name: Notify builder server that build started
+        if: ${{ github.event.inputs.status_url != '' && github.event.inputs.job_id != '' }}
+        shell: bash
+        env:
+          CPANEL_BUILDER_TOKEN: ${{ secrets.CPANEL_BUILDER_TOKEN }}
+          JOB_ID: ${{ github.event.inputs.job_id }}
+          STATUS_URL: ${{ github.event.inputs.status_url }}
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs = require("fs");
+          fs.writeFileSync("/tmp/lcars-status-started.json", JSON.stringify({
+            job_id: process.env.JOB_ID,
+            status: "building",
+            message: "GitHub Actions build started"
+          }));
+          NODE
+          curl -fsS -X POST "$STATUS_URL" \
+            -H "Authorization: Bearer $CPANEL_BUILDER_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data-binary @/tmp/lcars-status-started.json || true
 
       - name: Generate icon pack resources
         run: node builder/scripts/generate-icon-pack.js builder/work/job.json builder/android-template
@@ -81,9 +115,46 @@ jobs:
           mkdir -p builder/output
           cp builder/android-template/app/build/outputs/apk/release/app-release.apk builder/output/lcars-niagara-icon-pack.apk
 
+      - name: Upload APK to builder server
+        if: ${{ github.event.inputs.upload_url != '' && github.event.inputs.job_id != '' }}
+        shell: bash
+        env:
+          CPANEL_BUILDER_TOKEN: ${{ secrets.CPANEL_BUILDER_TOKEN }}
+          JOB_ID: ${{ github.event.inputs.job_id }}
+          UPLOAD_URL: ${{ github.event.inputs.upload_url }}
+        run: |
+          set -euo pipefail
+          curl -fsS -X POST "$UPLOAD_URL" \
+            -H "Authorization: Bearer $CPANEL_BUILDER_TOKEN" \
+            -F "job_id=$JOB_ID" \
+            -F "status=done" \
+            -F "apk=@builder/output/lcars-niagara-icon-pack.apk;type=application/vnd.android.package-archive"
+
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: lcars-niagara-icon-pack-apk
           path: builder/output/lcars-niagara-icon-pack.apk
           if-no-files-found: error
+
+      - name: Notify builder server that build failed
+        if: ${{ failure() && github.event.inputs.status_url != '' && github.event.inputs.job_id != '' }}
+        shell: bash
+        env:
+          CPANEL_BUILDER_TOKEN: ${{ secrets.CPANEL_BUILDER_TOKEN }}
+          JOB_ID: ${{ github.event.inputs.job_id }}
+          STATUS_URL: ${{ github.event.inputs.status_url }}
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs = require("fs");
+          fs.writeFileSync("/tmp/lcars-status-failed.json", JSON.stringify({
+            job_id: process.env.JOB_ID,
+            status: "failed",
+            message: "GitHub Actions build failed"
+          }));
+          NODE
+          curl -fsS -X POST "$STATUS_URL" \
+            -H "Authorization: Bearer $CPANEL_BUILDER_TOKEN" \
+            -H "Content-Type: application/json" \
+            --data-binary @/tmp/lcars-status-failed.json || true
