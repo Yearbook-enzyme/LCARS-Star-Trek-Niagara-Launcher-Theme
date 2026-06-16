@@ -60,8 +60,22 @@ function normalizeHex(color, fallback = "#d62b18") {
 }
 
 function componentFor(app) {
-  if (app.component) return app.component;
-  if (app.package && app.activity) return `ComponentInfo{${app.package}/${app.activity}}`;
+  if (app.component) {
+    const c = String(app.component).trim();
+    if (c.startsWith("ComponentInfo{")) return c;
+    if (c.includes("/")) return `ComponentInfo{${c}}`;
+    if (app.package && c.startsWith(".")) return `ComponentInfo{${app.package}/${c}}`;
+    if (app.package) return `ComponentInfo{${app.package}/${c}}`;
+    return c;
+  }
+
+  if (app.package && app.activity) {
+    const a = String(app.activity).trim();
+    if (a.startsWith("ComponentInfo{")) return a;
+    if (a.includes("/")) return `ComponentInfo{${a}}`;
+    return `ComponentInfo{${app.package}/${a}}`;
+  }
+
   if (app.package) return `ComponentInfo{${app.package}/${app.package}}`;
   return "";
 }
