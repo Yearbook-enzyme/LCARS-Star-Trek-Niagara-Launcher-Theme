@@ -11,8 +11,8 @@
       <h1>How to Use the LCARS Icon Generator</h1>
 
       <p>
-        The icon generator is privacy-first. It does not read your device, scan your apps,
-        or upload your app list. You provide only the list you want to use.
+        The icon generator is privacy-first. It does not scan your phone,
+        read your installed apps, require ADB, require Termux, or upload your app list.
       </p>
 
       <a class="button secondary" href="icon-generator.html">Open Icon Generator</a>
@@ -24,10 +24,10 @@
         <h2>Recommended method</h2>
 
         <div class="infoCard">
-          <h3>Simple manual list</h3>
+          <h3>Type or paste app names</h3>
           <p>
-            Type or paste one app name per line. This works on Android, iPhone, iPad,
-            desktop, and any other device.
+            The easiest method is to write one app name per line. This works on Android,
+            iPhone, iPad, desktop, and basically anything else.
           </p>
 
           <pre>Discord
@@ -38,36 +38,51 @@ Music
 Calendar</pre>
 
           <p>
-            This is the safest and easiest method. The generator will guess categories,
-            and you can edit them before downloading icons.
+            After parsing, the generator guesses categories. You can edit every category
+            before downloading icons.
           </p>
         </div>
 
-        <h2>Android</h2>
+        <h2>Optional upload method</h2>
 
         <div class="infoCard">
-          <h3>App names or package names</h3>
+          <h3>Upload a list you already have</h3>
           <p>
-            Android icon packs work best with package names, but you do not need them
-            for basic generated icons.
+            If you already have an app list from your launcher, backup tool, notes app,
+            spreadsheet, or another trusted method, you can upload it.
           </p>
 
-          <p>App names are fine:</p>
+          <p>The generator accepts app names:</p>
 
           <pre>Discord
 Brave
 ChatGPT</pre>
 
-          <p>Package names are more precise if you already have them:</p>
+          <p>It also accepts package names, mostly useful for Android users:</p>
 
           <pre>com.discord
 com.brave.browser
 com.openai.chatgpt</pre>
 
+          <p>And mixed CSV-style rows:</p>
+
+          <pre>Discord,com.discord
+Brave,com.brave.browser
+ChatGPT,com.openai.chatgpt</pre>
+        </div>
+
+        <h2>Android</h2>
+
+        <div class="infoCard">
+          <h3>App names are enough</h3>
           <p>
-            If you already know how to export package names from your launcher, backup tool,
-            desktop tools, or another trusted method, you can upload that list. This site
-            does not require you to install anything or connect your phone to a computer.
+            For simple generated icon files, app names are fine. Package names are more
+            precise for Android launcher/icon-pack mapping, but they are optional.
+          </p>
+
+          <p>
+            This site does not ask you to connect your phone to a computer, install a
+            terminal app, or give another app permission to inspect your device.
           </p>
         </div>
 
@@ -76,8 +91,8 @@ com.openai.chatgpt</pre>
         <div class="infoCard">
           <h3>Use app names</h3>
           <p>
-            Paste app names manually, generate PNG icons, then use Apple Shortcuts to add
-            custom icons to your Home Screen.
+            iPhone and iPad users should paste app names, generate PNG icons, then use
+            Apple Shortcuts to add custom icons to the Home Screen.
           </p>
 
           <pre>Messages
@@ -88,30 +103,8 @@ Discord
 ChatGPT</pre>
 
           <p>
-            On iPhone and iPad, generated icons are meant for Shortcuts/Home Screen setup,
+            On iPhone and iPad, these icons are for Shortcuts/Home Screen customization,
             not Android-style icon packs.
-          </p>
-        </div>
-
-        <h2>Accepted input formats</h2>
-
-        <div class="infoCard">
-          <h3>One item per line</h3>
-
-          <pre>Discord
-com.brave.browser
-ChatGPT
-com.spotify.music</pre>
-
-          <h3>CSV-style rows</h3>
-
-          <pre>Discord,com.discord
-Brave,com.brave.browser
-ChatGPT,com.openai.chatgpt</pre>
-
-          <p>
-            You can mix app names and package names. The generator will deduplicate entries
-            and let you correct categories before export.
           </p>
         </div>
 
@@ -119,8 +112,8 @@ ChatGPT,com.openai.chatgpt</pre>
 
         <div class="infoCard">
           <p>
-            Your app list can reveal personal habits, so the generator runs locally in your
-            browser. Unknown app contribution JSON is copied only when you choose to copy it.
+            Your app list can reveal personal habits. The generator runs locally in your
+            browser, and unknown-app contribution JSON is copied only if you choose to copy it.
           </p>
         </div>
       </div>
