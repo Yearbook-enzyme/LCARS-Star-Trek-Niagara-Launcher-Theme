@@ -1,3 +1,7 @@
 
 # Local signing secrets
 .secrets-local/
+
+# cPanel builder runtime secrets and jobs
+server/cpanel-builder/config.php
+server/cpanel-builder/jobs/
