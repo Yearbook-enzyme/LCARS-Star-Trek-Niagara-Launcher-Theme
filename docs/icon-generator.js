@@ -112,6 +112,12 @@ function saveUserMapping(app) {
   persistUserMappings();
 }
 
+function saveUserMappingsForApps(apps) {
+  for (const app of apps || []) {
+    saveUserMapping(app);
+  }
+}
+
 async function loadKnownApps() {
   try {
     const response = await fetch("data/app-categories.json");
@@ -407,7 +413,10 @@ function render() {
 function processInput(text) {
   parsedApps = enrich(parseText(text));
   render();
-  setStatus(parsedApps.length ? "App list parsed locally." : "No apps found.");
+
+  const savedCount = parsedApps.filter(app => app.source === "saved").length;
+  const suffix = savedCount ? ` ${savedCount} saved local mappings applied.` : "";
+  setStatus(parsedApps.length ? `App list parsed locally.${suffix}` : "No apps found.");
 }
 
 function contributionPayload(apps = parsedApps) {
@@ -629,6 +638,8 @@ async function submitMappingContribution(apps) {
   const checkbox = document.getElementById("shareMappings");
   if (!checkbox?.checked) return;
 
+  saveUserMappingsForApps(apps);
+
   const payload = contributionPayload(apps);
 
   if (!payload.apps.length) return;
@@ -733,18 +744,30 @@ function colorForApkJob(app, index) {
   return lcars[index % lcars.length];
 }
 
+function jobEntryFromCurrentApp(app, index) {
+  return {
+    package: app.package,
+    component: app.component || "",
+    label: app.label || knownLabelForPackage(app.package),
+    category: app.category || "unknown",
+    color: app.color || colorForApkJob(app, index)
+  };
+}
+
 function createApkJobFromTextareaFirst() {
+  const currentApps = parsedApps && parsedApps.length
+    ? assignments().filter(app => app.package)
+    : [];
+
+  if (currentApps.length) {
+    return currentApps.map(jobEntryFromCurrentApp);
+  }
+
   const text = document.getElementById("appText")?.value || "";
   const lineApps = enrich(parseText(text)).filter(app => app.package);
 
   if (lineApps.length) {
-    return lineApps.map((app, index) => ({
-      package: app.package,
-      component: app.component || "",
-      label: app.label || knownLabelForPackage(app.package),
-      category: app.category || "unknown",
-      color: colorForApkJob(app, index)
-    }));
+    return lineApps.map(jobEntryFromCurrentApp);
   }
 
   return (parsedApps || [])
