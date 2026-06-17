@@ -54,16 +54,69 @@ const categoryRules = {
 
 let knownApps = {};
 let parsedApps = [];
+const USER_MAPPINGS_STORAGE_KEY = "lcarsIconGeneratorUserMappingsV1";
+let userMappings = {};
 
 function setStatus(text) {
   document.getElementById("status").textContent = text;
+}
+
+function loadUserMappings() {
+  try {
+    const raw = localStorage.getItem(USER_MAPPINGS_STORAGE_KEY);
+    userMappings = raw ? JSON.parse(raw) : {};
+  } catch {
+    userMappings = {};
+  }
+}
+
+function persistUserMappings() {
+  try {
+    localStorage.setItem(USER_MAPPINGS_STORAGE_KEY, JSON.stringify(userMappings));
+  } catch {
+  }
+}
+
+function localMappingCount() {
+  return Object.keys(userMappings || {}).length;
+}
+
+function mappingKeysForApp(app) {
+  const keys = [];
+  if (app.component) keys.push(`component:${app.component}`);
+  if (app.package) keys.push(`package:${app.package}`);
+  return keys;
+}
+
+function savedMappingFor(app) {
+  for (const key of mappingKeysForApp(app)) {
+    if (userMappings[key]) return userMappings[key];
+  }
+  return null;
+}
+
+function saveUserMapping(app) {
+  if (!app || !app.package) return;
+
+  const data = {
+    label: app.label || knownLabelForPackage(app.package),
+    package: app.package,
+    component: app.component || "",
+    category: app.category || "unknown"
+  };
+
+  for (const key of mappingKeysForApp(app)) {
+    userMappings[key] = data;
+  }
+
+  persistUserMappings();
 }
 
 async function loadKnownApps() {
   try {
     const response = await fetch("data/app-categories.json");
     knownApps = await response.json();
-    setStatus(`Loaded ${Object.keys(knownApps).length} known app mappings.`);
+    setStatus(`Loaded ${Object.keys(knownApps).length} known app mappings and ${localMappingCount()} saved local mappings.`);
   } catch {
     setStatus("Could not load known app database. Heuristics still work.");
   }
@@ -105,7 +158,7 @@ function cleanLabelText(text) {
 }
 
 function knownLabelForPackage(pkg) {
-  return knownApps[pkg]?.label || knownApps[pkg]?.name || inferLabel(pkg);
+  return userMappings[`package:${pkg}`]?.label || knownApps[pkg]?.label || knownApps[pkg]?.name || inferLabel(pkg);
 }
 
 function normalizeLine(line) {
@@ -177,6 +230,14 @@ function parseText(text) {
 }
 
 function categorize(app) {
+  const saved = savedMappingFor(app);
+  if (saved) {
+    if (saved.label && (!app.label || app.label === inferLabel(app.package || ""))) {
+      app.label = saved.label;
+    }
+    return { category: saved.category || "unknown", source: "saved" };
+  }
+
   if (app.package && knownApps[app.package]) {
     return { category: knownApps[app.package].category || "unknown", source: "known" };
   }
@@ -321,7 +382,8 @@ function render() {
       const target = parsedApps.find(x => x.id === app.id);
       if (target) {
         target.category = select.value;
-        target.source = "user";
+        target.source = "saved";
+        saveUserMapping(target);
       }
       render();
     });
@@ -425,6 +487,7 @@ document.getElementById("appFile").addEventListener("change", async event => {
 
 document.querySelectorAll("#palette, #colorMode, #iconSize").forEach(el => el.addEventListener("input", render));
 
+loadUserMappings();
 loadKnownApps();
 
 const APK_BUILDER_BASE = "https://lcars-builder.machinations.space";
