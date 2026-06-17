@@ -249,3 +249,16 @@ pre {
   display: inline-block;
   margin-top: 0.4rem;
 }
+
+.checkboxLine {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  margin-top: 0.7rem;
+  font-size: 0.9rem;
+  color: var(--cream);
+}
+
+.checkboxLine input {
+  accent-color: var(--orange);
+}

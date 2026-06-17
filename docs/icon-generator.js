@@ -82,21 +82,91 @@ function slug(text) {
   return String(text || "app").toLowerCase().replace(/[^a-z0-9._-]+/g, "_").replace(/^_+|_+$/g, "") || "app";
 }
 
+function findComponentToken(text) {
+  const componentInfo = String(text || "").match(/ComponentInfo\{([^}]+)\}/);
+  if (componentInfo) return componentInfo[1];
+
+  const component = String(text || "").match(/[a-zA-Z][a-zA-Z0-9_]*(?:\.[a-zA-Z0-9_]+)+\/[^\s,|;]+/);
+  return component ? component[0] : "";
+}
+
+function findPackageToken(text) {
+  const pkg = String(text || "").match(/\b[a-zA-Z][a-zA-Z0-9_]*(?:\.[a-zA-Z0-9_]+)+\b/);
+  return pkg ? pkg[0] : "";
+}
+
+function cleanLabelText(text) {
+  return String(text || "")
+    .replace(/ComponentInfo\{[^}]+\}/g, " ")
+    .replace(/[a-zA-Z][a-zA-Z0-9_]*(?:\.[a-zA-Z0-9_]+)+\/[^\s,|;]+/g, " ")
+    .replace(/\b[a-zA-Z][a-zA-Z0-9_]*(?:\.[a-zA-Z0-9_]+)+\b/g, " ")
+    .replace(/^[\s,|;:\-–—>]+|[\s,|;:\-–—>]+$/g, "")
+    .trim();
+}
+
+function knownLabelForPackage(pkg) {
+  return knownApps[pkg]?.label || knownApps[pkg]?.name || inferLabel(pkg);
+}
+
 function normalizeLine(line) {
-  let clean = line.trim().replace(/^package:/, "");
+  let clean = String(line || "")
+    .trim()
+    .replace(/^[-*•]\s*/, "")
+    .replace(/^package:/, "");
+
   if (!clean || clean.startsWith("#")) return null;
 
-  if (clean.includes(",")) {
-    const parts = clean.split(",").map(x => x.trim()).filter(Boolean);
-    const a = parts[0] || "";
-    const b = parts[1] || "";
-    if (isPackageName(a)) return { package: a, label: b || inferLabel(a), id: a };
-    if (isPackageName(b)) return { package: b, label: a || inferLabel(b), id: b };
-    return { package: "", label: a, id: `label:${slug(a)}` };
+  const tokens = clean.split(/[,|;\t]+/).map(x => x.trim()).filter(Boolean);
+  const componentRaw = findComponentToken(clean);
+  const component = componentRaw ? parseAndroidComponentText(componentRaw) : null;
+
+  if (component) {
+    const label = cleanLabelText(clean) || knownLabelForPackage(component.package);
+    return {
+      package: component.package,
+      component: component.component,
+      label,
+      id: component.component
+    };
   }
 
-  if (isPackageName(clean)) return { package: clean, label: inferLabel(clean), id: clean };
-  return { package: "", label: clean, id: `label:${slug(clean)}` };
+  const pkg = findPackageToken(clean);
+
+  if (pkg) {
+    let activity = "";
+    for (const token of tokens) {
+      const t = token.trim();
+      if (t === pkg) continue;
+      if (t.startsWith(".")) activity = pkg + t;
+      else if (t.startsWith(pkg + ".")) activity = t;
+    }
+
+    const label = cleanLabelText(clean) || knownLabelForPackage(pkg);
+
+    if (activity) {
+      return {
+        package: pkg,
+        component: `${pkg}/${activity}`,
+        label,
+        id: `${pkg}/${activity}`
+      };
+    }
+
+    return {
+      package: pkg,
+      label,
+      id: pkg
+    };
+  }
+
+  const label = clean.replace(/^["']|["']$/g, "").trim();
+  if (!label) return null;
+
+  return {
+    package: "",
+    label,
+    id: `label:${slug(label)}`
+  };
 }
 
 function parseText(text) {
@@ -208,6 +278,15 @@ function drawIcon(size, color) {
   return canvas;
 }
 
+function escapeHtml(text) {
+  return String(text || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
 function render() {
   const assigned = assignments();
 
@@ -247,12 +326,16 @@ function render() {
       render();
     });
 
+    const packageCell = app.package
+      ? `${escapeHtml(app.package)}${app.component ? `<br><small>${escapeHtml(app.component)}</small>` : ""}`
+      : "(name only)";
+
     tr.innerHTML = `
       <td><div class="generatedIcon mini" style="background:${app.color}"></div></td>
-      <td>${app.label}</td>
-      <td>${app.package || "(name only)"}</td>
+      <td>${escapeHtml(app.label)}</td>
+      <td>${packageCell}</td>
       <td></td>
-      <td>${app.source}</td>
+      <td>${escapeHtml(app.source)}</td>
     `;
     tr.children[3].appendChild(select);
     tbody.appendChild(tr);
@@ -265,11 +348,31 @@ function processInput(text) {
   setStatus(parsedApps.length ? "App list parsed locally." : "No apps found.");
 }
 
+function contributionPayload(apps = parsedApps) {
+  return {
+    source: "lcars-icon-generator",
+    submitted_at: new Date().toISOString(),
+    apps: apps
+      .filter(app => app.package)
+      .map(app => ({
+        label: app.label || knownLabelForPackage(app.package),
+        package: app.package,
+        component: app.component || "",
+        category: app.category || "unknown",
+        source: app.source || "unknown"
+      }))
+  };
+}
+
 function contributionJSON() {
   const out = {};
   for (const app of parsedApps) {
     if (!app.package || knownApps[app.package]) continue;
-    out[app.package] = { label: app.label, category: app.category };
+    out[app.package] = {
+      label: app.label,
+      component: app.component || "",
+      category: app.category
+    };
   }
   return JSON.stringify(out, null, 2);
 }
@@ -458,6 +561,28 @@ async function pollApkBuild(statusUrl) {
   throw new Error("APK build timed out while waiting for the server.");
 }
 
+
+async function submitMappingContribution(apps) {
+  const checkbox = document.getElementById("shareMappings");
+  if (!checkbox?.checked) return;
+
+  const payload = contributionPayload(apps);
+
+  if (!payload.apps.length) return;
+
+  try {
+    await fetch(`${APK_BUILDER_BASE}/contribute.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+  } catch (error) {
+    console.warn("Mapping contribution failed", error);
+  }
+}
+
 async function buildSignedApk() {
   const button = document.getElementById("buildApk");
 
@@ -470,6 +595,8 @@ async function buildSignedApk() {
     }
 
     const job = createApkJobFromParsedApps();
+
+    submitMappingContribution(job.apps);
 
     setStatus("Sending APK build request...");
     setApkBuildStatus("Sending build request to LCARS APK builder...");
@@ -544,45 +671,17 @@ function colorForApkJob(app, index) {
 }
 
 function createApkJobFromTextareaFirst() {
-  const rawLines = parseApkInputLinesFromTextarea();
-  const lineApps = [];
-
-  for (const line of rawLines) {
-    const cleaned = line.replace(/^package:/, "").trim();
-    const parsed = parseAndroidComponentText(cleaned);
-
-    if (parsed) {
-      lineApps.push({
-        package: parsed.package,
-        component: parsed.component,
-        label: guessLabelFromPackage(parsed.package),
-        category: "unknown",
-        color: "#d62b18"
-      });
-      continue;
-    }
-
-    if (/^[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)+$/.test(cleaned)) {
-      lineApps.push({
-        package: cleaned,
-        label: guessLabelFromPackage(cleaned),
-        category: "unknown",
-        color: "#d62b18"
-      });
-    }
-  }
+  const text = document.getElementById("appText")?.value || "";
+  const lineApps = enrich(parseText(text)).filter(app => app.package);
 
   if (lineApps.length) {
-    return lineApps.map((app, index) => {
-      const categorized = { ...app, ...categorize(app) };
-      return {
-        package: categorized.package,
-        component: categorized.component,
-        label: categorized.label,
-        category: categorized.category || "unknown",
-        color: colorForApkJob(categorized, index)
-      };
-    });
+    return lineApps.map((app, index) => ({
+      package: app.package,
+      component: app.component || "",
+      label: app.label || knownLabelForPackage(app.package),
+      category: app.category || "unknown",
+      color: colorForApkJob(app, index)
+    }));
   }
 
   return (parsedApps || [])
