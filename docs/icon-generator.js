@@ -323,3 +323,152 @@ document.getElementById("appFile").addEventListener("change", async event => {
 document.querySelectorAll("#palette, #colorMode, #iconSize").forEach(el => el.addEventListener("input", render));
 
 loadKnownApps();
+
+const APK_BUILDER_BASE = "https://lcars-builder.machinations.space";
+
+function setApkBuildStatus(text) {
+  const panel = document.getElementById("apkBuildPanel");
+  const status = document.getElementById("apkBuildStatus");
+  if (panel) panel.hidden = false;
+  if (status) status.textContent = text;
+}
+
+function setApkDownload(url) {
+  const link = document.getElementById("apkDownloadLink");
+  if (!link) return;
+  link.href = url;
+  link.hidden = false;
+}
+
+function clearApkDownload() {
+  const link = document.getElementById("apkDownloadLink");
+  if (!link) return;
+  link.href = "#";
+  link.hidden = true;
+}
+
+function appToApkJobEntry(app) {
+  const pkg = app.package || app.packageName || app.id || "";
+  const entry = {
+    package: String(pkg).replace(/^package:/, "").trim(),
+    label: app.label || app.name || pkg,
+    category: app.category || "unknown",
+    color: app.color || "#d62b18"
+  };
+
+  if (app.component) entry.component = app.component;
+  if (app.activity) entry.activity = app.activity;
+
+  return entry;
+}
+
+function createApkJobFromParsedApps() {
+  const apps = (parsedApps || [])
+    .map(appToApkJobEntry)
+    .filter(app => app.package);
+
+  if (!apps.length) {
+    throw new Error("Parse an app list before building an APK.");
+  }
+
+  return {
+    iconPackName: "LCARS Niagara Icons",
+    applicationId: "com.yearbookenzyme.lcarsiconpack.generated",
+    palette: document.getElementById("palette")?.value || "classic",
+    colorMode: document.getElementById("colorMode")?.value || "themeMono",
+    apps
+  };
+}
+
+async function readBuilderJson(response) {
+  const text = await response.text();
+  try {
+    return JSON.parse(text);
+  } catch {
+    return { error: text || `HTTP ${response.status}` };
+  }
+}
+
+async function pollApkBuild(statusUrl) {
+  for (let i = 0; i < 80; i += 1) {
+    const response = await fetch(statusUrl, { cache: "no-store" });
+    const data = await readBuilderJson(response);
+
+    if (!response.ok) {
+      throw new Error(data.error || `Status request failed with HTTP ${response.status}`);
+    }
+
+    const status = data.status || "unknown";
+    const message = data.message ? ` — ${data.message}` : "";
+    setApkBuildStatus(`APK build ${status}${message}`);
+
+    if (status === "done") {
+      if (!data.download_url) {
+        throw new Error("Build finished but no download_url was returned.");
+      }
+      setApkDownload(data.download_url);
+      setStatus("Signed APK ready.");
+      return data;
+    }
+
+    if (status === "failed") {
+      throw new Error(data.message || "APK build failed.");
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 5000));
+  }
+
+  throw new Error("APK build timed out while waiting for the server.");
+}
+
+async function buildSignedApk() {
+  const button = document.getElementById("buildApk");
+
+  try {
+    clearApkDownload();
+
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Building APK...";
+    }
+
+    const job = createApkJobFromParsedApps();
+
+    setStatus("Sending APK build request...");
+    setApkBuildStatus("Sending build request to LCARS APK builder...");
+
+    const response = await fetch(`${APK_BUILDER_BASE}/build.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(job)
+    });
+
+    const data = await readBuilderJson(response);
+
+    if (!response.ok) {
+      throw new Error(data.error || `Build request failed with HTTP ${response.status}`);
+    }
+
+    if (!data.status_url) {
+      throw new Error("Builder did not return a status_url.");
+    }
+
+    setStatus("APK build queued.");
+    setApkBuildStatus(`APK build queued. Job ${data.job_id || ""}`.trim());
+
+    await pollApkBuild(data.status_url);
+  } catch (error) {
+    console.error(error);
+    setStatus(`APK build error: ${error.message}`);
+    setApkBuildStatus(`APK build error: ${error.message}`);
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = "Build Signed APK";
+    }
+  }
+}
+
+document.getElementById("buildApk")?.addEventListener("click", buildSignedApk);

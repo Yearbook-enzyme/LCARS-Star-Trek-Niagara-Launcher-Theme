@@ -67,9 +67,15 @@
       </label>
 
       <button id="downloadZip">Download Icon ZIP</button>
+      <button id="buildApk">Build Signed APK</button>
       <button id="copyUnknowns">Copy Unknown-App JSON</button>
 
       <p id="status" class="hint">No app list loaded yet.</p>
+
+      <div id="apkBuildPanel" class="apkBuildPanel" hidden>
+        <p id="apkBuildStatus" class="hint">APK builder idle.</p>
+        <a id="apkDownloadLink" class="button" href="#" hidden>Download Signed APK</a>
+      </div>
     </section>
 
     <section class="previewWrap widePreview">

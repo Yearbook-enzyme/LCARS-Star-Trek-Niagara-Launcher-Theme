@@ -236,3 +236,16 @@ pre {
   font-size: 0.9rem;
   line-height: 1.45;
 }
+
+.apkBuildPanel {
+  margin-top: 0.75rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(232, 189, 136, 0.35);
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.apkBuildPanel .button {
+  display: inline-block;
+  margin-top: 0.4rem;
+}
