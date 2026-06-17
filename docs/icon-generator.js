@@ -509,3 +509,80 @@ async function buildSignedApk() {
 }
 
 document.getElementById("buildApk")?.addEventListener("click", buildSignedApk);
+
+function parseApkInputLinesFromTextarea() {
+  const text = document.getElementById("appText")?.value || "";
+  return text
+    .split(/\r?\n/)
+    .map(line => line.trim())
+    .filter(line => line && !line.startsWith("#"));
+}
+
+function guessLabelFromPackage(pkg) {
+  const last = String(pkg || "").split(".").filter(Boolean).pop() || pkg || "App";
+  return last
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, ch => ch.toUpperCase());
+}
+
+function createApkJobFromTextareaFirst() {
+  const rawLines = parseApkInputLinesFromTextarea();
+  const lineApps = [];
+
+  for (const line of rawLines) {
+    const cleaned = line.replace(/^package:/, "").trim();
+    const parsed = parseAndroidComponentText(cleaned);
+
+    if (parsed) {
+      lineApps.push({
+        package: parsed.package,
+        component: parsed.component,
+        label: guessLabelFromPackage(parsed.package),
+        category: "unknown",
+        color: "#d62b18"
+      });
+      continue;
+    }
+
+    if (/^[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)+$/.test(cleaned)) {
+      lineApps.push({
+        package: cleaned,
+        label: guessLabelFromPackage(cleaned),
+        category: "unknown",
+        color: "#d62b18"
+      });
+    }
+  }
+
+  if (lineApps.length) {
+    const enriched = enrich(lineApps);
+    assignColors(enriched);
+    return enriched.map(app => ({
+      package: app.package,
+      component: app.component,
+      label: app.label,
+      category: app.category || "unknown",
+      color: app.color || "#d62b18"
+    }));
+  }
+
+  return (parsedApps || [])
+    .map(appToApkJobEntry)
+    .filter(app => app.package);
+}
+
+function createApkJobFromParsedApps() {
+  const apps = createApkJobFromTextareaFirst();
+
+  if (!apps.length) {
+    throw new Error("Parse or paste an Android app list before building an APK.");
+  }
+
+  return {
+    iconPackName: "LCARS Niagara Icons",
+    applicationId: "com.yearbookenzyme.lcarsiconpack.generated",
+    palette: document.getElementById("palette")?.value || "classic",
+    colorMode: document.getElementById("colorMode")?.value || "themeMono",
+    apps
+  };
+}
