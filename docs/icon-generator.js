@@ -347,17 +347,54 @@ function clearApkDownload() {
   link.hidden = true;
 }
 
+function parseAndroidComponentText(value) {
+  const raw = String(value || "").replace(/^package:/, "").trim();
+
+  if (!raw.includes("/")) return null;
+
+  const slashIndex = raw.indexOf("/");
+  const pkg = raw.slice(0, slashIndex).trim();
+  let activity = raw.slice(slashIndex + 1).trim();
+
+  if (!pkg || !activity || !pkg.includes(".")) return null;
+
+  if (activity.startsWith(".")) {
+    activity = pkg + activity;
+  }
+
+  return {
+    package: pkg,
+    component: `${pkg}/${activity}`
+  };
+}
+
 function appToApkJobEntry(app) {
-  const pkg = app.package || app.packageName || app.id || "";
+  const raw = app.package || app.packageName || app.id || app.label || app.name || "";
+  const parsedComponent = parseAndroidComponentText(raw);
+
+  const pkg = parsedComponent
+    ? parsedComponent.package
+    : String(raw).replace(/^package:/, "").trim();
+
+  const labelRaw = app.label || app.name || pkg;
+  const label = parseAndroidComponentText(labelRaw) ? pkg : labelRaw;
+
   const entry = {
-    package: String(pkg).replace(/^package:/, "").trim(),
-    label: app.label || app.name || pkg,
+    package: pkg,
+    label,
     category: app.category || "unknown",
     color: app.color || "#d62b18"
   };
 
-  if (app.component) entry.component = app.component;
-  if (app.activity) entry.activity = app.activity;
+  if (parsedComponent) {
+    entry.component = parsedComponent.component;
+  } else {
+    if (app.component) {
+      const parsedStoredComponent = parseAndroidComponentText(app.component);
+      entry.component = parsedStoredComponent ? parsedStoredComponent.component : app.component;
+    }
+    if (app.activity) entry.activity = app.activity;
+  }
 
   return entry;
 }

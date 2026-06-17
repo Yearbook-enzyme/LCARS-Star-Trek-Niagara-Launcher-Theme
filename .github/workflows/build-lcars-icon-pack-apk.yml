@@ -42,7 +42,11 @@ jobs:
           mkdir -p builder/work
 
           if [ -n "${{ github.event.inputs.job_url }}" ]; then
-            curl -fsSL "${{ github.event.inputs.job_url }}" -o builder/work/job.json
+            curl -fsSL \
+              -H "Accept: application/json" \
+              -H "User-Agent: LCARS-Niagara-Builder" \
+              "${{ github.event.inputs.job_url }}" \
+              -o builder/work/job.json
           else
             cp builder/input/sample-job.json builder/work/job.json
           fi
