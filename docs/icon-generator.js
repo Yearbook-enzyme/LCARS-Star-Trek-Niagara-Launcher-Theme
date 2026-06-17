@@ -525,6 +525,24 @@ function guessLabelFromPackage(pkg) {
     .replace(/\b\w/g, ch => ch.toUpperCase());
 }
 
+
+function colorForApkJob(app, index) {
+  if (app.color && /^#[0-9a-fA-F]{6}$/.test(app.color)) {
+    return app.color;
+  }
+
+  const lcars = [
+    "#d62b18",
+    "#df5a1f",
+    "#e09a3f",
+    "#dfb98a",
+    "#be4b3f",
+    "#f0c48c"
+  ];
+
+  return lcars[index % lcars.length];
+}
+
 function createApkJobFromTextareaFirst() {
   const rawLines = parseApkInputLinesFromTextarea();
   const lineApps = [];
@@ -555,15 +573,16 @@ function createApkJobFromTextareaFirst() {
   }
 
   if (lineApps.length) {
-    const enriched = enrich(lineApps);
-    assignColors(enriched);
-    return enriched.map(app => ({
-      package: app.package,
-      component: app.component,
-      label: app.label,
-      category: app.category || "unknown",
-      color: app.color || "#d62b18"
-    }));
+    return lineApps.map((app, index) => {
+      const categorized = { ...app, ...categorize(app) };
+      return {
+        package: categorized.package,
+        component: categorized.component,
+        label: categorized.label,
+        category: categorized.category || "unknown",
+        color: colorForApkJob(categorized, index)
+      };
+    });
   }
 
   return (parsedApps || [])
