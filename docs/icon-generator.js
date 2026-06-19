@@ -132,9 +132,62 @@ function isPackageName(text) {
   return /^[a-zA-Z][a-zA-Z0-9_]*(\.[a-zA-Z0-9_]+)+$/.test(text);
 }
 
+function smartLabelFromPackage(pkg) {
+  const overrides = {
+    "com.openai.chatgpt": "ChatGPT",
+    "com.openai.sora": "Sora",
+    "com.brave.browser": "Brave",
+    "com.spotify.music": "Spotify",
+    "com.discord": "Discord",
+    "com.Slack": "Slack",
+    "com.aircoookie.WLED": "WLED",
+    "com.fitbit.FitbitMobile": "Fitbit",
+    "com.x8bit.bitwarden": "Bitwarden",
+    "md.obsidian": "Obsidian",
+    "org.fdroid.fdroid": "F-Droid",
+    "org.telegram.messenger": "Telegram",
+    "org.torproject.torbrowser": "Tor Browser",
+    "com.google.android.youtube": "YouTube",
+    "com.google.android.apps.maps": "Google Maps"
+  };
+
+  if (overrides[pkg]) return overrides[pkg];
+
+  const generic = new Set([
+    "com", "org", "net", "io", "ai", "app", "co", "de", "jp", "ru", "us", "gov", "ml", "md", "fi", "nl", "no", "eu", "dev", "chat", "air",
+    "android", "mobile", "client", "release", "gold", "pro", "free", "fdroid", "flutter", "main", "launcher", "companion", "community",
+    "browser", "music", "app"
+  ]);
+
+  const parts = String(pkg || "")
+    .split(".")
+    .map(x => x.trim())
+    .filter(Boolean);
+
+  const meaningful = parts.filter(part => !generic.has(part.toLowerCase()));
+  const picked = meaningful.length ? meaningful[meaningful.length - 1] : (parts[parts.length - 1] || pkg || "App");
+
+  const acronyms = {
+    wled: "WLED",
+    vnc: "VNC",
+    vpn: "VPN",
+    sms: "SMS",
+    ssh: "SSH",
+    pdf: "PDF",
+    nfc: "NFC",
+    gps: "GPS",
+    ai: "AI"
+  };
+
+  return String(picked)
+    .replace(/[_-]+/g, " ")
+    .split(/\s+/)
+    .map(word => acronyms[word.toLowerCase()] || word.replace(/\b\w/g, ch => ch.toUpperCase()))
+    .join(" ");
+}
+
 function inferLabel(pkg) {
-  const last = pkg.split(".").pop() || pkg;
-  return last.replace(/[_-]+/g, " ").replace(/\b\w/g, ch => ch.toUpperCase());
+  return smartLabelFromPackage(pkg);
 }
 
 function slug(text) {

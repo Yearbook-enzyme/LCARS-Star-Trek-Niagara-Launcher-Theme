@@ -27,6 +27,46 @@ const categories = new Set([
   "unknown"
 ]);
 
+const categoryRules = {
+  communication: ["discord", "signal", "telegram", "whatsapp", "messenger", "mail", "gmail", "reddit", "chat", "slack", "mastodon", "revolt", "fastmail", "zoom"],
+  browser: ["browser", "chrome", "firefox", "brave", "vivaldi", "kiwi", "opera", "edge", "torbrowser", "waterfox", "vanadium"],
+  media: ["music", "audio", "video", "spotify", "poweramp", "youtube", "grayjay", "vlc", "podcast", "qobuz", "bandcamp", "foobar", "shazam", "libby", "kindle"],
+  health: ["fitbit", "withings", "health", "fitness", "sleep", "oura", "garmin", "strava", "cronometer"],
+  ai: ["openai", "chatgpt", "sora", "claude", "perplexity", "gemini", "copilot", "anythingllm"],
+  tools: ["termux", "tool", "calculator", "file", "manager", "scanner", "bitwarden", "aegis", "tasker", "tailscale", "wireguard", "localsend", "ntfy", "ssh", "vnc"],
+  productivity: ["calendar", "keep", "docs", "sheets", "notion", "todo", "tasks", "office", "drive", "obsidian", "markor"],
+  photography: ["camera", "photo", "photos", "gallery", "snapseed", "lightroom", "fujifilm", "flickr", "scaniverse"],
+  maps: ["maps", "navigation", "waze", "uber", "lyft", "magicearth", "streetcomplete"],
+  finance: ["bank", "wallet", "cash", "paypal", "venmo", "coinbase", "chase", "fidelity", "vanguard", "ledger"],
+  shopping: ["amazon", "ebay", "shop", "store", "target", "walmart", "menards", "mcdonalds"],
+  games: ["game", "steam", "xbox", "playstation", "minecraft", "chess", "lichess", "dolphin"],
+  reading: ["reader", "news", "feed", "kindle", "book", "feeder", "bookwyrm", "khan"],
+  security: ["vpn", "auth", "password", "bitwarden", "proton", "security", "aegis", "authy", "auditor"]
+};
+
+const labelOverrides = {
+  "com.openai.chatgpt": "ChatGPT",
+  "com.openai.sora": "Sora",
+  "com.brave.browser": "Brave",
+  "com.spotify.music": "Spotify",
+  "com.discord": "Discord",
+  "com.Slack": "Slack",
+  "com.aircoookie.WLED": "WLED",
+  "com.fitbit.FitbitMobile": "Fitbit",
+  "com.x8bit.bitwarden": "Bitwarden",
+  "md.obsidian": "Obsidian",
+  "org.fdroid.fdroid": "F-Droid",
+  "org.telegram.messenger": "Telegram",
+  "org.torproject.torbrowser": "Tor Browser",
+  "com.google.android.youtube": "YouTube",
+  "com.google.android.apps.maps": "Google Maps"
+};
+
+const genericLabelWords = new Set([
+  "android", "app", "mobile", "client", "release", "gold", "pro", "free", "fdroid", "flutter", "main", "launcher", "companion", "community",
+  "browser", "music", "package", "activity", "default", "splash", "unknown"
+]);
+
 if (!input) {
   console.error("Usage: node tools/import-contributions.js /path/to/contributions.jsonl [--write] [--min-count=1] [--include-package-only]");
   process.exit(1);
@@ -47,6 +87,87 @@ const stats = {
   skippedBadPackage: 0,
   skippedBadComponent: 0
 };
+
+function titleCase(text) {
+  const acronyms = {
+    wled: "WLED",
+    vnc: "VNC",
+    vpn: "VPN",
+    sms: "SMS",
+    ssh: "SSH",
+    pdf: "PDF",
+    nfc: "NFC",
+    gps: "GPS",
+    ai: "AI"
+  };
+
+  return String(text || "")
+    .replace(/[_-]+/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map(word => acronyms[word.toLowerCase()] || word.replace(/\b\w/g, ch => ch.toUpperCase()))
+    .join(" ");
+}
+
+function labelLooksGeneric(label) {
+  const clean = String(label || "").trim().toLowerCase();
+  if (!clean) return true;
+  if (genericLabelWords.has(clean)) return true;
+  if (clean.length <= 2) return true;
+  return false;
+}
+
+function inferLabel(pkg) {
+  if (labelOverrides[pkg]) return labelOverrides[pkg];
+
+  const genericParts = new Set([
+    "com", "org", "net", "io", "ai", "app", "co", "de", "jp", "ru", "us", "gov", "ml", "md", "fi", "nl", "no", "eu", "dev", "chat", "air",
+    "android", "mobile", "client", "release", "gold", "pro", "free", "fdroid", "flutter", "main", "launcher", "companion", "community",
+    "browser", "music", "app"
+  ]);
+
+  const parts = String(pkg || "").split(".").map(x => x.trim()).filter(Boolean);
+  const meaningful = parts.filter(part => !genericParts.has(part.toLowerCase()));
+  return titleCase(meaningful.length ? meaningful[meaningful.length - 1] : (parts[parts.length - 1] || pkg));
+}
+
+function inferCategory(pkg, label) {
+  const haystack = `${pkg} ${label}`.toLowerCase();
+  let best = { category: "unknown", score: 0 };
+
+  for (const [category, terms] of Object.entries(categoryRules)) {
+    let score = 0;
+    for (const term of terms) {
+      if (haystack.includes(term)) score += term.length;
+    }
+    if (score > best.score) best = { category, score };
+  }
+
+  return best.score > 0 ? best.category : "unknown";
+}
+
+function isPlatformPackage(pkg) {
+  return (
+    pkg === "android" ||
+    pkg.startsWith("android.") ||
+    pkg.startsWith("com.android.") ||
+    pkg.startsWith("app.grapheneos.")
+  );
+}
+
+function normalizeCategory(pkg, label, category) {
+  let c = categories.has(category) ? category : "unknown";
+
+  if (c === "system" && !isPlatformPackage(pkg)) {
+    c = "unknown";
+  }
+
+  if (c === "unknown") {
+    c = inferCategory(pkg, label);
+  }
+
+  return c;
+}
 
 function addVote(app) {
   stats.appsSeen += 1;
@@ -71,9 +192,10 @@ function addVote(app) {
     return;
   }
 
-  const label = String(app.label || "").trim().slice(0, 120);
+  const rawLabel = String(app.label || "").trim().slice(0, 120);
+  const label = labelLooksGeneric(rawLabel) ? inferLabel(pkg) : rawLabel;
   const categoryRaw = String(app.category || "unknown").trim();
-  const category = categories.has(categoryRaw) ? categoryRaw : "unknown";
+  const category = normalizeCategory(pkg, label, categoryRaw);
 
   if (!tallies.has(pkg)) {
     tallies.set(pkg, {
@@ -126,8 +248,10 @@ for (const [pkg, t] of [...tallies.entries()].sort(([a], [b]) => a.localeCompare
   if (t.count < minCount) continue;
 
   const current = db[pkg] || {};
-  const label = winner(t.labels, current.label || pkg.split(".").pop() || pkg);
-  const category = winner(t.categories, current.category || "unknown");
+  const label = current.label || winner(t.labels, inferLabel(pkg));
+  const category = current.category && current.category !== "unknown"
+    ? current.category
+    : winner(t.categories, inferCategory(pkg, label));
   const component = winner(t.components, current.component || "");
 
   const next = {
@@ -162,14 +286,14 @@ console.log(`Skipped bad component: ${stats.skippedBadComponent}`);
 console.log(`Packages with accepted votes: ${tallies.size}`);
 console.log(`Changes that would be applied: ${changes.length}`);
 
-for (const change of changes.slice(0, 80)) {
+for (const change of changes.slice(0, 100)) {
   console.log(`${change.package} (${change.count})`);
   console.log(`  before: ${JSON.stringify(change.before)}`);
   console.log(`  after:  ${JSON.stringify(change.after)}`);
 }
 
-if (changes.length > 80) {
-  console.log(`...and ${changes.length - 80} more`);
+if (changes.length > 100) {
+  console.log(`...and ${changes.length - 100} more`);
 }
 
 if (write) {
