@@ -505,18 +505,32 @@
   }
 
   function observeIconTable() {
-    const target = document.body;
-    const observer = new MutationObserver(() => {
-      ensureIconGeneratorControls();
-      applyAppFilters();
-      renderBuildHistory();
+    if (window.__lcarsIconTableHooksInstalled) return;
+    window.__lcarsIconTableHooksInstalled = true;
+
+    const updateSoon = () => {
+      for (const delay of [50, 250, 800]) {
+        setTimeout(() => {
+          ensureIconGeneratorControls();
+          applyAppFilters();
+          renderBuildHistory();
+        }, delay);
+      }
+    };
+
+    $("#parseApps")?.addEventListener("click", updateSoon);
+    $("#loadSampleApps")?.addEventListener("click", updateSoon);
+
+    document.addEventListener("change", event => {
+      const target = event.target;
+      if (target && target.matches && target.matches('input[type="file"]')) {
+        updateSoon();
+      }
     });
 
-    observer.observe(target, {
-      childList: true,
-      subtree: true
-    });
+    updateSoon();
   }
+
 
   function init() {
     addStylesheet();
