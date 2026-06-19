@@ -1,4 +1,8 @@
 (() => {
+  if (location.pathname.endsWith("/icon-generator.html") || location.pathname.endsWith("/icon-generator")) {
+    return;
+  }
+
   const USER_MAPPINGS_KEY = "lcarsIconGeneratorUserMappingsV1";
   const BUILD_HISTORY_KEY = "lcarsIconGeneratorBuildHistoryV1";
   const SAMPLE_URL = "samples/sample-launchable-components.txt";
