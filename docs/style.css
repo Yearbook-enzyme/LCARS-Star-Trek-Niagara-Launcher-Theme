@@ -276,3 +276,39 @@ pre {
 .notice strong {
   color: var(--gold);
 }
+
+
+.siteFooter {
+  margin: 3rem 0 0;
+  padding: 1rem;
+  border-top: 3px solid var(--orange);
+  color: var(--cream);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1rem;
+  align-items: center;
+  font-size: 0.9rem;
+  opacity: 0.95;
+}
+
+.siteFooter strong {
+  color: var(--gold);
+}
+
+.siteFooter a {
+  color: var(--cream);
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+
+.aboutCard {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid rgba(232, 162, 65, 0.35);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.aboutCard h2 {
+  margin-top: 0;
+}
