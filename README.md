@@ -1,6 +1,6 @@
 # LCARS Niagara Launcher Theme
 
-![LCARS Niagara Theme screenshot](./screenshot.png)
+![LCARS Niagara Theme screenshot](./Screenshot_20260423-121603.png)
 
 An unofficial LCARS-inspired theme toolkit for **Niagara Launcher** on Android.
 
