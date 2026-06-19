@@ -235,3 +235,42 @@ body::before {
     margin: 0.55rem;
   }
 }
+
+/* Compact copy buttons for code blocks */
+.lcars-copy-wrap {
+  overflow: hidden;
+}
+
+.lcars-copy-wrap pre {
+  padding-top: 2.35rem;
+}
+
+.lcars-copy-btn {
+  width: auto !important;
+  min-width: 4.8rem;
+  max-width: max-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0.45rem;
+  right: 0.45rem;
+  left: auto;
+  margin: 0;
+  padding: 0.32rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  line-height: 1;
+  z-index: 2;
+}
+
+@media (max-width: 700px) {
+  .lcars-copy-btn {
+    position: absolute;
+    top: 0.45rem;
+    right: 0.45rem;
+    left: auto;
+    width: auto !important;
+    margin: 0;
+  }
+}
