@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Get Your Android App List — LCARS Niagara Theme</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <section class="panel">
+      <h1>Get your Android app list</h1>
+      <p>
+        The LCARS icon generator works best when you give it Android launcher components,
+        not just package names. A launcher component looks like this:
+      </p>
+
+      <pre><code>com.discord/com.discord.main.MainDefault
+com.openai.chatgpt/com.openai.chatgpt.MainActivity
+com.spotify.music/com.spotify.music.MainActivity</code></pre>
+
+      <p>
+        This page gives you an ADB script that exports the correct format from your own phone.
+      </p>
+
+      <h2>What you need</h2>
+      <ol>
+        <li>Android platform-tools / ADB installed on your computer.</li>
+        <li>USB debugging enabled on your phone.</li>
+        <li>Your phone connected by USB and authorized when Android asks.</li>
+      </ol>
+
+      <h2>Linux, macOS, or Git Bash</h2>
+      <p>Download and run the shell script:</p>
+
+      <p>
+        <a class="button" href="downloads/export-lcars-app-list.sh" download>Download export-lcars-app-list.sh</a>
+      </p>
+
+      <pre><code>chmod +x export-lcars-app-list.sh
+./export-lcars-app-list.sh</code></pre>
+
+      <h2>Windows PowerShell</h2>
+      <p>Download and run the PowerShell script:</p>
+
+      <p>
+        <a class="button" href="downloads/export-lcars-app-list.ps1" download>Download export-lcars-app-list.ps1</a>
+      </p>
+
+      <pre><code>powershell -ExecutionPolicy Bypass -File .\export-lcars-app-list.ps1</code></pre>
+
+      <h2>Output files</h2>
+      <p>The script creates these files in the folder where you run it:</p>
+
+      <ul>
+        <li><code>lcars-launchable-components.txt</code> — upload or paste this into the LCARS icon generator.</li>
+        <li><code>lcars-launchable-components-packages.txt</code> — package-name-only reference list.</li>
+        <li><code>lcars-launchable-components-raw-query.txt</code> — raw Android query output for troubleshooting.</li>
+      </ul>
+
+      <h2>Why this is better than package names</h2>
+      <p>
+        A package name like <code>com.discord</code> is useful, but icon packs usually need the exact
+        launchable activity too. The script expands relative activities like
+        <code>com.discord/.main.MainDefault</code> into the full final form:
+      </p>
+
+      <pre><code>com.discord/com.discord.main.MainDefault</code></pre>
+
+      <p>
+        Once the file is created, go back to the icon generator, upload
+        <code>lcars-launchable-components.txt</code>, parse it, adjust categories if needed,
+        then build the signed APK.
+      </p>
+
+      <p>
+        <a class="button" href="icon-generator.html">Open Icon Generator</a>
+      </p>
+    </section>
+  </main>
+</body>
+</html>
