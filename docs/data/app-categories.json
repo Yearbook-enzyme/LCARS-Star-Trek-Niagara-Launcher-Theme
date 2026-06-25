@@ -64,6 +64,11 @@
     "category": "unknown",
     "component": "at.bitfire.davdroid/at.bitfire.davdroid.ui.AccountsActivity"
   },
+  "au.com.shiftyjelly.pocketcasts": {
+    "label": "Pocketcasts",
+    "category": "media",
+    "component": "au.com.shiftyjelly.pocketcasts/au.com.shiftyjelly.pocketcasts.ui.MainActivity"
+  },
   "bitpit.launcher": {
     "label": "Bitpit",
     "category": "unknown",
@@ -73,6 +78,16 @@
     "label": "Ruler",
     "category": "unknown",
     "component": "bubble.level.ar.measure.tape.ruler/com.wave.template.ui.features.main.MainActivity"
+  },
+  "ch.protonmail.android": {
+    "label": "Protonmail",
+    "category": "communication",
+    "component": "ch.protonmail.android/ch.protonmail.android.RoutingActivity"
+  },
+  "ch.protonvpn.android": {
+    "label": "Protonvpn",
+    "category": "security",
+    "component": "ch.protonvpn.android/ch.protonvpn.android.RoutingActivity"
   },
   "chat.revolt": {
     "label": "Revolt",
@@ -109,6 +124,11 @@
     "category": "shopping",
     "component": "com.amazon.avod.thirdpartyclient/com.amazon.avod.thirdpartyclient.LauncherActivity"
   },
+  "com.amazon.dee.app": {
+    "label": "Dee",
+    "category": "shopping",
+    "component": "com.amazon.dee.app/com.amazon.dee.app.Launcher"
+  },
   "com.amazon.kindle": {
     "label": "Kindle",
     "category": "shopping",
@@ -121,7 +141,8 @@
   },
   "com.android.chrome": {
     "label": "Chrome",
-    "category": "browser"
+    "category": "browser",
+    "component": "com.android.chrome/com.google.android.apps.chrome.Main"
   },
   "com.android.contacts": {
     "label": "Contacts",
@@ -183,6 +204,11 @@
     "category": "unknown",
     "component": "com.astrospheric.dfior.astrospheric/com.astrospheric.dfior.astrospheric.MainActivity"
   },
+  "com.audible.application": {
+    "label": "Application",
+    "category": "reading",
+    "component": "com.audible.application/com.audible.application.MainLauncher"
+  },
   "com.authy.authy": {
     "label": "Authy",
     "category": "security",
@@ -202,6 +228,11 @@
     "label": "Tacet",
     "category": "unknown",
     "component": "com.axitetech.apps.tacet/com.axite.apps.tacet.MainActivity"
+  },
+  "com.azure.authenticator": {
+    "label": "Authenticator",
+    "category": "security",
+    "component": "com.azure.authenticator/com.azure.authenticator.ui.LaunchActivity"
   },
   "com.bandcamp.android": {
     "label": "Bandcamp",
@@ -283,6 +314,11 @@
     "category": "unknown",
     "component": "com.cooingdv.skyridercurise/com.cooingdv.skyridercurise.activity.MainActivity"
   },
+  "com.costco.app.android": {
+    "label": "Costco",
+    "category": "shopping",
+    "component": "com.costco.app.android/com.costco.app.android.ui.main.MainActivity"
+  },
   "com.cronometer.android.gold": {
     "label": "Cronometer",
     "category": "health",
@@ -292,6 +328,11 @@
     "label": "Opencalculator",
     "category": "tools",
     "component": "com.darkempire78.opencalculator/com.darkempire78.opencalculator.activities.MainActivity"
+  },
+  "com.dena.a12026418": {
+    "label": "A12026418",
+    "category": "games",
+    "component": "com.dena.a12026418/com.dena.kenya.Kenya"
   },
   "com.discord": {
     "label": "Discord",
@@ -303,10 +344,30 @@
     "category": "unknown",
     "component": "com.disney.disneyplus/com.bamtechmedia.dominguez.main.MainActivity"
   },
+  "com.dolby.dolby234": {
+    "label": "Dolby234",
+    "category": "media",
+    "component": "com.dolby.dolby234/com.dolby.sessions.Launcher"
+  },
+  "com.epson.epsonsmart": {
+    "label": "Epsonsmart",
+    "category": "tools",
+    "component": "com.epson.epsonsmart/com.epson.epsonsmart.controller.splash.SplashActivity"
+  },
   "com.extreamsd.usbaudioplayerpro": {
     "label": "Usbaudioplayerpro",
     "category": "media",
     "component": "com.extreamsd.usbaudioplayerpro/com.extreamsd.usbaudioplayershared.ScreenSlidePagerActivity"
+  },
+  "com.facebook.katana": {
+    "label": "Katana",
+    "category": "reading",
+    "component": "com.facebook.katana/com.facebook.katana.LoginActivity"
+  },
+  "com.facebook.orca": {
+    "label": "Orca",
+    "category": "communication",
+    "component": "com.facebook.orca/com.facebook.orca.auth.StartScreenActivity"
   },
   "com.facer.constellation": {
     "label": "Constellation",
@@ -338,6 +399,11 @@
     "category": "finance",
     "component": "com.fidelity.android/com.fidelity.android.activity.AppConfigLoaderActivity"
   },
+  "com.finch.finch": {
+    "label": "Finch",
+    "category": "health",
+    "component": "com.finch.finch/com.finch.finch.MainActivity"
+  },
   "com.fitbit.FitbitMobile": {
     "label": "Fitbit",
     "category": "health",
@@ -362,6 +428,11 @@
     "label": "Reader",
     "category": "reading",
     "component": "com.foobnix.pro.pdf.reader/com.foobnix.ui2.MainTabs2"
+  },
+  "com.formagrid.airtable": {
+    "label": "Airtable",
+    "category": "tools",
+    "component": "com.formagrid.airtable/com.formagrid.airtable.activity.session.SessionLoaderActivity"
   },
   "com.fujifilm_dsc.app.remoteshooter": {
     "label": "Remoteshooter",
@@ -403,6 +474,11 @@
     "category": "maps",
     "component": "com.generalmagic.magicearth/com.generalmagic.magicearth.MainActivity"
   },
+  "com.getluma.android": {
+    "label": "Getluma",
+    "category": "tools",
+    "component": "com.getluma.android/com.getluma.android.Launcher"
+  },
   "com.github.android": {
     "label": "Github",
     "category": "tools",
@@ -412,6 +488,11 @@
     "label": "Syncthingandroid",
     "category": "unknown",
     "component": "com.github.catfriend1.syncthingandroid/com.nutomic.syncthingandroid.activities.FirstStartActivity"
+  },
+  "com.github.jamesgay.fitnotes": {
+    "label": "Fitnotes",
+    "category": "health",
+    "component": "com.github.jamesgay.fitnotes/com.github.jamesgay.fitnotes.feature.home.MainActivity"
   },
   "com.github.tmo1.sms_ie": {
     "label": "Sms Ie",
@@ -423,10 +504,30 @@
     "category": "unknown",
     "component": "com.glgjing.captain/com.glgjing.ads.AdActivity"
   },
+  "com.goblintools": {
+    "label": "Goblintools",
+    "category": "tools",
+    "component": "com.goblintools/com.goblintools.MainActivity"
+  },
   "com.google.android.apps.adm": {
     "label": "Adm",
     "category": "unknown",
     "component": "com.google.android.apps.adm/com.google.android.apps.adm.activities.MainActivity"
+  },
+  "com.google.android.apps.bard": {
+    "label": "Bard",
+    "category": "unknown",
+    "component": "com.google.android.apps.bard/com.google.android.apps.bard.shellapp.BardEntryPointActivity"
+  },
+  "com.google.android.apps.docs": {
+    "label": "Docs",
+    "category": "productivity",
+    "component": "com.google.android.apps.docs/com.google.android.apps.docs.app.NewMainProxyActivity"
+  },
+  "com.google.android.apps.docs.editors.sheets": {
+    "label": "Sheets",
+    "category": "productivity",
+    "component": "com.google.android.apps.docs.editors.sheets/com.google.android.apps.docs.app.NewMainProxyActivity"
   },
   "com.google.android.apps.maps": {
     "label": "Google Maps",
@@ -435,8 +536,18 @@
   },
   "com.google.android.apps.messaging": {
     "label": "Messaging",
-    "category": "unknown",
+    "category": "communication",
     "component": "com.google.android.apps.messaging/com.google.android.apps.messaging.ui.ConversationListActivity"
+  },
+  "com.google.android.apps.paidtasks": {
+    "label": "Paidtasks",
+    "category": "productivity",
+    "component": "com.google.android.apps.paidtasks/com.google.android.apps.paidtasks.activity.LaunchActivity"
+  },
+  "com.google.android.apps.photos": {
+    "label": "Photos",
+    "category": "photography",
+    "component": "com.google.android.apps.photos/com.google.android.apps.photos.home.HomeActivity"
   },
   "com.google.android.apps.pixel.health": {
     "label": "Health",
@@ -448,23 +559,45 @@
     "category": "unknown",
     "component": "com.google.android.apps.tachyon/com.google.android.apps.tachyon.MainActivity"
   },
+  "com.google.android.apps.translate": {
+    "label": "Translate",
+    "category": "tools",
+    "component": "com.google.android.apps.translate/com.google.android.apps.translate.TranslateActivity"
+  },
   "com.google.android.apps.tycho": {
     "label": "Tycho",
     "category": "unknown",
     "component": "com.google.android.apps.tycho/com.google.android.apps.tycho.AccountDetailsActivity"
+  },
+  "com.google.android.apps.walletnfcrel": {
+    "label": "Walletnfcrel",
+    "category": "shopping",
+    "component": "com.google.android.apps.walletnfcrel/com.google.commerce.tapandpay.android.wallet.WalletActivity"
   },
   "com.google.android.apps.wear.companion": {
     "label": "Wear",
     "category": "unknown",
     "component": "com.google.android.apps.wear.companion/com.google.android.apps.wear.companion.core.application.RootActivity"
   },
+  "com.google.android.apps.youtube.music": {
+    "label": "Youtube",
+    "category": "media",
+    "component": "com.google.android.apps.youtube.music/com.google.android.apps.youtube.music.activities.MusicActivity"
+  },
   "com.google.android.calendar": {
     "label": "Calendar",
-    "category": "productivity"
+    "category": "productivity",
+    "component": "com.google.android.calendar/com.android.calendar.AllInOneActivity"
+  },
+  "com.google.android.deskclock": {
+    "label": "Deskclock",
+    "category": "unknown",
+    "component": "com.google.android.deskclock/com.android.deskclock.DeskClock"
   },
   "com.google.android.gm": {
     "label": "Gmail",
-    "category": "communication"
+    "category": "communication",
+    "component": "com.google.android.gm/com.google.android.gm.ConversationListActivityGmail"
   },
   "com.google.android.googlequicksearchbox": {
     "label": "Googlequicksearchbox",
@@ -485,6 +618,11 @@
     "category": "media",
     "component": "com.google.android.youtube/com.google.android.youtube.app.honeycomb.Shell$HomeActivity"
   },
+  "com.google.ar.lens": {
+    "label": "Lens",
+    "category": "ai",
+    "component": "com.google.ar.lens/com.google.vr.apps.ornament.app.lens.LensLauncherActivity"
+  },
   "com.google.chromeremotedesktop": {
     "label": "Chromeremotedesktop",
     "category": "browser",
@@ -495,6 +633,11 @@
     "category": "unknown",
     "component": "com.gs.complications.suite/com.gs.complications.suite.MainActivity"
   },
+  "com.halcyoni.gymboss2": {
+    "label": "Gymboss2",
+    "category": "health",
+    "component": "com.halcyoni.gymboss2/com.spaceotechnologies.gymboss.activities.MainActivity_"
+  },
   "com.hearxgroup.hearwho": {
     "label": "Hearwho",
     "category": "unknown",
@@ -504,6 +647,11 @@
     "label": "Lyric",
     "category": "unknown",
     "component": "com.honeywell.android.lyric/com.honeywell.granite.graniteui.presentation.activity.dashboard.DashBoardActivity"
+  },
+  "com.IceWaterGames.Viridi": {
+    "label": "Viridi",
+    "category": "games",
+    "component": "com.IceWaterGames.Viridi/com.unity3d.player.UnityPlayerActivity"
   },
   "com.idunnololz.summit": {
     "label": "Summit",
@@ -524,6 +672,16 @@
     "label": "Linuxcommandbibliotheca",
     "category": "unknown",
     "component": "com.inspiredandroid.linuxcommandbibliotheca/com.inspiredandroid.linuxcommandbibliotheca.MainActivity"
+  },
+  "com.instagram.android": {
+    "label": "Instagram",
+    "category": "communication",
+    "component": "com.instagram.android/com.instagram.android.activity.MainTabActivity"
+  },
+  "com.instagram.barcelona": {
+    "label": "Barcelona",
+    "category": "communication",
+    "component": "com.instagram.barcelona/com.instagram.barcelona.mainactivity.BarcelonaActivity"
   },
   "com.ionicframework.wagandroid554504": {
     "label": "Wagandroid554504",
@@ -602,13 +760,38 @@
   },
   "com.meetup": {
     "label": "Meetup",
-    "category": "unknown",
+    "category": "communication",
     "component": "com.meetup/com.meetup.feature.legacy.activity.BootstrapActivity"
   },
   "com.menards.mobile": {
     "label": "Menards",
     "category": "shopping",
     "component": "com.menards.mobile/com.menards.mobile.TabbedActivity"
+  },
+  "com.microsoft.copilot": {
+    "label": "Copilot",
+    "category": "ai",
+    "component": "com.microsoft.copilot/com.microsoft.copilotn.MainActivity"
+  },
+  "com.microsoft.office.officehubrow": {
+    "label": "Officehubrow",
+    "category": "productivity",
+    "component": "com.microsoft.office.officehubrow/com.microsoft.office.officesuite.OfficeSuiteActivity"
+  },
+  "com.microsoft.office.outlook": {
+    "label": "Outlook",
+    "category": "productivity",
+    "component": "com.microsoft.office.outlook/com.microsoft.office.outlook.MainActivity"
+  },
+  "com.microsoft.skydrive": {
+    "label": "Skydrive",
+    "category": "productivity",
+    "component": "com.microsoft.skydrive/com.microsoft.skydrive.MainActivity"
+  },
+  "com.microsoft.teams": {
+    "label": "Teams",
+    "category": "productivity",
+    "component": "com.microsoft.teams/com.microsoft.skype.teams.Launcher"
   },
   "com.minar.birday": {
     "label": "Birday",
@@ -644,6 +827,11 @@
     "label": "Snapseed",
     "category": "photography",
     "component": "com.niksoftware.snapseed/com.google.android.apps.snapseed.WelcomeScreenActivity"
+  },
+  "com.noaimgames.shadowweather": {
+    "label": "Shadowweather",
+    "category": "tools",
+    "component": "com.noaimgames.shadowweather/com.noaimgames.shadowweather.MainActivity"
   },
   "com.noctuasoftware.stellarium_free": {
     "label": "Stellarium Free",
@@ -689,6 +877,21 @@
     "label": "Libby",
     "category": "media",
     "component": "com.overdrive.mobile.android.libby/com.overdrive.mobile.android.nautilus.ui.Activity_Main"
+  },
+  "com.pank0.usagishima": {
+    "label": "Usagishima",
+    "category": "games",
+    "component": "com.pank0.usagishima/com.godot.game.GodotApp"
+  },
+  "com.parkmobile.parkcolumbus": {
+    "label": "Parkcolumbus",
+    "category": "maps",
+    "component": "com.parkmobile.parkcolumbus/net.easypark.android.mvp.splash.SplashActivity"
+  },
+  "com.patreon.android": {
+    "label": "Patreon",
+    "category": "reading",
+    "component": "com.patreon.android/com.patreon.android.screens.launcher.LauncherActivity"
   },
   "com.paypal.android.p2pmobile": {
     "label": "P2pmobile",
@@ -785,10 +988,20 @@
     "category": "unknown",
     "component": "com.redfin.android/com.redfin.android.core.activity.launch.DefaultLaunchActivity"
   },
+  "com.renshuu.renshuu_org": {
+    "label": "Renshuu Org",
+    "category": "reading",
+    "component": "com.renshuu.renshuu_org/com.renshuu.renshuu_org.MainActivity"
+  },
   "com.ringapp": {
     "label": "Ringapp",
     "category": "unknown",
     "component": "com.ringapp/com.ring.launch.LaunchActivity"
+  },
+  "com.Ringotan": {
+    "label": "Ringotan",
+    "category": "reading",
+    "component": "com.Ringotan/crc64a464ddfb21a204d7.MainActivity"
   },
   "com.route.app": {
     "label": "Route",
@@ -800,6 +1013,96 @@
     "category": "unknown",
     "component": "com.rover.android/com.rover.android.deeplink.DeepLinkWithSplashActivity"
   },
+  "com.samsung.android.app.contacts": {
+    "label": "Contacts",
+    "category": "unknown",
+    "component": "com.samsung.android.app.contacts/com.samsung.android.contacts.contactslist.PeopleActivity"
+  },
+  "com.samsung.android.app.find": {
+    "label": "Find",
+    "category": "unknown",
+    "component": "com.samsung.android.app.find/com.samsung.android.app.find.MainActivity"
+  },
+  "com.samsung.android.app.notes": {
+    "label": "Notes",
+    "category": "unknown",
+    "component": "com.samsung.android.app.notes/com.samsung.android.app.notes.memolist.MemoListActivity"
+  },
+  "com.samsung.android.app.spage": {
+    "label": "Spage",
+    "category": "unknown",
+    "component": "com.samsung.android.app.spage/com.samsung.android.app.spage.main.LauncherActivity"
+  },
+  "com.samsung.android.app.watchmanager": {
+    "label": "Watchmanager",
+    "category": "tools",
+    "component": "com.samsung.android.app.watchmanager/com.samsung.android.app.watchmanager.setupwizard.SetupWizardWelcomeActivity"
+  },
+  "com.samsung.android.dialer": {
+    "label": "Dialer",
+    "category": "unknown",
+    "component": "com.samsung.android.dialer/com.samsung.android.dialer.DialtactsActivity"
+  },
+  "com.samsung.android.forest": {
+    "label": "Forest",
+    "category": "unknown",
+    "component": "com.samsung.android.forest/com.samsung.android.forest.launcher.LauncherActivity"
+  },
+  "com.samsung.android.oneconnect": {
+    "label": "Oneconnect",
+    "category": "unknown",
+    "component": "com.samsung.android.oneconnect/com.samsung.android.oneconnect.ui.SCMainActivity"
+  },
+  "com.samsung.ecomm.global.gbr": {
+    "label": "Gbr",
+    "category": "unknown",
+    "component": "com.samsung.ecomm.global.gbr/com.samsung.ecomm.global.shop_app.MainActivity"
+  },
+  "com.samsung.sree": {
+    "label": "Sree",
+    "category": "unknown",
+    "component": "com.samsung.sree/com.samsung.sree.ui.MainActivity"
+  },
+  "com.sec.android.app.camera": {
+    "label": "Camera",
+    "category": "photography",
+    "component": "com.sec.android.app.camera/com.sec.android.app.camera.Camera"
+  },
+  "com.sec.android.app.myfiles": {
+    "label": "Myfiles",
+    "category": "tools",
+    "component": "com.sec.android.app.myfiles/com.sec.android.app.myfiles.ui.MainActivity"
+  },
+  "com.sec.android.app.popupcalculator": {
+    "label": "Popupcalculator",
+    "category": "tools",
+    "component": "com.sec.android.app.popupcalculator/com.sec.android.app.popupcalculator.Calculator"
+  },
+  "com.sec.android.app.samsungapps": {
+    "label": "Samsungapps",
+    "category": "unknown",
+    "component": "com.sec.android.app.samsungapps/com.sec.android.app.samsungapps.SamsungAppsMainActivity"
+  },
+  "com.sec.android.app.sbrowser": {
+    "label": "Sbrowser",
+    "category": "browser",
+    "component": "com.sec.android.app.sbrowser/com.sec.android.app.sbrowser.SBrowserMainActivity"
+  },
+  "com.sec.android.app.voicenote": {
+    "label": "Voicenote",
+    "category": "unknown",
+    "component": "com.sec.android.app.voicenote/com.sec.android.app.voicenote.main.VNMainActivity"
+  },
+  "com.sec.android.easyMover": {
+    "label": "EasyMover",
+    "category": "unknown",
+    "component": "com.sec.android.easyMover/com.sec.android.easyMover.ui.launch.LauncherActivity"
+  },
+  "com.sec.android.gallery3d": {
+    "label": "Gallery3d",
+    "category": "photography",
+    "component": "com.sec.android.gallery3d/com.samsung.android.gallery.app.activity.GalleryActivity"
+  },
   "com.shazam.android": {
     "label": "Shazam",
     "category": "media",
@@ -809,6 +1112,11 @@
     "label": "Arrive",
     "category": "shopping",
     "component": "com.shopify.arrive/com.shopify.arrive.MainActivity"
+  },
+  "com.simplecityapps.shuttle": {
+    "label": "Shuttle",
+    "category": "media",
+    "component": "com.simplecityapps.shuttle/com.simplecityapps.shuttle.ui.MainActivity"
   },
   "com.simplemobiletools.calendar.pro": {
     "label": "Calendar",
@@ -875,6 +1183,11 @@
     "category": "tools",
     "component": "com.termux.tasker/com.termux.tasker.activities.TermuxTaskerLauncherActivity"
   },
+  "com.thestorygraph.thestorygraph": {
+    "label": "Thestorygraph",
+    "category": "reading",
+    "component": "com.thestorygraph.thestorygraph/com.thestorygraph.thestorygraph.MainActivity"
+  },
   "com.thumbtack.consumer": {
     "label": "Consumer",
     "category": "unknown",
@@ -884,6 +1197,11 @@
     "label": "Titannative",
     "category": "unknown",
     "component": "com.titannative/com.titan.titanriamobile.MainActivity"
+  },
+  "com.toasttab.consumer": {
+    "label": "Consumer",
+    "category": "shopping",
+    "component": "com.toasttab.consumer/com.toasttab.consumer.core.splash.SplashActivity"
   },
   "com.truebill": {
     "label": "Truebill",
@@ -910,6 +1228,11 @@
     "category": "unknown",
     "component": "com.twentythreeandme.app/com.twentythreeandme.app.nux.NuxIntroductionActivity"
   },
+  "com.underthing.focus.friend": {
+    "label": "Friend",
+    "category": "productivity",
+    "component": "com.underthing.focus.friend/com.unity3d.player.UnityPlayerActivity"
+  },
   "com.urbandroid.sleep": {
     "label": "Sleep",
     "category": "health",
@@ -924,6 +1247,11 @@
     "label": "Vanguard",
     "category": "finance",
     "component": "com.vanguard/com.vanguard.vanguard.activity.impl.MainActivity"
+  },
+  "com.visiblemobile.flagship": {
+    "label": "Flagship",
+    "category": "unknown",
+    "component": "com.visiblemobile.flagship/com.visiblemobile.flagship.splash.ui.SplashActivity"
   },
   "com.wag.walker": {
     "label": "Walker",
@@ -949,6 +1277,16 @@
     "label": "Weawow",
     "category": "unknown",
     "component": "com.weawow/com.weawow.DefaultIcon"
+  },
+  "com.whatsapp": {
+    "label": "Whatsapp",
+    "category": "communication",
+    "component": "com.whatsapp/com.whatsapp.Main"
+  },
+  "com.whetware.taskhero": {
+    "label": "Taskhero",
+    "category": "productivity",
+    "component": "com.whetware.taskhero/com.whetware.taskhero.MainActivity"
   },
   "com.wildohio.app": {
     "label": "Wildohio",
@@ -1040,6 +1378,11 @@
     "category": "unknown",
     "component": "dev.imranr.obtainium.fdroid/dev.imranr.obtainium.MainActivity"
   },
+  "edu.osumc.healthassistant.app": {
+    "label": "Healthassistant",
+    "category": "health",
+    "component": "edu.osumc.healthassistant.app/epic.mychart.android.library.prelogin.SplashActivity"
+  },
   "eu.darken.sdmse": {
     "label": "Sdmse",
     "category": "unknown",
@@ -1064,6 +1407,11 @@
     "label": "Nasa",
     "category": "unknown",
     "component": "gov.nasa/gov.nasa.ui.activities.MainActivity"
+  },
+  "ie.delilahsthings.soothingloop": {
+    "label": "Soothingloop",
+    "category": "media",
+    "component": "ie.delilahsthings.soothingloop/ie.delilahsthings.soothingloop.MainActivity"
   },
   "im.vector.app": {
     "label": "Vector",
@@ -1095,10 +1443,45 @@
     "category": "unknown",
     "component": "io.local.wearlivehr/io.local.wearlivehr.MainActivity"
   },
+  "jp.co.canon.ic.cameraconnect": {
+    "label": "Cameraconnect",
+    "category": "photography",
+    "component": "jp.co.canon.ic.cameraconnect/jp.co.canon.ic.cameraconnect.top.CCTopActivity"
+  },
   "jp.co.canon.ic.photolayout": {
     "label": "Photolayout",
     "category": "photography",
     "component": "jp.co.canon.ic.photolayout/jp.co.canon.ic.photolayout.MainActivity"
+  },
+  "jp.co.hit_point.nekoatsume": {
+    "label": "Nekoatsume",
+    "category": "games",
+    "component": "jp.co.hit_point.nekoatsume/jp.co.hit_point.nekoatsume.GActivity"
+  },
+  "jp.co.hit_point.nekoatsume2": {
+    "label": "Nekoatsume2",
+    "category": "games",
+    "component": "jp.co.hit_point.nekoatsume2/com.unity3d.player.UnityPlayerActivity"
+  },
+  "jp.pokemon.pokemonsleep": {
+    "label": "Pokemonsleep",
+    "category": "games",
+    "component": "jp.pokemon.pokemonsleep/jp.pokemon.pokemonsleep.commonutility.UnityPlayerActivity"
+  },
+  "jp.pokemon.pokemontcgp": {
+    "label": "Pokemontcgp",
+    "category": "games",
+    "component": "jp.pokemon.pokemontcgp/com.unity3d.player.UnityPlayerActivity"
+  },
+  "jp.pokemon.poketoru": {
+    "label": "Poketoru",
+    "category": "games",
+    "component": "jp.pokemon.poketoru/com.havok.Vision.NativeLibLoader"
+  },
+  "lab.rreedd.oyatsu": {
+    "label": "Oyatsu",
+    "category": "tools",
+    "component": "lab.rreedd.oyatsu/lab.rreedd.oyatsu.LocationInputActivity"
   },
   "md.obsidian": {
     "label": "Obsidian",
@@ -1125,6 +1508,11 @@
     "category": "unknown",
     "component": "net.activitywatch.android/net.activitywatch.android.MainActivity"
   },
+  "net.cozic.joplin": {
+    "label": "Joplin",
+    "category": "productivity",
+    "component": "net.cozic.joplin/net.cozic.joplin.MainActivity"
+  },
   "net.dinglisch.android.taskerm": {
     "label": "Taskerm",
     "category": "tools",
@@ -1134,6 +1522,11 @@
     "label": "Markor",
     "category": "productivity",
     "component": "net.gsantner.markor/net.gsantner.markor.activity.MainActivity"
+  },
+  "net.sharewire.parkmobilev2": {
+    "label": "Parkmobilev2",
+    "category": "maps",
+    "component": "net.sharewire.parkmobilev2/net.easypark.android.mvp.splash.SplashActivity"
   },
   "net.waterfox.android.release": {
     "label": "Waterfox",
@@ -1185,6 +1578,11 @@
     "category": "unknown",
     "component": "org.futo.inputmethod.latin/org.futo.inputmethod.latin.uix.settings.SettingsActivity"
   },
+  "org.futo.inputmethod.latin.playstore": {
+    "label": "Playstore",
+    "category": "shopping",
+    "component": "org.futo.inputmethod.latin.playstore/org.futo.inputmethod.latin.uix.settings.SettingsActivity"
+  },
   "org.futo.voiceinput": {
     "label": "Voiceinput",
     "category": "unknown",
@@ -1217,7 +1615,8 @@
   },
   "org.mozilla.firefox": {
     "label": "Firefox",
-    "category": "browser"
+    "category": "browser",
+    "component": "org.mozilla.firefox/org.mozilla.firefox.App"
   },
   "org.olympic.app.mobile": {
     "label": "Olympic",
@@ -1252,6 +1651,11 @@
     "label": "Whobird",
     "category": "unknown",
     "component": "org.woheller69.whobird/org.tensorflow.lite.examples.soundclassifier.DownloadActivity"
+  },
+  "pl.solidexplorer2": {
+    "label": "Solidexplorer2",
+    "category": "tools",
+    "component": "pl.solidexplorer2/pl.solidexplorer.SolidExplorer"
   },
   "ru.execbit.aiohealthplugin": {
     "label": "Aiohealthplugin",
