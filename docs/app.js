@@ -106,43 +106,150 @@ function drawWallpaper(targetCanvas) {
   const sx = w / REF.docW;
   const sy = h / REF.docH;
 
-  const spineX = w * (value("spineX", 67) / 100);
-  const barY = h * (value("barY", 19) / 100);
-  const thicknessScale = value("thickness", REF.railThickness) / REF.railThickness;
+  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+  const rhythmName = document.getElementById("panelRhythm")?.value || "standard";
+  const rhythms = {
+    standard: {
+      top: 1.00,
+      mid: 1.00,
+      gold: 1.00,
+      cream: 1.00,
+      bottomMin: 1.00,
+      colors: [1, 2, 1, 3, 4, 2]
+    },
+    stepped: {
+      top: 0.78,
+      mid: 0.62,
+      gold: 1.22,
+      cream: 0.82,
+      bottomMin: 1.20,
+      colors: [3, 2, 1, 4, 0, 2]
+    },
+    tallLower: {
+      top: 0.90,
+      mid: 1.30,
+      gold: 0.76,
+      cream: 1.18,
+      bottomMin: 0.95,
+      colors: [1, 2, 3, 1, 4, 2]
+    },
+    staccato: {
+      top: 0.58,
+      mid: 0.52,
+      gold: 0.72,
+      cream: 0.56,
+      bottomMin: 1.65,
+      colors: [4, 2, 1, 3, 0, 2]
+    },
+    balanced: {
+      top: 0.86,
+      mid: 0.92,
+      gold: 0.92,
+      cream: 0.92,
+      bottomMin: 1.12,
+      colors: [0, 2, 1, 3, 4, 2]
+    }
+  };
+
+  const rhythm = rhythms[rhythmName] || rhythms.standard;
+  const colorForPanel = (slot, fallback) => palette[rhythm.colors[slot] ?? fallback] || palette[fallback];
+
+  const rawSpineX = w * (value("spineX", 67) / 100);
+  const thicknessScaleRaw = value("thickness", REF.railThickness) / REF.railThickness;
   const segmentScale = value("segmentScale", 100) / 100;
 
-  const t = REF.railThickness * sy * thicknessScale;
-  const gap = REF.centerGap * sy * thicknessScale;
+  const tRaw = REF.railThickness * sy * thicknessScaleRaw;
+  const t = clamp(
+    tRaw,
+    Math.max(3, h * 0.004),
+    Math.max(6, Math.min(h * 0.055, w * 0.09))
+  );
 
-  const innerW = REF.innerCurveW * sx * thicknessScale;
-  const innerH = REF.innerCurveH * sy * thicknessScale;
-  const outerW = REF.outerCurveW * sx * thicknessScale;
-  const outerH = REF.outerCurveH * sy * thicknessScale;
+  const safeThicknessScale = t / (REF.railThickness * sy || 1);
 
-  const leftGap = REF.leftGap * sx * thicknessScale;
-  const leftSeg1W = REF.leftSeg1W * sx * segmentScale;
-  const leftSeg2W = REF.leftSeg2W * sx * segmentScale;
-  const railStart = leftSeg1W + leftGap + leftSeg2W + leftGap;
+  const gap = clamp(
+    REF.centerGap * sy * safeThicknessScale,
+    Math.max(3, h * 0.0035),
+    Math.max(4, h * 0.032)
+  );
+
+  const innerW = REF.innerCurveW * sx * safeThicknessScale;
+  const innerH = REF.innerCurveH * sy * safeThicknessScale;
+  const outerW = REF.outerCurveW * sx * safeThicknessScale;
+  const outerH = REF.outerCurveH * sy * safeThicknessScale;
+
+  const spineX = clamp(
+    rawSpineX,
+    Math.max(w * 0.22, innerW + w * 0.10),
+    Math.max(w * 0.30, w - Math.max(w * 0.08, outerW * 1.2))
+  );
+
+  let leftGap = REF.leftGap * sx * safeThicknessScale;
+  let leftSeg1W = REF.leftSeg1W * sx * segmentScale;
+  let leftSeg2W = REF.leftSeg2W * sx * segmentScale;
+
+  // Guardrail: keep horizontal rails out of the inner elbow curve.
+  const maxRailStart = Math.max(0, spineX - innerW - leftGap);
+  const desiredRailStart = leftSeg1W + leftGap + leftSeg2W + leftGap;
+
+  if (desiredRailStart > maxRailStart) {
+    const segmentTotal = Math.max(1, leftSeg1W + leftSeg2W);
+    const scaledTotal = Math.max(0, maxRailStart - leftGap * 2);
+    const segScale = scaledTotal / segmentTotal;
+    leftSeg1W *= segScale;
+    leftSeg2W *= segScale;
+  }
+
+  const railStart = Math.max(
+    0,
+    Math.min(maxRailStart, leftSeg1W + leftGap + leftSeg2W + leftGap)
+  );
 
   const right = w;
   const rightW = right - spineX;
 
-  const railTopY = barY - t - gap / 2;
-  const railBottomY = barY + gap / 2;
-
   const topOrangeY = 0;
-  const topOrangeH = REF.topOrangeH * sy;
+  const topOrangeH = clamp(REF.topOrangeH * sy * rhythm.top, h * 0.028, h * 0.18);
   const topRedY = topOrangeY + topOrangeH + gap;
+
+  const desiredRailTopY = h * (value("barY", 19) / 100) - t - gap / 2;
+
+  // Guardrail: prevent the top block and upper elbow from colliding.
+  const minRailTopY = topRedY + Math.max(innerH, outerH - t) + gap * 0.4;
+  const maxRailTopY = Math.max(
+    minRailTopY,
+    h - (t * 2 + gap * 3 + innerH + h * 0.10)
+  );
+
+  const railTopY = clamp(desiredRailTopY, minRailTopY, maxRailTopY);
+  const railBottomY = railTopY + t + gap;
   const topRedBottom = railTopY + t;
 
   const lowerRedTop = railBottomY;
   const lowerRedBottom = railBottomY + t + innerH;
 
-  const midOrangeH = REF.midOrangeH * sy;
-  const goldH = REF.goldH * sy;
-  const creamH = REF.creamH * sy;
+  let midOrangeH = REF.midOrangeH * sy * rhythm.mid;
+  let goldH = REF.goldH * sy * rhythm.gold;
+  let creamH = REF.creamH * sy * rhythm.cream;
 
-  const midOrangeY = lowerRedBottom + gap;
+  const lowerStart = lowerRedBottom + gap;
+  const lowerAvailable = Math.max(0, h - lowerStart);
+  const desiredLowerGaps = gap * 3;
+  const minBottomRedH = Math.max(t, h * 0.035 * rhythm.bottomMin);
+  const lowerFixedTotal = midOrangeH + goldH + creamH + desiredLowerGaps + minBottomRedH;
+
+  // Guardrail: compress lower decorative blocks on extreme aspect ratios/settings.
+  if (lowerFixedTotal > lowerAvailable) {
+    const scalable = Math.max(1, midOrangeH + goldH + creamH);
+    const availableForScalable = Math.max(0, lowerAvailable - desiredLowerGaps - minBottomRedH);
+    const stackScale = clamp(availableForScalable / scalable, 0.12, 1);
+    midOrangeH *= stackScale;
+    goldH *= stackScale;
+    creamH *= stackScale;
+  }
+
+  const midOrangeY = lowerStart;
   const goldY = midOrangeY + midOrangeH + gap;
   const creamY = goldY + goldH + gap;
   const bottomRedY = creamY + creamH + gap;
@@ -151,37 +258,31 @@ function drawWallpaper(targetCanvas) {
   c.fillStyle = "#000";
   c.fillRect(0, 0, w, h);
 
-  // Left segmented rails
-  rect(c, 0, railTopY, leftSeg1W, t, palette[0]);
-  rect(c, leftSeg1W + leftGap, railTopY, leftSeg2W, t, palette[1]);
-  rect(c, 0, railBottomY, leftSeg1W, t, palette[0]);
-  rect(c, leftSeg1W + leftGap, railBottomY, leftSeg2W, t, palette[1]);
+  // Left segmented rails.
+  rect(c, 0, railTopY, leftSeg1W, t, colorForPanel(0, 0));
+  rect(c, leftSeg1W + leftGap, railTopY, leftSeg2W, t, colorForPanel(2, 1));
+  rect(c, 0, railBottomY, leftSeg1W, t, colorForPanel(0, 0));
+  rect(c, leftSeg1W + leftGap, railBottomY, leftSeg2W, t, colorForPanel(2, 1));
 
-  // Top orange stays anchored to the top.
-  rect(c, spineX, topOrangeY, rightW, topOrangeH, palette[1]);
+  // Top block stays anchored to the top.
+  rect(c, spineX, topOrangeY, rightW, topOrangeH, colorForPanel(0, 1));
 
-  // Upper red dynamically stretches from top orange down to the rail.
-  c.fillStyle = palette[2];
+  // Upper elbow stretches from top block down to the rail.
+  c.fillStyle = colorForPanel(1, 2);
   c.beginPath();
   c.moveTo(railStart, railTopY);
   c.lineTo(spineX - innerW, railTopY);
-
-  // fixed inner curve near the rail, then vertical wall up to the anchored top red block
   qLB_RT(c, spineX - innerW, railTopY - innerH, spineX, railTopY);
   c.lineTo(spineX, topRedY);
-
   c.lineTo(right, topRedY);
-
-  // fixed outer curve near the rail bottom
   c.lineTo(right, topRedBottom - outerH);
   qRT_LB(c, right - outerW, topRedBottom - outerH, right, topRedBottom);
-
   c.lineTo(railStart, topRedBottom);
   c.closePath();
   c.fill();
 
-  // Lower red elbow
-  c.fillStyle = palette[2];
+  // Lower elbow.
+  c.fillStyle = colorForPanel(1, 2);
   c.beginPath();
   c.moveTo(railStart, lowerRedTop);
   c.lineTo(right - outerW, lowerRedTop);
@@ -194,12 +295,11 @@ function drawWallpaper(targetCanvas) {
   c.fill();
 
   // Lower blocks fill downward from the moving lower elbow.
-  rect(c, spineX, midOrangeY, rightW, midOrangeH, palette[1]);
-  rect(c, spineX, goldY, rightW, goldH, palette[3]);
-  rect(c, spineX, creamY, rightW, creamH, palette[4]);
-  rect(c, spineX, bottomRedY, rightW, bottomRedH, palette[2]);
+  rect(c, spineX, midOrangeY, rightW, midOrangeH, colorForPanel(2, 1));
+  rect(c, spineX, goldY, rightW, goldH, colorForPanel(3, 3));
+  rect(c, spineX, creamY, rightW, creamH, colorForPanel(4, 4));
+  rect(c, spineX, bottomRedY, rightW, bottomRedH, colorForPanel(5, 2));
 }
-
 function redrawPreview() {
   const { w, h } = getSize();
 

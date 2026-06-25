@@ -135,6 +135,21 @@
         <input id="segmentScale" type="range" min="70" max="135" value="100">
       </label>
 
+      <label>
+        Panel rhythm
+        <select id="panelRhythm">
+          <option value="standard">Standard LCARS stack</option>
+          <option value="stepped">Stepped color rhythm</option>
+          <option value="tallLower">Tall lower panels</option>
+          <option value="staccato">Short accent blocks</option>
+          <option value="balanced">Balanced terminal blocks</option>
+        </select>
+      </label>
+
+      <p class="hint">
+        Panel rhythm changes the static color-block proportions while keeping the LCARS elbow shape intact.
+      </p>
+
       <button id="download">Download Wallpaper PNG</button>
 
       <p class="hint">
@@ -147,7 +162,7 @@
     </section>
   </main>
 
-  <script src="app.js?v=16"></script>
+  <script src="app.js?v=20"></script>
   <script src="ui-polish.js?v=1781832014"></script>
   <footer class="siteFooter">
     <strong>LCARS Niagara Theme · MVP v0.1.0</strong>
