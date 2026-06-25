@@ -31,16 +31,18 @@ cd ~/LCARS-Star-Trek-Niagara-Launcher-Theme
 TOKEN="$(cat .secrets-local/cpanel-builder-callback-token.txt)"
 curl -fsSL -H "Authorization: Bearer $TOKEN" "https://lcars-builder.machinations.space/export-contributions.php" -o /tmp/lcars-contributions.jsonl
 wc -l /tmp/lcars-contributions.jsonl
-nix-shell -p nodejs_22 --run "node tools/import-contributions.js /tmp/lcars-contributions.jsonl --min-count=1"
+REPORT="reports/app-category-import-$(date +%Y-%m-%d).md"
+nix-shell -p nodejs_22 --run "node tools/import-contributions.js /tmp/lcars-contributions.jsonl --min-count=1 --report=$REPORT"
 ```
 
 If the dry run looks sane:
 
 ```bash
-nix-shell -p nodejs_22 --run "node tools/import-contributions.js /tmp/lcars-contributions.jsonl --min-count=1 --write"
-git diff --stat docs/data/app-categories.json
-git diff docs/data/app-categories.json | less
-git add docs/data/app-categories.json
+REPORT="reports/app-category-import-$(date +%Y-%m-%d).md"
+nix-shell -p nodejs_22 --run "node tools/import-contributions.js /tmp/lcars-contributions.jsonl --min-count=1 --write --report=$REPORT"
+git diff --stat docs/data/app-categories.json "$REPORT"
+git diff docs/data/app-categories.json "$REPORT" | less
+git add docs/data/app-categories.json "$REPORT"
 git commit -m "Import contributed app category mappings"
 git push
 ```

@@ -71,9 +71,11 @@
       <button id="buildApk">Build Signed APK</button>
 
       <div class="notice">
-        <strong>Before building:</strong> review the app categories in the table after parsing your app list.
-        The generator guesses categories automatically, but correcting them gives better LCARS color grouping
-        and saves your choices locally for the next time you load the same apps.
+        <strong>Before sharing or building:</strong> parse your app list and review the categories in the table.
+        Correcting categories improves LCARS color grouping and saves your choices locally for next time.
+        To improve the shared database, use both sharing controls: check <strong>Share parsed app mappings</strong>,
+        then click <strong>Submit Reviewed Mappings</strong>. If you build a signed APK while sharing is checked,
+        the builder will also submit the reviewed mappings.
       </div>
 
       <button id="copyUnknowns">Copy Unknown-App JSON</button>
@@ -82,6 +84,8 @@
         <input id="shareMappings" type="checkbox">
         Share parsed app mappings to improve future matching
       </label>
+
+      <button id="submitMappings" class="secondary">Submit Reviewed Mappings</button>
 
       <p id="status" class="hint">No app list loaded yet.</p>
 
@@ -116,7 +120,7 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-  <script src="icon-generator.js?v=1781831690"></script>
+  <script src="icon-generator.js?v=1782400000"></script>
   <footer class="siteFooter">
     <strong>LCARS Niagara Theme · MVP v0.1.0</strong>
     <span>Created by Logan / Machinations</span>

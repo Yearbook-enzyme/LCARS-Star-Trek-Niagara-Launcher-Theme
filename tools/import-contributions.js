@@ -5,6 +5,8 @@ const path = require("path");
 const input = process.argv[2];
 const write = process.argv.includes("--write");
 const includePackageOnly = process.argv.includes("--include-package-only");
+const reportArg = process.argv.find(arg => arg.startsWith("--report="));
+const reportPath = reportArg ? reportArg.split("=").slice(1).join("=") : "";
 const minCountArg = process.argv.find(arg => arg.startsWith("--min-count="));
 const minCount = minCountArg ? Number(minCountArg.split("=")[1]) : 1;
 
@@ -68,7 +70,7 @@ const genericLabelWords = new Set([
 ]);
 
 if (!input) {
-  console.error("Usage: node tools/import-contributions.js /path/to/contributions.jsonl [--write] [--min-count=1] [--include-package-only]");
+  console.error("Usage: node tools/import-contributions.js /path/to/contributions.jsonl [--write] [--min-count=1] [--include-package-only] [--report=reports/app-category-import.md]");
   process.exit(1);
 }
 
@@ -294,6 +296,65 @@ for (const change of changes.slice(0, 100)) {
 
 if (changes.length > 100) {
   console.log(`...and ${changes.length - 100} more`);
+}
+
+function markdownReport() {
+  const lines = [];
+  const now = new Date().toISOString();
+  const added = changes.filter(change => !change.before || !Object.keys(change.before).length);
+  const updated = changes.filter(change => change.before && Object.keys(change.before).length);
+  const unknownToKnown = changes.filter(change =>
+    change.before?.category === "unknown" &&
+    change.after?.category &&
+    change.after.category !== "unknown"
+  );
+
+  lines.push(`# LCARS app-category import report`);
+  lines.push("");
+  lines.push(`Generated: ${now}`);
+  lines.push("");
+  lines.push("## Summary");
+  lines.push("");
+  lines.push(`- Contribution records read: ${stats.records}`);
+  lines.push(`- Apps seen: ${stats.appsSeen}`);
+  lines.push(`- Apps accepted: ${stats.appsAccepted}`);
+  lines.push(`- Skipped, no component: ${stats.skippedNoComponent}`);
+  lines.push(`- Skipped, bad package: ${stats.skippedBadPackage}`);
+  lines.push(`- Skipped, bad component: ${stats.skippedBadComponent}`);
+  lines.push(`- Packages with accepted votes: ${tallies.size}`);
+  lines.push(`- Changes applied or proposed: ${changes.length}`);
+  lines.push(`- New packages: ${added.length}`);
+  lines.push(`- Updated existing packages: ${updated.length}`);
+  lines.push(`- Unknown → known category improvements: ${unknownToKnown.length}`);
+  lines.push(`- Minimum vote count: ${minCount}`);
+  lines.push(`- Package-only entries included: ${includePackageOnly ? "yes" : "no"}`);
+  lines.push("");
+  lines.push("## Changes");
+  lines.push("");
+  lines.push("| Package | Votes | Before | After |");
+  lines.push("|---|---:|---|---|");
+
+  for (const change of changes) {
+    const before = change.before?.category || "(new)";
+    const after = change.after?.category || "unknown";
+    const label = change.after?.label || change.before?.label || "";
+    lines.push(`| \`${change.package}\` | ${change.count} | ${before} | ${after}${label ? ` / ${label}` : ""} |`);
+  }
+
+  lines.push("");
+  lines.push("## Notes");
+  lines.push("");
+  lines.push("- Component-backed submissions are preferred because Niagara icon replacement needs exact Android launcher components.");
+  lines.push("- Package-only entries are ignored unless `--include-package-only` is passed intentionally.");
+  lines.push("- Review any surprising labels before committing, especially generic labels inferred from package names.");
+
+  return lines.join("\n") + "\n";
+}
+
+if (reportPath) {
+  fs.mkdirSync(path.dirname(reportPath), { recursive: true });
+  fs.writeFileSync(reportPath, markdownReport());
+  console.log(`Wrote report ${reportPath}`);
 }
 
 if (write) {

@@ -687,26 +687,72 @@ async function pollApkBuild(statusUrl) {
 }
 
 
-async function submitMappingContribution(apps) {
+async function submitMappingContribution(apps, { requireOptIn = true, updateStatus = false } = {}) {
   const checkbox = document.getElementById("shareMappings");
-  if (!checkbox?.checked) return;
+
+  if (requireOptIn && !checkbox?.checked) {
+    if (updateStatus) {
+      setStatus("To submit reviewed mappings, first check “Share parsed app mappings.”");
+    }
+    return { ok: false, skipped: true, reason: "sharing-not-enabled" };
+  }
 
   saveUserMappingsForApps(apps);
 
   const payload = contributionPayload(apps);
 
-  if (!payload.apps.length) return;
+  if (!payload.apps.length) {
+    if (updateStatus) setStatus("No package mappings found to submit.");
+    return { ok: false, skipped: true, reason: "empty-payload" };
+  }
 
   try {
-    await fetch(`${APK_BUILDER_BASE}/contribute.php`, {
+    const response = await fetch(`${APK_BUILDER_BASE}/contribute.php`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(payload)
     });
+
+    const data = await readBuilderJson(response);
+
+    if (!response.ok) {
+      throw new Error(data.error || `Mapping submit failed with HTTP ${response.status}`);
+    }
+
+    if (updateStatus) {
+      setStatus(`Submitted ${data.accepted ?? payload.apps.length} reviewed app mappings for database improvement.`);
+    }
+
+    return { ok: true, accepted: data.accepted ?? payload.apps.length };
   } catch (error) {
     console.warn("Mapping contribution failed", error);
+    if (updateStatus) setStatus(`Mapping submit error: ${error.message}`);
+    return { ok: false, error };
+  }
+}
+
+async function submitReviewedMappings() {
+  const button = document.getElementById("submitMappings");
+
+  try {
+    if (!parsedApps.length) {
+      setStatus("Parse and review an app list before submitting mappings.");
+      return;
+    }
+
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Submitting mappings...";
+    }
+
+    await submitMappingContribution(assignments(), { updateStatus: true });
+  } finally {
+    if (button) {
+      button.disabled = false;
+      button.textContent = "Submit Reviewed Mappings";
+    }
   }
 }
 
@@ -723,7 +769,7 @@ async function buildSignedApk() {
 
     const job = createApkJobFromParsedApps();
 
-    submitMappingContribution(job.apps);
+    await submitMappingContribution(job.apps);
 
     setStatus("Sending APK build request...");
     setApkBuildStatus("Sending build request to LCARS APK builder...");
@@ -763,6 +809,7 @@ async function buildSignedApk() {
 }
 
 document.getElementById("buildApk")?.addEventListener("click", buildSignedApk);
+document.getElementById("submitMappings")?.addEventListener("click", submitReviewedMappings);
 
 function parseApkInputLinesFromTextarea() {
   const text = document.getElementById("appText")?.value || "";
