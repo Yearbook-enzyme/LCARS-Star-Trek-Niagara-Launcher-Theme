@@ -312,3 +312,662 @@ pre {
 .aboutCard h2 {
   margin-top: 0;
 }
+
+
+/* Font guide */
+.fontCards {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.fontCard {
+  border: 2px solid rgba(255, 190, 110, 0.6);
+  border-radius: 18px;
+  padding: 1rem;
+  background: rgba(255, 190, 110, 0.08);
+}
+
+.fontCard h3 {
+  margin-top: 0;
+}
+
+.fontPreviewWrap {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.fontPreviewPanel {
+  width: min(100%, 520px);
+  border-radius: 32px;
+  background: #000;
+  padding: 1rem;
+  border: 4px solid #df5a1f;
+  box-shadow: 0 0 0 8px rgba(224, 154, 63, 0.22);
+}
+
+.fontPreviewKicker {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: #e09a3f;
+  color: #000;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.fontPreviewText {
+  min-height: 6rem;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 24px 24px 24px 0;
+  background: #d62b18;
+  color: #000;
+  font-size: clamp(1.4rem, 5vw, 3.25rem);
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
+}
+
+.fontPreviewRows {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.fontPreviewRows span {
+  display: block;
+  padding: 0.45rem 0.75rem;
+  border-radius: 999px 0 0 999px;
+  background: #dfb98a;
+  color: #000;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.fontPreviewRows span:nth-child(2) {
+  background: #e09a3f;
+}
+
+.fontPreviewRows span:nth-child(3) {
+  background: #df5a1f;
+}
+
+.fontPreviewRows span:nth-child(4) {
+  background: #e8bd88;
+}
+
+.fontInstallNote {
+  width: min(100%, 520px);
+}
+
+
+/* Quick start */
+.quickStart {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border: 2px solid rgba(255, 190, 110, 0.55);
+  border-radius: 22px;
+  background: rgba(255, 190, 110, 0.08);
+}
+
+.quickStart ol {
+  margin: 0;
+  padding-left: 1.35rem;
+}
+
+.quickStart li {
+  margin: 0.65rem 0;
+}
+
+.quickStart code {
+  background: rgba(0, 0, 0, 0.35);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.35rem;
+}
+
+
+/* Niagara font preview */
+.niagaraPhonePreview {
+  position: relative;
+  width: min(100%, 390px);
+  aspect-ratio: 9 / 19.5;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 34px;
+  border: 5px solid #222;
+  background: #000;
+  box-shadow: 0 0 0 2px rgba(255, 190, 110, 0.42), 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+
+.lcarsWallpaperMock,
+.niagaraOverlay {
+  position: absolute;
+  inset: 0;
+}
+
+.lcarsWallpaperMock {
+  background: #000;
+}
+
+.wallBlock,
+.wallRail {
+  position: absolute;
+  display: block;
+}
+
+.wallTop {
+  top: 0;
+  right: 0;
+  width: 36%;
+  height: 12%;
+  background: #df5a1f;
+}
+
+.wallElbow {
+  top: 14%;
+  right: 0;
+  width: 66%;
+  height: 15%;
+  border-radius: 0 0 0 46px;
+  background: #d62b18;
+}
+
+.wallMid {
+  top: 34%;
+  right: 0;
+  width: 36%;
+  height: 9%;
+  background: #df5a1f;
+}
+
+.wallGold {
+  top: 45%;
+  right: 0;
+  width: 36%;
+  height: 16%;
+  background: #e09a3f;
+}
+
+.wallCream {
+  top: 63%;
+  right: 0;
+  width: 36%;
+  height: 15%;
+  background: #dfb98a;
+}
+
+.wallBottom {
+  top: 80%;
+  right: 0;
+  width: 36%;
+  bottom: 0;
+  background: #d62b18;
+}
+
+.wallRailTop,
+.wallRailBottom {
+  left: 0;
+  width: 47%;
+  height: 2.4%;
+  background: #e8bd88;
+}
+
+.wallRailTop { top: 20.4%; }
+.wallRailBottom { top: 24.2%; }
+
+.niagaraOverlay {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: 0.85rem;
+  padding: 2rem 1.35rem 1.4rem;
+  color: #f2e7cf;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.36) 58%, rgba(0, 0, 0, 0.08));
+}
+
+.niagaraStatus {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: #e09a3f;
+  text-transform: uppercase;
+}
+
+.niagaraSearch {
+  width: 72%;
+  padding: 0.55rem 0.75rem;
+  border-radius: 999px;
+  color: #000;
+  background: #dfb98a;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.niagaraFeaturedApp {
+  align-self: start;
+  width: min-content;
+  max-width: 84%;
+  padding: 0.42rem 0.7rem;
+  border-radius: 999px 0 999px 999px;
+  color: #000;
+  background: #df5a1f;
+  font-size: clamp(1.25rem, 7vw, 2.6rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
+}
+
+.niagaraAppList {
+  display: grid;
+  align-content: center;
+  gap: 0.62rem;
+  min-width: 0;
+}
+
+.niagaraApp {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 0;
+  font-size: clamp(1rem, 4.5vw, 1.45rem);
+  line-height: 1;
+  letter-spacing: 0.035em;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.75);
+}
+
+.appDot {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 1.45em;
+  height: 1.45em;
+  border-radius: 999px;
+  color: #000;
+  background: #e09a3f;
+  font-size: 0.72em;
+  font-weight: 900;
+}
+
+.niagaraAlphabet {
+  justify-self: end;
+  max-width: 42%;
+  color: #e8bd88;
+  font-size: 0.62rem;
+  line-height: 1.55;
+  text-align: right;
+  letter-spacing: 0.12em;
+}
+
+
+/* Niagara home font preview v2 */
+.niagaraHomePreview {
+  position: relative;
+  width: min(100%, 430px);
+  aspect-ratio: 9 / 19.5;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 34px;
+  border: 5px solid #1e1e1e;
+  background: #000;
+  box-shadow: 0 0 0 2px rgba(255, 190, 110, 0.38), 0 18px 50px rgba(0, 0, 0, 0.5);
+}
+
+.niagaraWallpaper,
+.niagaraHomeLayer {
+  position: absolute;
+  inset: 0;
+}
+
+.niagaraWallpaper {
+  background: #000;
+}
+
+.niagaraWallpaper span {
+  position: absolute;
+  display: block;
+}
+
+.nw-top {
+  top: 0;
+  right: 0;
+  width: 33%;
+  height: 12%;
+  background: #df5a1f;
+}
+
+.nw-upper {
+  top: 14%;
+  right: 0;
+  width: 66%;
+  height: 12%;
+  background: #d62b18;
+  border-bottom-left-radius: 44px;
+}
+
+.nw-lower {
+  top: 28%;
+  right: 0;
+  width: 66%;
+  height: 12%;
+  background: #d62b18;
+  border-top-left-radius: 44px;
+}
+
+.nw-mid {
+  top: 42%;
+  right: 0;
+  width: 33%;
+  height: 8%;
+  background: #df5a1f;
+}
+
+.nw-gold {
+  top: 52%;
+  right: 0;
+  width: 33%;
+  height: 15%;
+  background: #e09a3f;
+}
+
+.nw-cream {
+  top: 69%;
+  right: 0;
+  width: 33%;
+  height: 15%;
+  background: #dfb98a;
+}
+
+.nw-bottom {
+  top: 86%;
+  right: 0;
+  width: 33%;
+  bottom: 0;
+  background: #d62b18;
+}
+
+.nw-rail {
+  height: 1.7%;
+}
+
+.rail-a,
+.rail-c {
+  left: 0;
+  width: 30%;
+  background: #e8bd88;
+}
+
+.rail-b,
+.rail-d {
+  left: 32%;
+  width: 27%;
+  background: #df5a1f;
+}
+
+.rail-a,
+.rail-b {
+  top: 22.2%;
+}
+
+.rail-c,
+.rail-d {
+  top: 26.2%;
+}
+
+.niagaraHomeLayer {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  gap: 0.8rem;
+  padding: 2.1rem 1.25rem 1.25rem;
+  color: #f3dfbd;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.68) 46%, rgba(0, 0, 0, 0.16) 100%);
+}
+
+.niagaraClock {
+  font-size: clamp(2.6rem, 12vw, 4.2rem);
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  color: #e8bd88;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8);
+}
+
+.niagaraDate {
+  max-width: 68%;
+  font-size: 0.78rem;
+  line-height: 1.25;
+  letter-spacing: 0.08em;
+  color: #e09a3f;
+  text-transform: uppercase;
+}
+
+.niagaraFeaturedApp {
+  align-self: start;
+  width: fit-content;
+  max-width: 78%;
+  padding: 0.4rem 0.72rem;
+  border-radius: 999px 0 999px 999px;
+  color: #000;
+  background: #df5a1f;
+  font-size: clamp(1.3rem, 7.2vw, 2.65rem);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: 0.04em;
+  overflow-wrap: anywhere;
+}
+
+.niagaraAppList {
+  display: grid;
+  align-content: center;
+  gap: 0.68rem;
+  max-width: 72%;
+}
+
+.niagaraApp {
+  display: grid;
+  grid-template-columns: 2.05rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.62rem;
+  min-width: 0;
+  font-size: clamp(1.02rem, 4.4vw, 1.38rem);
+  line-height: 1;
+  letter-spacing: 0.035em;
+  text-shadow: 0 1px 7px rgba(0, 0, 0, 0.86);
+}
+
+.mockIcon {
+  display: inline-grid;
+  place-items: center;
+  width: 2.05rem;
+  height: 2.05rem;
+  border-radius: 999px;
+  color: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  box-shadow:
+    inset 0 -0.28rem 0 rgba(0, 0, 0, 0.18),
+    0 0 0 2px rgba(0, 0, 0, 0.45);
+}
+
+.mockIcon.social { background: #d62b18; }
+.mockIcon.tools { background: #e8bd88; }
+.mockIcon.media { background: #df5a1f; }
+.mockIcon.comms { background: #e09a3f; }
+.mockIcon.system { background: #dfb98a; }
+.mockIcon.science { background: #c8a6ff; }
+.mockIcon.weather { background: #9ed4ff; }
+
+.niagaraAlphabet {
+  justify-self: end;
+  max-width: 37%;
+  color: #e8bd88;
+  font-size: 0.58rem;
+  line-height: 1.55;
+  text-align: right;
+  letter-spacing: 0.13em;
+  opacity: 0.94;
+}
+
+.fontInstallNote {
+  width: min(100%, 520px);
+}
+
+
+/* Niagara wallpaper canvas font preview */
+.niagaraWallpaperPhone {
+  position: relative;
+  width: min(100%, 390px);
+  aspect-ratio: 9 / 20;
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 30px;
+  border: 4px solid rgba(232, 189, 136, 0.45);
+  background: #000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.95), 0 18px 50px rgba(0, 0, 0, 0.55);
+}
+
+#niagaraWallpaperCanvas,
+.niagaraLauncherLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#niagaraWallpaperCanvas {
+  object-fit: cover;
+}
+
+.niagaraLauncherLayer {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  padding: 2rem 1.25rem 1.25rem;
+  color: #f2dfbd;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.76) 43%, rgba(0, 0, 0, 0.08) 100%);
+}
+
+.launcherTime {
+  font-size: clamp(2.6rem, 12vw, 4.1rem);
+  line-height: 0.9;
+  letter-spacing: 0.035em;
+  color: #e8bd88;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.8);
+}
+
+.launcherDate {
+  max-width: 64%;
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  color: #e09a3f;
+  text-transform: uppercase;
+}
+
+.launcherList {
+  align-self: center;
+  display: grid;
+  gap: 0.74rem;
+  max-width: 72%;
+  margin-top: 1.2rem;
+}
+
+.launcherRow {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+  font-size: clamp(1.02rem, 4.35vw, 1.35rem);
+  line-height: 1;
+  letter-spacing: 0.035em;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.88);
+}
+
+.launcherRow.featured {
+  margin-bottom: 0.3rem;
+  font-size: clamp(1.18rem, 5.6vw, 1.85rem);
+}
+
+.launcherIcon {
+  display: inline-grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  color: #000;
+  background: #e09a3f;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.67rem;
+  font-weight: 900;
+  overflow: hidden;
+  box-shadow:
+    inset 0 -0.26rem 0 rgba(0, 0, 0, 0.18),
+    0 0 0 2px rgba(0, 0, 0, 0.42);
+}
+
+.launcherIcon.social { background: #d62b18; }
+.launcherIcon.tools { background: #e8bd88; }
+.launcherIcon.media { background: #df5a1f; }
+.launcherIcon.comms { background: #e09a3f; }
+.launcherIcon.system { background: #dfb98a; }
+.launcherIcon.science { background: #c8a6ff; }
+.launcherIcon.weather { background: #9ed4ff; }
+.launcherIcon.dining { background: #df5a1f; }
+
+.launcherAlphabet {
+  justify-self: end;
+  max-width: 38%;
+  color: #e8bd88;
+  font-size: 0.58rem;
+  line-height: 1.55;
+  text-align: right;
+  letter-spacing: 0.13em;
+  opacity: 0.95;
+}
+
+
+/* Font guide simple */
+.fontCards {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.fontCard {
+  border: 2px solid rgba(255, 190, 110, 0.6);
+  border-radius: 18px;
+  padding: 1rem;
+  background: rgba(255, 190, 110, 0.08);
+}
+
+.fontCard h3 {
+  margin-top: 0;
+}
+
+.fontGuideSummary {
+  align-content: start;
+}
+
+
+/* Font guide layout fix */
+.fontGuideLayout {
+  display: block;
+  max-width: 760px;
+}
+
+.fontGuideLayout .panel {
+  max-width: 760px;
+}
+
+.fontGuideSummary {
+  margin-top: 1.25rem;
+  padding: 1rem;
+  border: 2px solid rgba(255, 190, 110, 0.6);
+  border-radius: 18px;
+  background: rgba(255, 190, 110, 0.08);
+}
