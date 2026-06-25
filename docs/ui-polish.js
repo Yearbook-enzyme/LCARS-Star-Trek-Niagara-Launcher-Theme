@@ -37,10 +37,11 @@
       <h2>Start here</h2>
       <div class="lcars-flow-grid">
         <div class="lcars-flow-step"><strong>01</strong><span>Generate a Niagara wallpaper.</span></div>
-        <div class="lcars-flow-step"><strong>02</strong><span>Export your Android launcher app list.</span></div>
-        <div class="lcars-flow-step"><strong>03</strong><span>Generate matching LCARS icons.</span></div>
-        <div class="lcars-flow-step"><strong>04</strong><span>Build the signed icon-pack APK.</span></div>
-        <div class="lcars-flow-step"><strong>05</strong><span>Apply wallpaper and icon pack in Niagara.</span></div>
+        <div class="lcars-flow-step"><strong>02</strong><span>Choose Trek-inspired fonts.</span></div>
+        <div class="lcars-flow-step"><strong>03</strong><span>Export your Android launcher app list.</span></div>
+        <div class="lcars-flow-step"><strong>04</strong><span>Generate matching LCARS icons.</span></div>
+        <div class="lcars-flow-step"><strong>05</strong><span>Build the signed icon-pack APK.</span></div>
+        <div class="lcars-flow-step"><strong>06</strong><span>Apply wallpaper, fonts, and icon pack in Niagara.</span></div>
       </div>
     `;
 
