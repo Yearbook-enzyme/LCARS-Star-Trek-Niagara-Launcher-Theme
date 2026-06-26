@@ -12,6 +12,9 @@
   <a href="https://yearbook-enzyme.github.io/LCARS-Star-Trek-Niagara-Launcher-Theme/">
     <img alt="Live Site" src="https://img.shields.io/badge/Live%20Site-Open-ff9900?style=for-the-badge">
   </a>
+  <a href="https://yearbook-enzyme.github.io/LCARS-Star-Trek-Niagara-Launcher-Theme/gallery.html">
+    <img alt="Gallery" src="https://img.shields.io/badge/Gallery-Browse-bf5af2?style=for-the-badge">
+  </a>
   <img alt="Status" src="https://img.shields.io/badge/Status-v0.2.0-d62b18?style=for-the-badge">
   <img alt="Platform" src="https://img.shields.io/badge/Android-Niagara%20Launcher-e09a3f?style=for-the-badge">
   <img alt="Fan Project" src="https://img.shields.io/badge/Unofficial-Fan%20Project-dfb98a?style=for-the-badge">
@@ -25,6 +28,9 @@ It is built for people who want their phone to feel less like a normal app grid 
 
 **Live site:**
 https://yearbook-enzyme.github.io/LCARS-Star-Trek-Niagara-Launcher-Theme/
+
+**Gallery:**
+https://yearbook-enzyme.github.io/LCARS-Star-Trek-Niagara-Launcher-Theme/gallery.html
 
 **Creator:** Logan / Machinations
 https://blog.machinations.space/
