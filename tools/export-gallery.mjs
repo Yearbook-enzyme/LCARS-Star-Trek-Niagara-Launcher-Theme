@@ -77,9 +77,7 @@ const iconPaletteConfigs = [
 
 const iconModeConfigs = [
   { mode: "themeMono", title: "Theme-matched monochrome" },
-  { mode: "categoryPalette", title: "Theme palette by category" },
-  { mode: "rainbow", title: "Rainbow category mode" },
-  { mode: "sequentialRainbow", title: "Rainbow sequence mode" }
+  { mode: "categoryPalette", title: "Theme palette by category" }
 ];
 
 const iconMatrix = iconPaletteConfigs.flatMap(palette =>
