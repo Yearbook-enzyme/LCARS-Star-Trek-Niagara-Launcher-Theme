@@ -128,6 +128,42 @@ function launcherIconXml() {
 `;
 }
 
+function folderIconXml(color) {
+  const fill = normalizeHex(color, "#d62b18");
+
+  return `<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="432dp"
+    android:height="432dp"
+    android:viewportWidth="432"
+    android:viewportHeight="432">
+
+    <path
+        android:fillColor="#000000"
+        android:pathData="M0,0h432v432h-432z" />
+
+    <path
+        android:fillColor="${fill}"
+        android:pathData="M54,120 C54,94 75,78 101,78 L164,78 C176,78 187,84 194,94 L216,126 L331,126 C357,126 378,147 378,173 L378,307 C378,333 357,354 331,354 L101,354 C75,354 54,333 54,307 Z" />
+
+    <path
+        android:fillColor="#ffffff"
+        android:fillAlpha="0.16"
+        android:pathData="M84,156 L348,156 L348,188 L84,188 Z" />
+
+    <path
+        android:fillColor="#000000"
+        android:fillAlpha="0.35"
+        android:pathData="M84,222 L310,222 L310,244 L84,244 Z M84,266 L270,266 L270,288 L84,288 Z" />
+
+    <path
+        android:fillColor="#ffffff"
+        android:fillAlpha="0.10"
+        android:pathData="M101,96 L160,96 C170,96 179,101 184,109 L204,138 L78,138 L78,119 C78,106 88,96 101,96 Z" />
+</vector>
+`;
+}
+
 function appfilterXml(entries) {
   const items = entries
     .map(app => `    <item component="${escapeXml(app.component)}" drawable="${app.resName}" />`)
@@ -203,18 +239,43 @@ mkdirp(valuesDir);
 
 write(path.join(drawableDir, "ic_launcher.xml"), launcherIconXml());
 
+const folderDrawableNames = [
+  "ic_folder",
+  "ic_folder_lcars",
+  "folder",
+  "folder_icon",
+  "ic_launcher_folder"
+];
+
+for (const name of folderDrawableNames) {
+  write(path.join(drawableDir, `${name}.xml`), folderIconXml(job.folderColor || job.accentColor || "#d62b18"));
+}
+
 for (const app of entries) {
   write(path.join(drawableDir, `${app.resName}.xml`), roundedSquareVectorXml(app.color));
 }
 
+const specialEntries = folderDrawableNames.map(name => ({
+  resName: name,
+  label: name === "ic_folder_lcars" ? "LCARS Folder" : "Folder",
+  component: "",
+  category: "special",
+  color: normalizeHex(job.folderColor || job.accentColor || "#d62b18")
+}));
+
+const drawableEntries = [...specialEntries, ...entries];
+
 write(path.join(xmlDir, "appfilter.xml"), appfilterXml(entries));
-write(path.join(xmlDir, "drawable.xml"), drawableXml(entries));
-write(path.join(xmlDir, "icon_pack.xml"), drawableXml(entries));
+write(path.join(xmlDir, "drawable.xml"), drawableXml(drawableEntries));
+write(path.join(xmlDir, "icon_pack.xml"), drawableXml(drawableEntries));
 
 write(path.join(assetsDir, "appfilter.xml"), appfilterXml(entries));
-write(path.join(assetsDir, "drawable.xml"), drawableXml(entries));
-write(path.join(assetsDir, "theme_resources.xml"), themeResourcesXml(entries));
-write(path.join(assetsDir, "icon-manifest.json"), JSON.stringify(entries, null, 2));
+write(path.join(assetsDir, "drawable.xml"), drawableXml(drawableEntries));
+write(path.join(assetsDir, "theme_resources.xml"), themeResourcesXml(drawableEntries));
+write(path.join(assetsDir, "icon-manifest.json"), JSON.stringify({
+  special: specialEntries,
+  apps: entries
+}, null, 2));
 
 write(path.join(valuesDir, "strings.xml"), `<?xml version="1.0" encoding="utf-8"?>
 <resources>
