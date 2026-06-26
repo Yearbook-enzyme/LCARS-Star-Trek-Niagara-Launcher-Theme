@@ -66,6 +66,7 @@ The wallpaper generator includes multiple color directions:
 * Grayscale LCARS
 * E-Ink Soft
 * Terminal Green
+* Spectrum Rainbow LCARS
 * High Contrast
 
 ### Panel rhythm variations
@@ -77,6 +78,7 @@ The wallpaper generator also includes shape/rhythm variations that change the pr
 * Tall lower panels
 * Short accent blocks
 * Balanced terminal blocks
+* Spectrum flow
 
 These rhythms make the generator more flexible than a single fixed wallpaper template. They let the same LCARS shape language feel more dense, open, compact, balanced, or accent-heavy depending on the screen.
 

@@ -19,6 +19,7 @@ const palettes = {
   grayscale: ["#e8e8e8", "#b7b7b7", "#777777", "#9a9a9a", "#d8d8d8"],
   eink: ["#f0ead8", "#c8bfa8", "#817969", "#a69a80", "#e2d7bd"],
   terminal: ["#b7ffb7", "#5edc5e", "#1e9b1e", "#77cc77", "#d4ffd4"],
+  spectrum: ["#ff2d55", "#ff9500", "#ffd60a", "#32d74b", "#0a84ff", "#bf5af2"],
   highContrast: ["#ffffff", "#ff9f1c", "#ff2e2e", "#ffd23f", "#f7f7f7"]
 };
 
@@ -149,6 +150,14 @@ function drawWallpaper(targetCanvas) {
       cream: 0.92,
       bottomMin: 1.12,
       colors: [0, 2, 1, 3, 4, 2]
+    },
+    spectrumFlow: {
+      top: 0.92,
+      mid: 0.96,
+      gold: 1.02,
+      cream: 0.96,
+      bottomMin: 1.08,
+      colors: [0, 1, 2, 3, 4, 5]
     }
   };
 

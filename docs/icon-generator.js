@@ -10,7 +10,8 @@ const palettes = {
   romulan: ["#c8f7c5", "#65b96f", "#2e7d32", "#8fbf66", "#d4e8c3"],
   muted: ["#c98769", "#a9482a", "#8f241c", "#d09242", "#d7b083"],
   eink: ["#f0ead8", "#c8bfa8", "#817969", "#a69a80", "#e2d7bd"],
-  terminal: ["#b7ffb7", "#5edc5e", "#1e9b1e", "#77cc77", "#d4ffd4"]
+  terminal: ["#b7ffb7", "#5edc5e", "#1e9b1e", "#77cc77", "#d4ffd4"],
+  spectrum: ["#ff2d55", "#ff9500", "#ffd60a", "#32d74b", "#0a84ff", "#bf5af2"]
 };
 
 const categoryLabels = {
