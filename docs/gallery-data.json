@@ -1,0 +1,141 @@
+{
+  "generatedAt": "2026-06-26T18:23:08.873Z",
+  "wallpapers": [
+    {
+      "title": "Classic Warm · Standard LCARS stack",
+      "palette": "classic",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/classic-standard.png"
+    },
+    {
+      "title": "TNG Pastel · Balanced terminal blocks",
+      "palette": "tng",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/tng-balanced.png"
+    },
+    {
+      "title": "Voyager Soft · Tall lower panels",
+      "palette": "voyager",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/voyager-talllower.png"
+    },
+    {
+      "title": "Red Alert · Standard LCARS stack",
+      "palette": "red",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/red-standard.png"
+    },
+    {
+      "title": "Medical Teal · Balanced terminal blocks",
+      "palette": "medical",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/medical-balanced.png"
+    },
+    {
+      "title": "Operations Blue · Short accent blocks",
+      "palette": "opsBlue",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/opsblue-staccato.png"
+    },
+    {
+      "title": "Spectrum Rainbow · Spectrum flow",
+      "palette": "spectrum",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/spectrum-spectrumflow.png"
+    },
+    {
+      "title": "True Rainbow · Spectrum flow",
+      "palette": "trueRainbow",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/truerainbow-spectrumflow.png"
+    },
+    {
+      "title": "Pastel Rainbow · Spectrum flow",
+      "palette": "pastelRainbow",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/pastelrainbow-spectrumflow.png"
+    },
+    {
+      "title": "E-Ink Soft · Balanced terminal blocks",
+      "palette": "eink",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/eink-balanced.png"
+    },
+    {
+      "title": "Terminal Green · Short accent blocks",
+      "palette": "terminal",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/terminal-staccato.png"
+    }
+  ],
+  "icons": [
+    {
+      "title": "Classic · Theme-matched monochrome",
+      "palette": "classic",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/classic-thememono.png"
+    },
+    {
+      "title": "Classic · Theme palette by category",
+      "palette": "classic",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/classic-categorypalette.png"
+    },
+    {
+      "title": "Spectrum · Rainbow category mode",
+      "palette": "spectrum",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/spectrum-rainbow.png"
+    },
+    {
+      "title": "True Rainbow · Rainbow sequence mode",
+      "palette": "trueRainbow",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/truerainbow-sequentialrainbow.png"
+    },
+    {
+      "title": "Pastel Rainbow · Rainbow sequence mode",
+      "palette": "pastelRainbow",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/pastelrainbow-sequentialrainbow.png"
+    },
+    {
+      "title": "Terminal Green · Theme-matched monochrome",
+      "palette": "terminal",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/terminal-thememono.png"
+    }
+  ],
+  "fonts": [
+    {
+      "title": "Federation",
+      "font": "Federation",
+      "note": "Recommended default for everyday launcher labels",
+      "file": "gallery-assets/fonts/federation.png"
+    },
+    {
+      "title": "Federation Wide",
+      "font": "Federation Wide",
+      "note": "Broader display text",
+      "file": "gallery-assets/fonts/federation-wide.png"
+    },
+    {
+      "title": "Trek TNG Monitors",
+      "font": "Trek TNG Monitors",
+      "note": "More console-accurate computer readout feel",
+      "file": "gallery-assets/fonts/trek-tng-monitors.png"
+    },
+    {
+      "title": "Context Ultra Condensed",
+      "font": "Context Ultra Condensed",
+      "note": "Narrow LCARS label style",
+      "file": "gallery-assets/fonts/context-ultra-condensed.png"
+    },
+    {
+      "title": "Jefferies Extended",
+      "font": "Jefferies Extended",
+      "note": "Display/title style",
+      "file": "gallery-assets/fonts/jefferies-extended.png"
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LCARS Gallery</title>
+  <style>
+    :root {
+      --bg: #000;
+      --panel: #0d0d0d;
+      --line: #5a2a16;
+      --text: #f2d6a2;
+      --muted: #c9a66c;
+      --accent: #ff9500;
+      --accent2: #bf5af2;
+      --accent3: #d62b18;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+    }
+
+    header {
+      padding: 28px 24px;
+      border-bottom: 4px solid var(--accent);
+      background:
+        linear-gradient(90deg, rgba(255,149,0,0.25), rgba(191,90,242,0.15) 55%, transparent);
+    }
+
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 2.1rem;
+      color: #fff;
+    }
+
+    p.lead {
+      margin: 0;
+      max-width: 900px;
+      color: var(--muted);
+    }
+
+    nav {
+      padding: 14px 24px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
+
+    main {
+      padding: 24px;
+      display: grid;
+      gap: 36px;
+    }
+
+    section h2 {
+      margin: 0 0 16px 0;
+      color: #fff;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .card img {
+      width: 100%;
+      display: block;
+      background: #050505;
+    }
+
+    .cardBody {
+      padding: 14px 16px 18px;
+    }
+
+    .cardTitle {
+      margin: 0 0 8px 0;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .card a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer {
+      padding: 30px 24px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>LCARS Gallery</h1>
+    <p class="lead">
+      A curated gallery showing representative wallpaper palettes, panel rhythms, icon color systems,
+      and font specimens for the LCARS Niagara Launcher Theme project.
+    </p>
+  </header>
+
+  <nav>
+    <a href="#wallpapers">Wallpapers</a>
+    <a href="#icons">Icons</a>
+    <a href="#fonts">Fonts</a>
+    <a href="index.html">Back to generator</a>
+  </nav>
+
+  <main>
+    <section id="wallpapers">
+      <h2>Wallpaper palettes and rhythms</h2>
+      <div id="wallpaperGrid" class="grid"></div>
+    </section>
+
+    <section id="icons">
+      <h2>Icon color systems</h2>
+      <div id="iconGrid" class="grid"></div>
+    </section>
+
+    <section id="fonts">
+      <h2>Font specimens</h2>
+      <div id="fontGrid" class="grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    Generated gallery for LCARS Niagara Launcher Theme.
+  </footer>
+
+  <script src="gallery.js"></script>
+</body>
+</html>
