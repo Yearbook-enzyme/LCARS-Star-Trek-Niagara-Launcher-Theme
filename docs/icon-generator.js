@@ -343,14 +343,25 @@ function mix(aHex, bHex, amount) {
   return rgbToHex({ r: a.r + (b.r - a.r) * amount, g: a.g + (b.g - a.g) * amount, b: a.b + (b.b - a.b) * amount });
 }
 
+function rainbowSequenceColor(index) {
+  const sequence = ["#ff1744", "#ff9100", "#ffea00", "#00e676", "#00b0ff", "#7c4dff"];
+  return sequence[index % sequence.length];
+}
+
+function displaySortKey(app) {
+  return String(app.label || app.package || app.component || "")
+    .toLocaleLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
 function colorFor(category, localIndex, globalIndex = 0) {
   const palette = palettes[document.getElementById("palette").value] || palettes.classic;
   const mode = document.getElementById("colorMode").value;
   const catIndex = Math.max(0, categoryOrder.indexOf(category));
 
-  if (mode === "sequentialRainbow") {
-    const sequence = ["#ff1744", "#ff9100", "#ffea00", "#00e676", "#00b0ff", "#7c4dff"];
-    return sequence[globalIndex % sequence.length];
+  if (mode === "sequentialRainbow" || mode === "sequentialRainbowLabel") {
+    return rainbowSequenceColor(globalIndex);
   }
 
   if (mode === "rainbow") {
@@ -368,12 +379,31 @@ function colorFor(category, localIndex, globalIndex = 0) {
   return mix(color, localIndex % 2 ? "#ffffff" : "#000000", (localIndex % 5) * 0.025);
 }
 
+function sequenceOrderMap(apps) {
+  const mode = document.getElementById("colorMode").value;
+
+  if (mode !== "sequentialRainbowLabel") {
+    return new Map(apps.map((app, index) => [app.id, index]));
+  }
+
+  const sorted = [...apps].sort((a, b) => {
+    const byLabel = displaySortKey(a).localeCompare(displaySortKey(b));
+    if (byLabel) return byLabel;
+    return String(a.package || a.id || "").localeCompare(String(b.package || b.id || ""));
+  });
+
+  return new Map(sorted.map((app, index) => [app.id, index]));
+}
+
 function assignments() {
   const counts = {};
+  const orderMap = sequenceOrderMap(parsedApps);
+
   return parsedApps.map((app, index) => {
     const n = counts[app.category] || 0;
     counts[app.category] = n + 1;
-    return { ...app, color: colorFor(app.category, n, index) };
+    const sequenceIndex = orderMap.get(app.id) ?? index;
+    return { ...app, color: colorFor(app.category, n, sequenceIndex) };
   });
 }
 
