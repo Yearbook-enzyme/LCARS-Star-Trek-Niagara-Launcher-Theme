@@ -51,7 +51,8 @@ jobs:
             cp builder/input/sample-job.json builder/work/job.json
           fi
 
-          node -e "JSON.parse(require('fs').readFileSync('builder/work/job.json', 'utf8')); console.log('Job JSON is valid.')"
+          node -e "JSON.parse(require('fs').readFileSync('builder/work/job.json', 'utf8')); console.log('Job JSON is valid JSON.')"
+          node tools/validate-apk-job.mjs builder/work/job.json
 
       - name: Notify builder server that build started
         if: ${{ github.event.inputs.status_url != '' && github.event.inputs.job_id != '' }}
