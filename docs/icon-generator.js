@@ -11,7 +11,9 @@ const palettes = {
   muted: ["#c98769", "#a9482a", "#8f241c", "#d09242", "#d7b083"],
   eink: ["#f0ead8", "#c8bfa8", "#817969", "#a69a80", "#e2d7bd"],
   terminal: ["#b7ffb7", "#5edc5e", "#1e9b1e", "#77cc77", "#d4ffd4"],
-  spectrum: ["#ff2d55", "#ff9500", "#ffd60a", "#32d74b", "#0a84ff", "#bf5af2"]
+  spectrum: ["#ff2d55", "#ff9500", "#ffd60a", "#32d74b", "#0a84ff", "#bf5af2"],
+  trueRainbow: ["#ff1744", "#ff9100", "#ffea00", "#00e676", "#00b0ff", "#7c4dff"],
+  pastelRainbow: ["#ff9aa2", "#ffb347", "#fff275", "#77dd77", "#89cff0", "#b39ddb"]
 };
 
 const categoryLabels = {
@@ -335,10 +337,15 @@ function mix(aHex, bHex, amount) {
   return rgbToHex({ r: a.r + (b.r - a.r) * amount, g: a.g + (b.g - a.g) * amount, b: a.b + (b.b - a.b) * amount });
 }
 
-function colorFor(category, localIndex) {
+function colorFor(category, localIndex, globalIndex = 0) {
   const palette = palettes[document.getElementById("palette").value] || palettes.classic;
   const mode = document.getElementById("colorMode").value;
   const catIndex = Math.max(0, categoryOrder.indexOf(category));
+
+  if (mode === "sequentialRainbow") {
+    const sequence = ["#ff1744", "#ff9100", "#ffea00", "#00e676", "#00b0ff", "#7c4dff"];
+    return sequence[globalIndex % sequence.length];
+  }
 
   if (mode === "rainbow") {
     const rainbow = ["#ff595e", "#ff924c", "#ffca3a", "#8ac926", "#52a7ff", "#6a4c93", "#c77dff", "#aaaaaa"];
@@ -357,10 +364,10 @@ function colorFor(category, localIndex) {
 
 function assignments() {
   const counts = {};
-  return parsedApps.map(app => {
+  return parsedApps.map((app, index) => {
     const n = counts[app.category] || 0;
     counts[app.category] = n + 1;
-    return { ...app, color: colorFor(app.category, n) };
+    return { ...app, color: colorFor(app.category, n, index) };
   });
 }
 

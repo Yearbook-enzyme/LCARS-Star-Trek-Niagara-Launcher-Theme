@@ -67,6 +67,8 @@ The wallpaper generator includes multiple color directions:
 * E-Ink Soft
 * Terminal Green
 * Spectrum Rainbow LCARS
+* True Rainbow LCARS
+* Pastel Rainbow LCARS
 * High Contrast
 
 ### Panel rhythm variations
@@ -118,6 +120,7 @@ The icon generator includes:
 * Theme-matched monochrome mode
 * Theme palette by category
 * Rainbow category mode
+* Rainbow sequence mode
 * 432×432, 512×512, and 1024×1024 PNG output
 * ZIP export
 * App category review table
