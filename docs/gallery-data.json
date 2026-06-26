@@ -1,17 +1,125 @@
 {
-  "generatedAt": "2026-06-26T18:23:08.873Z",
+  "generatedAt": "2026-06-26T18:31:36.844Z",
   "wallpapers": [
     {
-      "title": "Classic Warm · Standard LCARS stack",
+      "title": "Classic Warm LCARS · Standard LCARS stack",
       "palette": "classic",
       "rhythm": "standard",
       "file": "gallery-assets/wallpapers/classic-standard.png"
     },
     {
-      "title": "TNG Pastel · Balanced terminal blocks",
+      "title": "Classic Warm LCARS · Stepped color rhythm",
+      "palette": "classic",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/classic-stepped.png"
+    },
+    {
+      "title": "Classic Warm LCARS · Tall lower panels",
+      "palette": "classic",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/classic-talllower.png"
+    },
+    {
+      "title": "Classic Warm LCARS · Short accent blocks",
+      "palette": "classic",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/classic-staccato.png"
+    },
+    {
+      "title": "Classic Warm LCARS · Balanced terminal blocks",
+      "palette": "classic",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/classic-balanced.png"
+    },
+    {
+      "title": "Classic Warm LCARS · Spectrum flow",
+      "palette": "classic",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/classic-spectrumflow.png"
+    },
+    {
+      "title": "TNG Pastel LCARS · Standard LCARS stack",
+      "palette": "tng",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/tng-standard.png"
+    },
+    {
+      "title": "TNG Pastel LCARS · Stepped color rhythm",
+      "palette": "tng",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/tng-stepped.png"
+    },
+    {
+      "title": "TNG Pastel LCARS · Tall lower panels",
+      "palette": "tng",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/tng-talllower.png"
+    },
+    {
+      "title": "TNG Pastel LCARS · Short accent blocks",
+      "palette": "tng",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/tng-staccato.png"
+    },
+    {
+      "title": "TNG Pastel LCARS · Balanced terminal blocks",
       "palette": "tng",
       "rhythm": "balanced",
       "file": "gallery-assets/wallpapers/tng-balanced.png"
+    },
+    {
+      "title": "TNG Pastel LCARS · Spectrum flow",
+      "palette": "tng",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/tng-spectrumflow.png"
+    },
+    {
+      "title": "DS9 Muted Station · Standard LCARS stack",
+      "palette": "ds9",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/ds9-standard.png"
+    },
+    {
+      "title": "DS9 Muted Station · Stepped color rhythm",
+      "palette": "ds9",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/ds9-stepped.png"
+    },
+    {
+      "title": "DS9 Muted Station · Tall lower panels",
+      "palette": "ds9",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/ds9-talllower.png"
+    },
+    {
+      "title": "DS9 Muted Station · Short accent blocks",
+      "palette": "ds9",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/ds9-staccato.png"
+    },
+    {
+      "title": "DS9 Muted Station · Balanced terminal blocks",
+      "palette": "ds9",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/ds9-balanced.png"
+    },
+    {
+      "title": "DS9 Muted Station · Spectrum flow",
+      "palette": "ds9",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/ds9-spectrumflow.png"
+    },
+    {
+      "title": "Voyager Soft · Standard LCARS stack",
+      "palette": "voyager",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/voyager-standard.png"
+    },
+    {
+      "title": "Voyager Soft · Stepped color rhythm",
+      "palette": "voyager",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/voyager-stepped.png"
     },
     {
       "title": "Voyager Soft · Tall lower panels",
@@ -20,10 +128,190 @@
       "file": "gallery-assets/wallpapers/voyager-talllower.png"
     },
     {
+      "title": "Voyager Soft · Short accent blocks",
+      "palette": "voyager",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/voyager-staccato.png"
+    },
+    {
+      "title": "Voyager Soft · Balanced terminal blocks",
+      "palette": "voyager",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/voyager-balanced.png"
+    },
+    {
+      "title": "Voyager Soft · Spectrum flow",
+      "palette": "voyager",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/voyager-spectrumflow.png"
+    },
+    {
+      "title": "Command Gold · Standard LCARS stack",
+      "palette": "command",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/command-standard.png"
+    },
+    {
+      "title": "Command Gold · Stepped color rhythm",
+      "palette": "command",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/command-stepped.png"
+    },
+    {
+      "title": "Command Gold · Tall lower panels",
+      "palette": "command",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/command-talllower.png"
+    },
+    {
+      "title": "Command Gold · Short accent blocks",
+      "palette": "command",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/command-staccato.png"
+    },
+    {
+      "title": "Command Gold · Balanced terminal blocks",
+      "palette": "command",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/command-balanced.png"
+    },
+    {
+      "title": "Command Gold · Spectrum flow",
+      "palette": "command",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/command-spectrumflow.png"
+    },
+    {
       "title": "Red Alert · Standard LCARS stack",
       "palette": "red",
       "rhythm": "standard",
       "file": "gallery-assets/wallpapers/red-standard.png"
+    },
+    {
+      "title": "Red Alert · Stepped color rhythm",
+      "palette": "red",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/red-stepped.png"
+    },
+    {
+      "title": "Red Alert · Tall lower panels",
+      "palette": "red",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/red-talllower.png"
+    },
+    {
+      "title": "Red Alert · Short accent blocks",
+      "palette": "red",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/red-staccato.png"
+    },
+    {
+      "title": "Red Alert · Balanced terminal blocks",
+      "palette": "red",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/red-balanced.png"
+    },
+    {
+      "title": "Red Alert · Spectrum flow",
+      "palette": "red",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/red-spectrumflow.png"
+    },
+    {
+      "title": "Security Red · Standard LCARS stack",
+      "palette": "security",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/security-standard.png"
+    },
+    {
+      "title": "Security Red · Stepped color rhythm",
+      "palette": "security",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/security-stepped.png"
+    },
+    {
+      "title": "Security Red · Tall lower panels",
+      "palette": "security",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/security-talllower.png"
+    },
+    {
+      "title": "Security Red · Short accent blocks",
+      "palette": "security",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/security-staccato.png"
+    },
+    {
+      "title": "Security Red · Balanced terminal blocks",
+      "palette": "security",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/security-balanced.png"
+    },
+    {
+      "title": "Security Red · Spectrum flow",
+      "palette": "security",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/security-spectrumflow.png"
+    },
+    {
+      "title": "Science Blue/Purple · Standard LCARS stack",
+      "palette": "science",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/science-standard.png"
+    },
+    {
+      "title": "Science Blue/Purple · Stepped color rhythm",
+      "palette": "science",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/science-stepped.png"
+    },
+    {
+      "title": "Science Blue/Purple · Tall lower panels",
+      "palette": "science",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/science-talllower.png"
+    },
+    {
+      "title": "Science Blue/Purple · Short accent blocks",
+      "palette": "science",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/science-staccato.png"
+    },
+    {
+      "title": "Science Blue/Purple · Balanced terminal blocks",
+      "palette": "science",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/science-balanced.png"
+    },
+    {
+      "title": "Science Blue/Purple · Spectrum flow",
+      "palette": "science",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/science-spectrumflow.png"
+    },
+    {
+      "title": "Medical Teal · Standard LCARS stack",
+      "palette": "medical",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/medical-standard.png"
+    },
+    {
+      "title": "Medical Teal · Stepped color rhythm",
+      "palette": "medical",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/medical-stepped.png"
+    },
+    {
+      "title": "Medical Teal · Tall lower panels",
+      "palette": "medical",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/medical-talllower.png"
+    },
+    {
+      "title": "Medical Teal · Short accent blocks",
+      "palette": "medical",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/medical-staccato.png"
     },
     {
       "title": "Medical Teal · Balanced terminal blocks",
@@ -32,28 +320,250 @@
       "file": "gallery-assets/wallpapers/medical-balanced.png"
     },
     {
+      "title": "Medical Teal · Spectrum flow",
+      "palette": "medical",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/medical-spectrumflow.png"
+    },
+    {
+      "title": "Operations Blue · Standard LCARS stack",
+      "palette": "opsBlue",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/opsblue-standard.png"
+    },
+    {
+      "title": "Operations Blue · Stepped color rhythm",
+      "palette": "opsBlue",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/opsblue-stepped.png"
+    },
+    {
+      "title": "Operations Blue · Tall lower panels",
+      "palette": "opsBlue",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/opsblue-talllower.png"
+    },
+    {
       "title": "Operations Blue · Short accent blocks",
       "palette": "opsBlue",
       "rhythm": "staccato",
       "file": "gallery-assets/wallpapers/opsblue-staccato.png"
     },
     {
-      "title": "Spectrum Rainbow · Spectrum flow",
-      "palette": "spectrum",
-      "rhythm": "spectrumFlow",
-      "file": "gallery-assets/wallpapers/spectrum-spectrumflow.png"
+      "title": "Operations Blue · Balanced terminal blocks",
+      "palette": "opsBlue",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/opsblue-balanced.png"
     },
     {
-      "title": "True Rainbow · Spectrum flow",
-      "palette": "trueRainbow",
+      "title": "Operations Blue · Spectrum flow",
+      "palette": "opsBlue",
       "rhythm": "spectrumFlow",
-      "file": "gallery-assets/wallpapers/truerainbow-spectrumflow.png"
+      "file": "gallery-assets/wallpapers/opsblue-spectrumflow.png"
     },
     {
-      "title": "Pastel Rainbow · Spectrum flow",
-      "palette": "pastelRainbow",
+      "title": "Lower Decks Bright · Standard LCARS stack",
+      "palette": "lowerDecks",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/lowerdecks-standard.png"
+    },
+    {
+      "title": "Lower Decks Bright · Stepped color rhythm",
+      "palette": "lowerDecks",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/lowerdecks-stepped.png"
+    },
+    {
+      "title": "Lower Decks Bright · Tall lower panels",
+      "palette": "lowerDecks",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/lowerdecks-talllower.png"
+    },
+    {
+      "title": "Lower Decks Bright · Short accent blocks",
+      "palette": "lowerDecks",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/lowerdecks-staccato.png"
+    },
+    {
+      "title": "Lower Decks Bright · Balanced terminal blocks",
+      "palette": "lowerDecks",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/lowerdecks-balanced.png"
+    },
+    {
+      "title": "Lower Decks Bright · Spectrum flow",
+      "palette": "lowerDecks",
       "rhythm": "spectrumFlow",
-      "file": "gallery-assets/wallpapers/pastelrainbow-spectrumflow.png"
+      "file": "gallery-assets/wallpapers/lowerdecks-spectrumflow.png"
+    },
+    {
+      "title": "Latinum Gold · Standard LCARS stack",
+      "palette": "latinum",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/latinum-standard.png"
+    },
+    {
+      "title": "Latinum Gold · Stepped color rhythm",
+      "palette": "latinum",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/latinum-stepped.png"
+    },
+    {
+      "title": "Latinum Gold · Tall lower panels",
+      "palette": "latinum",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/latinum-talllower.png"
+    },
+    {
+      "title": "Latinum Gold · Short accent blocks",
+      "palette": "latinum",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/latinum-staccato.png"
+    },
+    {
+      "title": "Latinum Gold · Balanced terminal blocks",
+      "palette": "latinum",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/latinum-balanced.png"
+    },
+    {
+      "title": "Latinum Gold · Spectrum flow",
+      "palette": "latinum",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/latinum-spectrumflow.png"
+    },
+    {
+      "title": "Romulan Green · Standard LCARS stack",
+      "palette": "romulan",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/romulan-standard.png"
+    },
+    {
+      "title": "Romulan Green · Stepped color rhythm",
+      "palette": "romulan",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/romulan-stepped.png"
+    },
+    {
+      "title": "Romulan Green · Tall lower panels",
+      "palette": "romulan",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/romulan-talllower.png"
+    },
+    {
+      "title": "Romulan Green · Short accent blocks",
+      "palette": "romulan",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/romulan-staccato.png"
+    },
+    {
+      "title": "Romulan Green · Balanced terminal blocks",
+      "palette": "romulan",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/romulan-balanced.png"
+    },
+    {
+      "title": "Romulan Green · Spectrum flow",
+      "palette": "romulan",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/romulan-spectrumflow.png"
+    },
+    {
+      "title": "Muted OLED · Standard LCARS stack",
+      "palette": "muted",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/muted-standard.png"
+    },
+    {
+      "title": "Muted OLED · Stepped color rhythm",
+      "palette": "muted",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/muted-stepped.png"
+    },
+    {
+      "title": "Muted OLED · Tall lower panels",
+      "palette": "muted",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/muted-talllower.png"
+    },
+    {
+      "title": "Muted OLED · Short accent blocks",
+      "palette": "muted",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/muted-staccato.png"
+    },
+    {
+      "title": "Muted OLED · Balanced terminal blocks",
+      "palette": "muted",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/muted-balanced.png"
+    },
+    {
+      "title": "Muted OLED · Spectrum flow",
+      "palette": "muted",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/muted-spectrumflow.png"
+    },
+    {
+      "title": "Grayscale LCARS · Standard LCARS stack",
+      "palette": "grayscale",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/grayscale-standard.png"
+    },
+    {
+      "title": "Grayscale LCARS · Stepped color rhythm",
+      "palette": "grayscale",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/grayscale-stepped.png"
+    },
+    {
+      "title": "Grayscale LCARS · Tall lower panels",
+      "palette": "grayscale",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/grayscale-talllower.png"
+    },
+    {
+      "title": "Grayscale LCARS · Short accent blocks",
+      "palette": "grayscale",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/grayscale-staccato.png"
+    },
+    {
+      "title": "Grayscale LCARS · Balanced terminal blocks",
+      "palette": "grayscale",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/grayscale-balanced.png"
+    },
+    {
+      "title": "Grayscale LCARS · Spectrum flow",
+      "palette": "grayscale",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/grayscale-spectrumflow.png"
+    },
+    {
+      "title": "E-Ink Soft · Standard LCARS stack",
+      "palette": "eink",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/eink-standard.png"
+    },
+    {
+      "title": "E-Ink Soft · Stepped color rhythm",
+      "palette": "eink",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/eink-stepped.png"
+    },
+    {
+      "title": "E-Ink Soft · Tall lower panels",
+      "palette": "eink",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/eink-talllower.png"
+    },
+    {
+      "title": "E-Ink Soft · Short accent blocks",
+      "palette": "eink",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/eink-staccato.png"
     },
     {
       "title": "E-Ink Soft · Balanced terminal blocks",
@@ -62,48 +572,696 @@
       "file": "gallery-assets/wallpapers/eink-balanced.png"
     },
     {
+      "title": "E-Ink Soft · Spectrum flow",
+      "palette": "eink",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/eink-spectrumflow.png"
+    },
+    {
+      "title": "Terminal Green · Standard LCARS stack",
+      "palette": "terminal",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/terminal-standard.png"
+    },
+    {
+      "title": "Terminal Green · Stepped color rhythm",
+      "palette": "terminal",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/terminal-stepped.png"
+    },
+    {
+      "title": "Terminal Green · Tall lower panels",
+      "palette": "terminal",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/terminal-talllower.png"
+    },
+    {
       "title": "Terminal Green · Short accent blocks",
       "palette": "terminal",
       "rhythm": "staccato",
       "file": "gallery-assets/wallpapers/terminal-staccato.png"
+    },
+    {
+      "title": "Terminal Green · Balanced terminal blocks",
+      "palette": "terminal",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/terminal-balanced.png"
+    },
+    {
+      "title": "Terminal Green · Spectrum flow",
+      "palette": "terminal",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/terminal-spectrumflow.png"
+    },
+    {
+      "title": "Spectrum Rainbow LCARS · Standard LCARS stack",
+      "palette": "spectrum",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/spectrum-standard.png"
+    },
+    {
+      "title": "Spectrum Rainbow LCARS · Stepped color rhythm",
+      "palette": "spectrum",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/spectrum-stepped.png"
+    },
+    {
+      "title": "Spectrum Rainbow LCARS · Tall lower panels",
+      "palette": "spectrum",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/spectrum-talllower.png"
+    },
+    {
+      "title": "Spectrum Rainbow LCARS · Short accent blocks",
+      "palette": "spectrum",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/spectrum-staccato.png"
+    },
+    {
+      "title": "Spectrum Rainbow LCARS · Balanced terminal blocks",
+      "palette": "spectrum",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/spectrum-balanced.png"
+    },
+    {
+      "title": "Spectrum Rainbow LCARS · Spectrum flow",
+      "palette": "spectrum",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/spectrum-spectrumflow.png"
+    },
+    {
+      "title": "True Rainbow LCARS · Standard LCARS stack",
+      "palette": "trueRainbow",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/truerainbow-standard.png"
+    },
+    {
+      "title": "True Rainbow LCARS · Stepped color rhythm",
+      "palette": "trueRainbow",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/truerainbow-stepped.png"
+    },
+    {
+      "title": "True Rainbow LCARS · Tall lower panels",
+      "palette": "trueRainbow",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/truerainbow-talllower.png"
+    },
+    {
+      "title": "True Rainbow LCARS · Short accent blocks",
+      "palette": "trueRainbow",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/truerainbow-staccato.png"
+    },
+    {
+      "title": "True Rainbow LCARS · Balanced terminal blocks",
+      "palette": "trueRainbow",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/truerainbow-balanced.png"
+    },
+    {
+      "title": "True Rainbow LCARS · Spectrum flow",
+      "palette": "trueRainbow",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/truerainbow-spectrumflow.png"
+    },
+    {
+      "title": "Pastel Rainbow LCARS · Standard LCARS stack",
+      "palette": "pastelRainbow",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/pastelrainbow-standard.png"
+    },
+    {
+      "title": "Pastel Rainbow LCARS · Stepped color rhythm",
+      "palette": "pastelRainbow",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/pastelrainbow-stepped.png"
+    },
+    {
+      "title": "Pastel Rainbow LCARS · Tall lower panels",
+      "palette": "pastelRainbow",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/pastelrainbow-talllower.png"
+    },
+    {
+      "title": "Pastel Rainbow LCARS · Short accent blocks",
+      "palette": "pastelRainbow",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/pastelrainbow-staccato.png"
+    },
+    {
+      "title": "Pastel Rainbow LCARS · Balanced terminal blocks",
+      "palette": "pastelRainbow",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/pastelrainbow-balanced.png"
+    },
+    {
+      "title": "Pastel Rainbow LCARS · Spectrum flow",
+      "palette": "pastelRainbow",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/pastelrainbow-spectrumflow.png"
+    },
+    {
+      "title": "High Contrast · Standard LCARS stack",
+      "palette": "highContrast",
+      "rhythm": "standard",
+      "file": "gallery-assets/wallpapers/highcontrast-standard.png"
+    },
+    {
+      "title": "High Contrast · Stepped color rhythm",
+      "palette": "highContrast",
+      "rhythm": "stepped",
+      "file": "gallery-assets/wallpapers/highcontrast-stepped.png"
+    },
+    {
+      "title": "High Contrast · Tall lower panels",
+      "palette": "highContrast",
+      "rhythm": "tallLower",
+      "file": "gallery-assets/wallpapers/highcontrast-talllower.png"
+    },
+    {
+      "title": "High Contrast · Short accent blocks",
+      "palette": "highContrast",
+      "rhythm": "staccato",
+      "file": "gallery-assets/wallpapers/highcontrast-staccato.png"
+    },
+    {
+      "title": "High Contrast · Balanced terminal blocks",
+      "palette": "highContrast",
+      "rhythm": "balanced",
+      "file": "gallery-assets/wallpapers/highcontrast-balanced.png"
+    },
+    {
+      "title": "High Contrast · Spectrum flow",
+      "palette": "highContrast",
+      "rhythm": "spectrumFlow",
+      "file": "gallery-assets/wallpapers/highcontrast-spectrumflow.png"
     }
   ],
   "icons": [
     {
-      "title": "Classic · Theme-matched monochrome",
+      "title": "Classic Warm LCARS · Theme-matched monochrome",
       "palette": "classic",
       "mode": "themeMono",
       "file": "gallery-assets/icons/classic-thememono.png"
     },
     {
-      "title": "Classic · Theme palette by category",
+      "title": "Classic Warm LCARS · Theme palette by category",
       "palette": "classic",
       "mode": "categoryPalette",
       "file": "gallery-assets/icons/classic-categorypalette.png"
     },
     {
-      "title": "Spectrum · Rainbow category mode",
-      "palette": "spectrum",
+      "title": "Classic Warm LCARS · Rainbow category mode",
+      "palette": "classic",
       "mode": "rainbow",
-      "file": "gallery-assets/icons/spectrum-rainbow.png"
+      "file": "gallery-assets/icons/classic-rainbow.png"
     },
     {
-      "title": "True Rainbow · Rainbow sequence mode",
-      "palette": "trueRainbow",
+      "title": "Classic Warm LCARS · Rainbow sequence mode",
+      "palette": "classic",
       "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/truerainbow-sequentialrainbow.png"
+      "file": "gallery-assets/icons/classic-sequentialrainbow.png"
     },
     {
-      "title": "Pastel Rainbow · Rainbow sequence mode",
-      "palette": "pastelRainbow",
+      "title": "TNG Pastel LCARS · Theme-matched monochrome",
+      "palette": "tng",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/tng-thememono.png"
+    },
+    {
+      "title": "TNG Pastel LCARS · Theme palette by category",
+      "palette": "tng",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/tng-categorypalette.png"
+    },
+    {
+      "title": "TNG Pastel LCARS · Rainbow category mode",
+      "palette": "tng",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/tng-rainbow.png"
+    },
+    {
+      "title": "TNG Pastel LCARS · Rainbow sequence mode",
+      "palette": "tng",
       "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/pastelrainbow-sequentialrainbow.png"
+      "file": "gallery-assets/icons/tng-sequentialrainbow.png"
+    },
+    {
+      "title": "DS9 Muted Station · Theme-matched monochrome",
+      "palette": "ds9",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/ds9-thememono.png"
+    },
+    {
+      "title": "DS9 Muted Station · Theme palette by category",
+      "palette": "ds9",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/ds9-categorypalette.png"
+    },
+    {
+      "title": "DS9 Muted Station · Rainbow category mode",
+      "palette": "ds9",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/ds9-rainbow.png"
+    },
+    {
+      "title": "DS9 Muted Station · Rainbow sequence mode",
+      "palette": "ds9",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/ds9-sequentialrainbow.png"
+    },
+    {
+      "title": "Voyager Soft · Theme-matched monochrome",
+      "palette": "voyager",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/voyager-thememono.png"
+    },
+    {
+      "title": "Voyager Soft · Theme palette by category",
+      "palette": "voyager",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/voyager-categorypalette.png"
+    },
+    {
+      "title": "Voyager Soft · Rainbow category mode",
+      "palette": "voyager",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/voyager-rainbow.png"
+    },
+    {
+      "title": "Voyager Soft · Rainbow sequence mode",
+      "palette": "voyager",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/voyager-sequentialrainbow.png"
+    },
+    {
+      "title": "Command Gold · Theme-matched monochrome",
+      "palette": "command",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/command-thememono.png"
+    },
+    {
+      "title": "Command Gold · Theme palette by category",
+      "palette": "command",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/command-categorypalette.png"
+    },
+    {
+      "title": "Command Gold · Rainbow category mode",
+      "palette": "command",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/command-rainbow.png"
+    },
+    {
+      "title": "Command Gold · Rainbow sequence mode",
+      "palette": "command",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/command-sequentialrainbow.png"
+    },
+    {
+      "title": "Red Alert · Theme-matched monochrome",
+      "palette": "red",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/red-thememono.png"
+    },
+    {
+      "title": "Red Alert · Theme palette by category",
+      "palette": "red",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/red-categorypalette.png"
+    },
+    {
+      "title": "Red Alert · Rainbow category mode",
+      "palette": "red",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/red-rainbow.png"
+    },
+    {
+      "title": "Red Alert · Rainbow sequence mode",
+      "palette": "red",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/red-sequentialrainbow.png"
+    },
+    {
+      "title": "Security Red · Theme-matched monochrome",
+      "palette": "security",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/security-thememono.png"
+    },
+    {
+      "title": "Security Red · Theme palette by category",
+      "palette": "security",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/security-categorypalette.png"
+    },
+    {
+      "title": "Security Red · Rainbow category mode",
+      "palette": "security",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/security-rainbow.png"
+    },
+    {
+      "title": "Security Red · Rainbow sequence mode",
+      "palette": "security",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/security-sequentialrainbow.png"
+    },
+    {
+      "title": "Science Blue/Purple · Theme-matched monochrome",
+      "palette": "science",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/science-thememono.png"
+    },
+    {
+      "title": "Science Blue/Purple · Theme palette by category",
+      "palette": "science",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/science-categorypalette.png"
+    },
+    {
+      "title": "Science Blue/Purple · Rainbow category mode",
+      "palette": "science",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/science-rainbow.png"
+    },
+    {
+      "title": "Science Blue/Purple · Rainbow sequence mode",
+      "palette": "science",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/science-sequentialrainbow.png"
+    },
+    {
+      "title": "Medical Teal · Theme-matched monochrome",
+      "palette": "medical",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/medical-thememono.png"
+    },
+    {
+      "title": "Medical Teal · Theme palette by category",
+      "palette": "medical",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/medical-categorypalette.png"
+    },
+    {
+      "title": "Medical Teal · Rainbow category mode",
+      "palette": "medical",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/medical-rainbow.png"
+    },
+    {
+      "title": "Medical Teal · Rainbow sequence mode",
+      "palette": "medical",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/medical-sequentialrainbow.png"
+    },
+    {
+      "title": "Operations Blue · Theme-matched monochrome",
+      "palette": "opsBlue",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/opsblue-thememono.png"
+    },
+    {
+      "title": "Operations Blue · Theme palette by category",
+      "palette": "opsBlue",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/opsblue-categorypalette.png"
+    },
+    {
+      "title": "Operations Blue · Rainbow category mode",
+      "palette": "opsBlue",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/opsblue-rainbow.png"
+    },
+    {
+      "title": "Operations Blue · Rainbow sequence mode",
+      "palette": "opsBlue",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/opsblue-sequentialrainbow.png"
+    },
+    {
+      "title": "Lower Decks Bright · Theme-matched monochrome",
+      "palette": "lowerDecks",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/lowerdecks-thememono.png"
+    },
+    {
+      "title": "Lower Decks Bright · Theme palette by category",
+      "palette": "lowerDecks",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/lowerdecks-categorypalette.png"
+    },
+    {
+      "title": "Lower Decks Bright · Rainbow category mode",
+      "palette": "lowerDecks",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/lowerdecks-rainbow.png"
+    },
+    {
+      "title": "Lower Decks Bright · Rainbow sequence mode",
+      "palette": "lowerDecks",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/lowerdecks-sequentialrainbow.png"
+    },
+    {
+      "title": "Latinum Gold · Theme-matched monochrome",
+      "palette": "latinum",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/latinum-thememono.png"
+    },
+    {
+      "title": "Latinum Gold · Theme palette by category",
+      "palette": "latinum",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/latinum-categorypalette.png"
+    },
+    {
+      "title": "Latinum Gold · Rainbow category mode",
+      "palette": "latinum",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/latinum-rainbow.png"
+    },
+    {
+      "title": "Latinum Gold · Rainbow sequence mode",
+      "palette": "latinum",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/latinum-sequentialrainbow.png"
+    },
+    {
+      "title": "Romulan Green · Theme-matched monochrome",
+      "palette": "romulan",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/romulan-thememono.png"
+    },
+    {
+      "title": "Romulan Green · Theme palette by category",
+      "palette": "romulan",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/romulan-categorypalette.png"
+    },
+    {
+      "title": "Romulan Green · Rainbow category mode",
+      "palette": "romulan",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/romulan-rainbow.png"
+    },
+    {
+      "title": "Romulan Green · Rainbow sequence mode",
+      "palette": "romulan",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/romulan-sequentialrainbow.png"
+    },
+    {
+      "title": "Muted OLED · Theme-matched monochrome",
+      "palette": "muted",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/muted-thememono.png"
+    },
+    {
+      "title": "Muted OLED · Theme palette by category",
+      "palette": "muted",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/muted-categorypalette.png"
+    },
+    {
+      "title": "Muted OLED · Rainbow category mode",
+      "palette": "muted",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/muted-rainbow.png"
+    },
+    {
+      "title": "Muted OLED · Rainbow sequence mode",
+      "palette": "muted",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/muted-sequentialrainbow.png"
+    },
+    {
+      "title": "Grayscale LCARS · Theme-matched monochrome",
+      "palette": "grayscale",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/grayscale-thememono.png"
+    },
+    {
+      "title": "Grayscale LCARS · Theme palette by category",
+      "palette": "grayscale",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/grayscale-categorypalette.png"
+    },
+    {
+      "title": "Grayscale LCARS · Rainbow category mode",
+      "palette": "grayscale",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/grayscale-rainbow.png"
+    },
+    {
+      "title": "Grayscale LCARS · Rainbow sequence mode",
+      "palette": "grayscale",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/grayscale-sequentialrainbow.png"
+    },
+    {
+      "title": "E-Ink Soft · Theme-matched monochrome",
+      "palette": "eink",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/eink-thememono.png"
+    },
+    {
+      "title": "E-Ink Soft · Theme palette by category",
+      "palette": "eink",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/eink-categorypalette.png"
+    },
+    {
+      "title": "E-Ink Soft · Rainbow category mode",
+      "palette": "eink",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/eink-rainbow.png"
+    },
+    {
+      "title": "E-Ink Soft · Rainbow sequence mode",
+      "palette": "eink",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/eink-sequentialrainbow.png"
     },
     {
       "title": "Terminal Green · Theme-matched monochrome",
       "palette": "terminal",
       "mode": "themeMono",
       "file": "gallery-assets/icons/terminal-thememono.png"
+    },
+    {
+      "title": "Terminal Green · Theme palette by category",
+      "palette": "terminal",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/terminal-categorypalette.png"
+    },
+    {
+      "title": "Terminal Green · Rainbow category mode",
+      "palette": "terminal",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/terminal-rainbow.png"
+    },
+    {
+      "title": "Terminal Green · Rainbow sequence mode",
+      "palette": "terminal",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/terminal-sequentialrainbow.png"
+    },
+    {
+      "title": "Spectrum Rainbow LCARS · Theme-matched monochrome",
+      "palette": "spectrum",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/spectrum-thememono.png"
+    },
+    {
+      "title": "Spectrum Rainbow LCARS · Theme palette by category",
+      "palette": "spectrum",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/spectrum-categorypalette.png"
+    },
+    {
+      "title": "Spectrum Rainbow LCARS · Rainbow category mode",
+      "palette": "spectrum",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/spectrum-rainbow.png"
+    },
+    {
+      "title": "Spectrum Rainbow LCARS · Rainbow sequence mode",
+      "palette": "spectrum",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/spectrum-sequentialrainbow.png"
+    },
+    {
+      "title": "True Rainbow LCARS · Theme-matched monochrome",
+      "palette": "trueRainbow",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/truerainbow-thememono.png"
+    },
+    {
+      "title": "True Rainbow LCARS · Theme palette by category",
+      "palette": "trueRainbow",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/truerainbow-categorypalette.png"
+    },
+    {
+      "title": "True Rainbow LCARS · Rainbow category mode",
+      "palette": "trueRainbow",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/truerainbow-rainbow.png"
+    },
+    {
+      "title": "True Rainbow LCARS · Rainbow sequence mode",
+      "palette": "trueRainbow",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/truerainbow-sequentialrainbow.png"
+    },
+    {
+      "title": "Pastel Rainbow LCARS · Theme-matched monochrome",
+      "palette": "pastelRainbow",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/pastelrainbow-thememono.png"
+    },
+    {
+      "title": "Pastel Rainbow LCARS · Theme palette by category",
+      "palette": "pastelRainbow",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/pastelrainbow-categorypalette.png"
+    },
+    {
+      "title": "Pastel Rainbow LCARS · Rainbow category mode",
+      "palette": "pastelRainbow",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/pastelrainbow-rainbow.png"
+    },
+    {
+      "title": "Pastel Rainbow LCARS · Rainbow sequence mode",
+      "palette": "pastelRainbow",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/pastelrainbow-sequentialrainbow.png"
+    },
+    {
+      "title": "High Contrast · Theme-matched monochrome",
+      "palette": "highContrast",
+      "mode": "themeMono",
+      "file": "gallery-assets/icons/highcontrast-thememono.png"
+    },
+    {
+      "title": "High Contrast · Theme palette by category",
+      "palette": "highContrast",
+      "mode": "categoryPalette",
+      "file": "gallery-assets/icons/highcontrast-categorypalette.png"
+    },
+    {
+      "title": "High Contrast · Rainbow category mode",
+      "palette": "highContrast",
+      "mode": "rainbow",
+      "file": "gallery-assets/icons/highcontrast-rainbow.png"
+    },
+    {
+      "title": "High Contrast · Rainbow sequence mode",
+      "palette": "highContrast",
+      "mode": "sequentialRainbow",
+      "file": "gallery-assets/icons/highcontrast-sequentialrainbow.png"
     }
   ],
   "fonts": [
@@ -132,10 +1290,106 @@
       "file": "gallery-assets/fonts/context-ultra-condensed.png"
     },
     {
+      "title": "Context Ultra Condensed Bold",
+      "font": "Context Ultra Condensed Bold",
+      "note": "Stronger narrow LCARS labels",
+      "file": "gallery-assets/fonts/context-ultra-condensed-bold.png"
+    },
+    {
       "title": "Jefferies Extended",
       "font": "Jefferies Extended",
-      "note": "Display/title style",
+      "note": "Elongated starship-like display text",
       "file": "gallery-assets/fonts/jefferies-extended.png"
+    },
+    {
+      "title": "TOS Title",
+      "font": "TOS Title",
+      "note": "Original-series retro title feel",
+      "file": "gallery-assets/fonts/tos-title.png"
+    },
+    {
+      "title": "Trek Movie 1",
+      "font": "Trek Movie 1",
+      "note": "Theatrical display styling",
+      "file": "gallery-assets/fonts/trek-movie-1.png"
+    },
+    {
+      "title": "Trek Movie 2",
+      "font": "Trek Movie 2",
+      "note": "Alternate theatrical display styling",
+      "file": "gallery-assets/fonts/trek-movie-2.png"
+    },
+    {
+      "title": "Starfleet",
+      "font": "Starfleet",
+      "note": "Starship-flavored accent text",
+      "file": "gallery-assets/fonts/starfleet.png"
+    },
+    {
+      "title": "Classic Ship Hull",
+      "font": "Classic Ship Hull",
+      "note": "Hull marking style accent text",
+      "file": "gallery-assets/fonts/classic-ship-hull.png"
+    },
+    {
+      "title": "Klingon",
+      "font": "Klingon",
+      "note": "Alien-script decorative accent",
+      "file": "gallery-assets/fonts/klingon.png"
+    },
+    {
+      "title": "Vulcan",
+      "font": "Vulcan",
+      "note": "Alien-script decorative accent",
+      "file": "gallery-assets/fonts/vulcan.png"
+    },
+    {
+      "title": "Romulan",
+      "font": "Romulan",
+      "note": "Alien-script decorative accent",
+      "file": "gallery-assets/fonts/romulan.png"
+    },
+    {
+      "title": "Bajoran",
+      "font": "Bajoran",
+      "note": "Alien-script decorative accent",
+      "file": "gallery-assets/fonts/bajoran.png"
+    },
+    {
+      "title": "Cardassian",
+      "font": "Cardassian",
+      "note": "Alien-script decorative accent",
+      "file": "gallery-assets/fonts/cardassian.png"
+    },
+    {
+      "title": "Dominion",
+      "font": "Dominion",
+      "note": "Alien-script decorative accent",
+      "file": "gallery-assets/fonts/dominion.png"
+    },
+    {
+      "title": "Ferengi",
+      "font": "Ferengi",
+      "note": "Alien-script decorative accent",
+      "file": "gallery-assets/fonts/ferengi.png"
+    },
+    {
+      "title": "Tholian",
+      "font": "Tholian",
+      "note": "Alien-script decorative accent",
+      "file": "gallery-assets/fonts/tholian.png"
+    },
+    {
+      "title": "Trill",
+      "font": "Trill",
+      "note": "Alien-script decorative accent",
+      "file": "gallery-assets/fonts/trill.png"
+    },
+    {
+      "title": "Trekbats",
+      "font": "Trekbats",
+      "note": "Symbol/decorative accent font",
+      "file": "gallery-assets/fonts/trekbats.png"
     }
   ]
 }

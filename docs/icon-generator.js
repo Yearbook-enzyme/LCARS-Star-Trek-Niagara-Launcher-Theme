@@ -5,15 +5,21 @@ const palettes = {
   voyager: ["#f1c48e", "#d89b52", "#c96b38", "#8e5bb8", "#b9a0dd"],
   command: ["#ffd89a", "#f0a43a", "#d65a28", "#ffc85a", "#ffe2b3"],
   red: ["#ffc0b8", "#e45a4e", "#d62b18", "#aa1d14", "#f08a28"],
+  security: ["#ffc7c7", "#d96464", "#b32626", "#7c1d1d", "#f08a28"],
   science: ["#c9b8ff", "#8f72d8", "#4d47a9", "#73b7e8", "#d8d0ff"],
   medical: ["#b6ffe4", "#46c2a6", "#167f7a", "#f1c96a", "#e8d7a0"],
+  opsBlue: ["#99c9ff", "#4d8bd8", "#2f5fa3", "#9f7dd6", "#d0c3ff"],
+  lowerDecks: ["#ffd6a5", "#ff9f1c", "#e71d36", "#2ec4b6", "#cbf3f0"],
+  latinum: ["#f7d58c", "#c99732", "#8a5c1b", "#f1aa30", "#ffe0a3"],
   romulan: ["#c8f7c5", "#65b96f", "#2e7d32", "#8fbf66", "#d4e8c3"],
   muted: ["#c98769", "#a9482a", "#8f241c", "#d09242", "#d7b083"],
+  grayscale: ["#e8e8e8", "#b7b7b7", "#777777", "#9a9a9a", "#d8d8d8"],
   eink: ["#f0ead8", "#c8bfa8", "#817969", "#a69a80", "#e2d7bd"],
   terminal: ["#b7ffb7", "#5edc5e", "#1e9b1e", "#77cc77", "#d4ffd4"],
   spectrum: ["#ff2d55", "#ff9500", "#ffd60a", "#32d74b", "#0a84ff", "#bf5af2"],
   trueRainbow: ["#ff1744", "#ff9100", "#ffea00", "#00e676", "#00b0ff", "#7c4dff"],
-  pastelRainbow: ["#ff9aa2", "#ffb347", "#fff275", "#77dd77", "#89cff0", "#b39ddb"]
+  pastelRainbow: ["#ff9aa2", "#ffb347", "#fff275", "#77dd77", "#89cff0", "#b39ddb"],
+  highContrast: ["#ffffff", "#ff9f1c", "#ff2e2e", "#ffd23f", "#f7f7f7"]
 };
 
 const categoryLabels = {

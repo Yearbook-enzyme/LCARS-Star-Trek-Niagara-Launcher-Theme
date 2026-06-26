@@ -11,34 +11,107 @@ const docsDir = path.join(repoRoot, "docs");
 const outBase = path.join(docsDir, "gallery-assets");
 
 const wallpaperConfigs = [
-  { palette: "classic", rhythm: "standard", title: "Classic Warm · Standard LCARS stack" },
-  { palette: "tng", rhythm: "balanced", title: "TNG Pastel · Balanced terminal blocks" },
-  { palette: "voyager", rhythm: "tallLower", title: "Voyager Soft · Tall lower panels" },
-  { palette: "red", rhythm: "standard", title: "Red Alert · Standard LCARS stack" },
-  { palette: "medical", rhythm: "balanced", title: "Medical Teal · Balanced terminal blocks" },
-  { palette: "opsBlue", rhythm: "staccato", title: "Operations Blue · Short accent blocks" },
-  { palette: "spectrum", rhythm: "spectrumFlow", title: "Spectrum Rainbow · Spectrum flow" },
-  { palette: "trueRainbow", rhythm: "spectrumFlow", title: "True Rainbow · Spectrum flow" },
-  { palette: "pastelRainbow", rhythm: "spectrumFlow", title: "Pastel Rainbow · Spectrum flow" },
-  { palette: "eink", rhythm: "balanced", title: "E-Ink Soft · Balanced terminal blocks" },
-  { palette: "terminal", rhythm: "staccato", title: "Terminal Green · Short accent blocks" }
+  { palette: "classic", title: "Classic Warm LCARS" },
+  { palette: "tng", title: "TNG Pastel LCARS" },
+  { palette: "ds9", title: "DS9 Muted Station" },
+  { palette: "voyager", title: "Voyager Soft" },
+  { palette: "command", title: "Command Gold" },
+  { palette: "red", title: "Red Alert" },
+  { palette: "security", title: "Security Red" },
+  { palette: "science", title: "Science Blue/Purple" },
+  { palette: "medical", title: "Medical Teal" },
+  { palette: "opsBlue", title: "Operations Blue" },
+  { palette: "lowerDecks", title: "Lower Decks Bright" },
+  { palette: "latinum", title: "Latinum Gold" },
+  { palette: "romulan", title: "Romulan Green" },
+  { palette: "muted", title: "Muted OLED" },
+  { palette: "grayscale", title: "Grayscale LCARS" },
+  { palette: "eink", title: "E-Ink Soft" },
+  { palette: "terminal", title: "Terminal Green" },
+  { palette: "spectrum", title: "Spectrum Rainbow LCARS" },
+  { palette: "trueRainbow", title: "True Rainbow LCARS" },
+  { palette: "pastelRainbow", title: "Pastel Rainbow LCARS" },
+  { palette: "highContrast", title: "High Contrast" }
 ];
 
-const iconConfigs = [
-  { palette: "classic", mode: "themeMono", title: "Classic · Theme-matched monochrome" },
-  { palette: "classic", mode: "categoryPalette", title: "Classic · Theme palette by category" },
-  { palette: "spectrum", mode: "rainbow", title: "Spectrum · Rainbow category mode" },
-  { palette: "trueRainbow", mode: "sequentialRainbow", title: "True Rainbow · Rainbow sequence mode" },
-  { palette: "pastelRainbow", mode: "sequentialRainbow", title: "Pastel Rainbow · Rainbow sequence mode" },
-  { palette: "terminal", mode: "themeMono", title: "Terminal Green · Theme-matched monochrome" }
+const rhythmConfigs = [
+  { rhythm: "standard", title: "Standard LCARS stack" },
+  { rhythm: "stepped", title: "Stepped color rhythm" },
+  { rhythm: "tallLower", title: "Tall lower panels" },
+  { rhythm: "staccato", title: "Short accent blocks" },
+  { rhythm: "balanced", title: "Balanced terminal blocks" },
+  { rhythm: "spectrumFlow", title: "Spectrum flow" }
 ];
+
+const wallpaperMatrix = wallpaperConfigs.flatMap(palette =>
+  rhythmConfigs.map(rhythm => ({
+    palette: palette.palette,
+    rhythm: rhythm.rhythm,
+    title: `${palette.title} · ${rhythm.title}`
+  }))
+);
+
+const iconPaletteConfigs = [
+  { palette: "classic", title: "Classic Warm LCARS" },
+  { palette: "tng", title: "TNG Pastel LCARS" },
+  { palette: "ds9", title: "DS9 Muted Station" },
+  { palette: "voyager", title: "Voyager Soft" },
+  { palette: "command", title: "Command Gold" },
+  { palette: "red", title: "Red Alert" },
+  { palette: "security", title: "Security Red" },
+  { palette: "science", title: "Science Blue/Purple" },
+  { palette: "medical", title: "Medical Teal" },
+  { palette: "opsBlue", title: "Operations Blue" },
+  { palette: "lowerDecks", title: "Lower Decks Bright" },
+  { palette: "latinum", title: "Latinum Gold" },
+  { palette: "romulan", title: "Romulan Green" },
+  { palette: "muted", title: "Muted OLED" },
+  { palette: "grayscale", title: "Grayscale LCARS" },
+  { palette: "eink", title: "E-Ink Soft" },
+  { palette: "terminal", title: "Terminal Green" },
+  { palette: "spectrum", title: "Spectrum Rainbow LCARS" },
+  { palette: "trueRainbow", title: "True Rainbow LCARS" },
+  { palette: "pastelRainbow", title: "Pastel Rainbow LCARS" },
+  { palette: "highContrast", title: "High Contrast" }
+];
+
+const iconModeConfigs = [
+  { mode: "themeMono", title: "Theme-matched monochrome" },
+  { mode: "categoryPalette", title: "Theme palette by category" },
+  { mode: "rainbow", title: "Rainbow category mode" },
+  { mode: "sequentialRainbow", title: "Rainbow sequence mode" }
+];
+
+const iconMatrix = iconPaletteConfigs.flatMap(palette =>
+  iconModeConfigs.map(mode => ({
+    palette: palette.palette,
+    mode: mode.mode,
+    title: `${palette.title} · ${mode.title}`
+  }))
+);
 
 const fontConfigs = [
   { font: "Federation", title: "Federation", note: "Recommended default for everyday launcher labels" },
   { font: "Federation Wide", title: "Federation Wide", note: "Broader display text" },
   { font: "Trek TNG Monitors", title: "Trek TNG Monitors", note: "More console-accurate computer readout feel" },
   { font: "Context Ultra Condensed", title: "Context Ultra Condensed", note: "Narrow LCARS label style" },
-  { font: "Jefferies Extended", title: "Jefferies Extended", note: "Display/title style" }
+  { font: "Context Ultra Condensed Bold", title: "Context Ultra Condensed Bold", note: "Stronger narrow LCARS labels" },
+  { font: "Jefferies Extended", title: "Jefferies Extended", note: "Elongated starship-like display text" },
+  { font: "TOS Title", title: "TOS Title", note: "Original-series retro title feel" },
+  { font: "Trek Movie 1", title: "Trek Movie 1", note: "Theatrical display styling" },
+  { font: "Trek Movie 2", title: "Trek Movie 2", note: "Alternate theatrical display styling" },
+  { font: "Starfleet", title: "Starfleet", note: "Starship-flavored accent text" },
+  { font: "Classic Ship Hull", title: "Classic Ship Hull", note: "Hull marking style accent text" },
+  { font: "Klingon", title: "Klingon", note: "Alien-script decorative accent" },
+  { font: "Vulcan", title: "Vulcan", note: "Alien-script decorative accent" },
+  { font: "Romulan", title: "Romulan", note: "Alien-script decorative accent" },
+  { font: "Bajoran", title: "Bajoran", note: "Alien-script decorative accent" },
+  { font: "Cardassian", title: "Cardassian", note: "Alien-script decorative accent" },
+  { font: "Dominion", title: "Dominion", note: "Alien-script decorative accent" },
+  { font: "Ferengi", title: "Ferengi", note: "Alien-script decorative accent" },
+  { font: "Tholian", title: "Tholian", note: "Alien-script decorative accent" },
+  { font: "Trill", title: "Trill", note: "Alien-script decorative accent" },
+  { font: "Trekbats", title: "Trekbats", note: "Symbol/decorative accent font" }
 ];
 
 const sampleApps = [
@@ -121,7 +194,7 @@ async function exportWallpapers(browser, baseUrl) {
 
   const out = [];
 
-  for (const cfg of wallpaperConfigs) {
+  for (const cfg of wallpaperMatrix) {
     await page.evaluate(({ palette, rhythm }) => {
       document.getElementById("preset").value = "1080x2400";
       document.getElementById("palette").value = palette;
@@ -168,7 +241,7 @@ async function exportIcons(browser, baseUrl) {
 
   const out = [];
 
-  for (const cfg of iconConfigs) {
+  for (const cfg of iconMatrix) {
     await page.evaluate(({ palette, mode }) => {
       document.getElementById("palette").value = palette;
       document.getElementById("colorMode").value = mode;

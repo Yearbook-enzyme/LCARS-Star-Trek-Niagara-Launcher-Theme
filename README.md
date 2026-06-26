@@ -157,6 +157,19 @@ flowchart LR
 
 ---
 
+## Gallery
+
+The live site includes a generated gallery that showcases the breadth of the project:
+
+* Every wallpaper palette across every panel rhythm
+* Icon palette examples across every icon color mode
+* Locally rendered font specimen images for Trek-inspired font directions
+
+Gallery:
+https://yearbook-enzyme.github.io/LCARS-Star-Trek-Niagara-Launcher-Theme/gallery.html
+
+---
+
 ## Quick start
 
 1. Open the live site.
