@@ -190,10 +190,17 @@ function drawWallpaper(targetCanvas) {
   const outerW = REF.outerCurveW * sx * safeThicknessScale;
   const outerH = REF.outerCurveH * sy * safeThicknessScale;
 
+  const edgeInset = clamp(
+    w * (value("edgeInset", 4) / 100),
+    0,
+    w * 0.18
+  );
+  const visibleRight = w - edgeInset;
+
   const spineX = clamp(
     rawSpineX,
     Math.max(w * 0.22, innerW + w * 0.10),
-    Math.max(w * 0.30, w - Math.max(w * 0.08, outerW * 1.2))
+    Math.max(w * 0.30, visibleRight - Math.max(w * 0.08, outerW * 1.2))
   );
 
   let leftGap = REF.leftGap * sx * safeThicknessScale;
@@ -217,8 +224,8 @@ function drawWallpaper(targetCanvas) {
     Math.min(maxRailStart, leftSeg1W + leftGap + leftSeg2W + leftGap)
   );
 
-  const right = w;
-  const rightW = right - spineX;
+  const right = visibleRight;
+  const rightW = Math.max(0, right - spineX);
 
   const topOrangeY = 0;
   const topOrangeH = clamp(REF.topOrangeH * sy * rhythm.top, h * 0.028, h * 0.18);
