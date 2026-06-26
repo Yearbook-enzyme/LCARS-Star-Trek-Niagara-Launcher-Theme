@@ -1,9 +1,11 @@
 {
   "name": "lcars-niagara-launcher-theme",
   "private": true,
-  "type": "module",
   "scripts": {
-    "export:gallery": "node tools/export-gallery.mjs"
+    "export:gallery": "node tools/export-gallery.mjs",
+    "check:syntax": "node --check docs/app.js && node --check docs/icon-generator.js && node --check docs/gallery.js && node --check tools/export-gallery.mjs && node --check tools/check-builder-smoke.mjs",
+    "check:builder": "node tools/check-builder-smoke.mjs",
+    "check": "npm run check:syntax && npm run check:builder"
   },
   "devDependencies": {
     "playwright": "^1.54.2"

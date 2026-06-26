@@ -5,3 +5,7 @@
 # cPanel builder runtime secrets and jobs
 server/cpanel-builder/config.php
 server/cpanel-builder/jobs/
+node_modules/
+.playwright/
+builder/work/
+*.apk
