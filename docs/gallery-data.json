@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-26T18:31:36.844Z",
+  "generatedAt": "2026-06-27T00:07:14.352Z",
   "wallpapers": [
     {
       "title": "Classic Warm LCARS · Standard LCARS stack",
@@ -763,505 +763,253 @@
       "title": "Classic Warm LCARS · Theme-matched monochrome",
       "palette": "classic",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/classic-thememono.png"
+      "file": "gallery-assets/icons/classic-thememono.svg"
     },
     {
       "title": "Classic Warm LCARS · Theme palette by category",
       "palette": "classic",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/classic-categorypalette.png"
-    },
-    {
-      "title": "Classic Warm LCARS · Rainbow category mode",
-      "palette": "classic",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/classic-rainbow.png"
-    },
-    {
-      "title": "Classic Warm LCARS · Rainbow sequence mode",
-      "palette": "classic",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/classic-sequentialrainbow.png"
+      "file": "gallery-assets/icons/classic-categorypalette.svg"
     },
     {
       "title": "TNG Pastel LCARS · Theme-matched monochrome",
       "palette": "tng",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/tng-thememono.png"
+      "file": "gallery-assets/icons/tng-thememono.svg"
     },
     {
       "title": "TNG Pastel LCARS · Theme palette by category",
       "palette": "tng",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/tng-categorypalette.png"
-    },
-    {
-      "title": "TNG Pastel LCARS · Rainbow category mode",
-      "palette": "tng",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/tng-rainbow.png"
-    },
-    {
-      "title": "TNG Pastel LCARS · Rainbow sequence mode",
-      "palette": "tng",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/tng-sequentialrainbow.png"
+      "file": "gallery-assets/icons/tng-categorypalette.svg"
     },
     {
       "title": "DS9 Muted Station · Theme-matched monochrome",
       "palette": "ds9",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/ds9-thememono.png"
+      "file": "gallery-assets/icons/ds9-thememono.svg"
     },
     {
       "title": "DS9 Muted Station · Theme palette by category",
       "palette": "ds9",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/ds9-categorypalette.png"
-    },
-    {
-      "title": "DS9 Muted Station · Rainbow category mode",
-      "palette": "ds9",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/ds9-rainbow.png"
-    },
-    {
-      "title": "DS9 Muted Station · Rainbow sequence mode",
-      "palette": "ds9",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/ds9-sequentialrainbow.png"
+      "file": "gallery-assets/icons/ds9-categorypalette.svg"
     },
     {
       "title": "Voyager Soft · Theme-matched monochrome",
       "palette": "voyager",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/voyager-thememono.png"
+      "file": "gallery-assets/icons/voyager-thememono.svg"
     },
     {
       "title": "Voyager Soft · Theme palette by category",
       "palette": "voyager",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/voyager-categorypalette.png"
-    },
-    {
-      "title": "Voyager Soft · Rainbow category mode",
-      "palette": "voyager",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/voyager-rainbow.png"
-    },
-    {
-      "title": "Voyager Soft · Rainbow sequence mode",
-      "palette": "voyager",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/voyager-sequentialrainbow.png"
+      "file": "gallery-assets/icons/voyager-categorypalette.svg"
     },
     {
       "title": "Command Gold · Theme-matched monochrome",
       "palette": "command",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/command-thememono.png"
+      "file": "gallery-assets/icons/command-thememono.svg"
     },
     {
       "title": "Command Gold · Theme palette by category",
       "palette": "command",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/command-categorypalette.png"
-    },
-    {
-      "title": "Command Gold · Rainbow category mode",
-      "palette": "command",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/command-rainbow.png"
-    },
-    {
-      "title": "Command Gold · Rainbow sequence mode",
-      "palette": "command",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/command-sequentialrainbow.png"
+      "file": "gallery-assets/icons/command-categorypalette.svg"
     },
     {
       "title": "Red Alert · Theme-matched monochrome",
       "palette": "red",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/red-thememono.png"
+      "file": "gallery-assets/icons/red-thememono.svg"
     },
     {
       "title": "Red Alert · Theme palette by category",
       "palette": "red",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/red-categorypalette.png"
-    },
-    {
-      "title": "Red Alert · Rainbow category mode",
-      "palette": "red",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/red-rainbow.png"
-    },
-    {
-      "title": "Red Alert · Rainbow sequence mode",
-      "palette": "red",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/red-sequentialrainbow.png"
+      "file": "gallery-assets/icons/red-categorypalette.svg"
     },
     {
       "title": "Security Red · Theme-matched monochrome",
       "palette": "security",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/security-thememono.png"
+      "file": "gallery-assets/icons/security-thememono.svg"
     },
     {
       "title": "Security Red · Theme palette by category",
       "palette": "security",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/security-categorypalette.png"
-    },
-    {
-      "title": "Security Red · Rainbow category mode",
-      "palette": "security",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/security-rainbow.png"
-    },
-    {
-      "title": "Security Red · Rainbow sequence mode",
-      "palette": "security",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/security-sequentialrainbow.png"
+      "file": "gallery-assets/icons/security-categorypalette.svg"
     },
     {
       "title": "Science Blue/Purple · Theme-matched monochrome",
       "palette": "science",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/science-thememono.png"
+      "file": "gallery-assets/icons/science-thememono.svg"
     },
     {
       "title": "Science Blue/Purple · Theme palette by category",
       "palette": "science",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/science-categorypalette.png"
-    },
-    {
-      "title": "Science Blue/Purple · Rainbow category mode",
-      "palette": "science",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/science-rainbow.png"
-    },
-    {
-      "title": "Science Blue/Purple · Rainbow sequence mode",
-      "palette": "science",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/science-sequentialrainbow.png"
+      "file": "gallery-assets/icons/science-categorypalette.svg"
     },
     {
       "title": "Medical Teal · Theme-matched monochrome",
       "palette": "medical",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/medical-thememono.png"
+      "file": "gallery-assets/icons/medical-thememono.svg"
     },
     {
       "title": "Medical Teal · Theme palette by category",
       "palette": "medical",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/medical-categorypalette.png"
-    },
-    {
-      "title": "Medical Teal · Rainbow category mode",
-      "palette": "medical",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/medical-rainbow.png"
-    },
-    {
-      "title": "Medical Teal · Rainbow sequence mode",
-      "palette": "medical",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/medical-sequentialrainbow.png"
+      "file": "gallery-assets/icons/medical-categorypalette.svg"
     },
     {
       "title": "Operations Blue · Theme-matched monochrome",
       "palette": "opsBlue",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/opsblue-thememono.png"
+      "file": "gallery-assets/icons/opsblue-thememono.svg"
     },
     {
       "title": "Operations Blue · Theme palette by category",
       "palette": "opsBlue",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/opsblue-categorypalette.png"
-    },
-    {
-      "title": "Operations Blue · Rainbow category mode",
-      "palette": "opsBlue",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/opsblue-rainbow.png"
-    },
-    {
-      "title": "Operations Blue · Rainbow sequence mode",
-      "palette": "opsBlue",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/opsblue-sequentialrainbow.png"
+      "file": "gallery-assets/icons/opsblue-categorypalette.svg"
     },
     {
       "title": "Lower Decks Bright · Theme-matched monochrome",
       "palette": "lowerDecks",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/lowerdecks-thememono.png"
+      "file": "gallery-assets/icons/lowerdecks-thememono.svg"
     },
     {
       "title": "Lower Decks Bright · Theme palette by category",
       "palette": "lowerDecks",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/lowerdecks-categorypalette.png"
-    },
-    {
-      "title": "Lower Decks Bright · Rainbow category mode",
-      "palette": "lowerDecks",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/lowerdecks-rainbow.png"
-    },
-    {
-      "title": "Lower Decks Bright · Rainbow sequence mode",
-      "palette": "lowerDecks",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/lowerdecks-sequentialrainbow.png"
+      "file": "gallery-assets/icons/lowerdecks-categorypalette.svg"
     },
     {
       "title": "Latinum Gold · Theme-matched monochrome",
       "palette": "latinum",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/latinum-thememono.png"
+      "file": "gallery-assets/icons/latinum-thememono.svg"
     },
     {
       "title": "Latinum Gold · Theme palette by category",
       "palette": "latinum",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/latinum-categorypalette.png"
-    },
-    {
-      "title": "Latinum Gold · Rainbow category mode",
-      "palette": "latinum",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/latinum-rainbow.png"
-    },
-    {
-      "title": "Latinum Gold · Rainbow sequence mode",
-      "palette": "latinum",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/latinum-sequentialrainbow.png"
+      "file": "gallery-assets/icons/latinum-categorypalette.svg"
     },
     {
       "title": "Romulan Green · Theme-matched monochrome",
       "palette": "romulan",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/romulan-thememono.png"
+      "file": "gallery-assets/icons/romulan-thememono.svg"
     },
     {
       "title": "Romulan Green · Theme palette by category",
       "palette": "romulan",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/romulan-categorypalette.png"
-    },
-    {
-      "title": "Romulan Green · Rainbow category mode",
-      "palette": "romulan",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/romulan-rainbow.png"
-    },
-    {
-      "title": "Romulan Green · Rainbow sequence mode",
-      "palette": "romulan",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/romulan-sequentialrainbow.png"
+      "file": "gallery-assets/icons/romulan-categorypalette.svg"
     },
     {
       "title": "Muted OLED · Theme-matched monochrome",
       "palette": "muted",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/muted-thememono.png"
+      "file": "gallery-assets/icons/muted-thememono.svg"
     },
     {
       "title": "Muted OLED · Theme palette by category",
       "palette": "muted",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/muted-categorypalette.png"
-    },
-    {
-      "title": "Muted OLED · Rainbow category mode",
-      "palette": "muted",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/muted-rainbow.png"
-    },
-    {
-      "title": "Muted OLED · Rainbow sequence mode",
-      "palette": "muted",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/muted-sequentialrainbow.png"
+      "file": "gallery-assets/icons/muted-categorypalette.svg"
     },
     {
       "title": "Grayscale LCARS · Theme-matched monochrome",
       "palette": "grayscale",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/grayscale-thememono.png"
+      "file": "gallery-assets/icons/grayscale-thememono.svg"
     },
     {
       "title": "Grayscale LCARS · Theme palette by category",
       "palette": "grayscale",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/grayscale-categorypalette.png"
-    },
-    {
-      "title": "Grayscale LCARS · Rainbow category mode",
-      "palette": "grayscale",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/grayscale-rainbow.png"
-    },
-    {
-      "title": "Grayscale LCARS · Rainbow sequence mode",
-      "palette": "grayscale",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/grayscale-sequentialrainbow.png"
+      "file": "gallery-assets/icons/grayscale-categorypalette.svg"
     },
     {
       "title": "E-Ink Soft · Theme-matched monochrome",
       "palette": "eink",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/eink-thememono.png"
+      "file": "gallery-assets/icons/eink-thememono.svg"
     },
     {
       "title": "E-Ink Soft · Theme palette by category",
       "palette": "eink",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/eink-categorypalette.png"
-    },
-    {
-      "title": "E-Ink Soft · Rainbow category mode",
-      "palette": "eink",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/eink-rainbow.png"
-    },
-    {
-      "title": "E-Ink Soft · Rainbow sequence mode",
-      "palette": "eink",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/eink-sequentialrainbow.png"
+      "file": "gallery-assets/icons/eink-categorypalette.svg"
     },
     {
       "title": "Terminal Green · Theme-matched monochrome",
       "palette": "terminal",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/terminal-thememono.png"
+      "file": "gallery-assets/icons/terminal-thememono.svg"
     },
     {
       "title": "Terminal Green · Theme palette by category",
       "palette": "terminal",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/terminal-categorypalette.png"
-    },
-    {
-      "title": "Terminal Green · Rainbow category mode",
-      "palette": "terminal",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/terminal-rainbow.png"
-    },
-    {
-      "title": "Terminal Green · Rainbow sequence mode",
-      "palette": "terminal",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/terminal-sequentialrainbow.png"
+      "file": "gallery-assets/icons/terminal-categorypalette.svg"
     },
     {
       "title": "Spectrum Rainbow LCARS · Theme-matched monochrome",
       "palette": "spectrum",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/spectrum-thememono.png"
+      "file": "gallery-assets/icons/spectrum-thememono.svg"
     },
     {
       "title": "Spectrum Rainbow LCARS · Theme palette by category",
       "palette": "spectrum",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/spectrum-categorypalette.png"
-    },
-    {
-      "title": "Spectrum Rainbow LCARS · Rainbow category mode",
-      "palette": "spectrum",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/spectrum-rainbow.png"
-    },
-    {
-      "title": "Spectrum Rainbow LCARS · Rainbow sequence mode",
-      "palette": "spectrum",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/spectrum-sequentialrainbow.png"
+      "file": "gallery-assets/icons/spectrum-categorypalette.svg"
     },
     {
       "title": "True Rainbow LCARS · Theme-matched monochrome",
       "palette": "trueRainbow",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/truerainbow-thememono.png"
+      "file": "gallery-assets/icons/truerainbow-thememono.svg"
     },
     {
       "title": "True Rainbow LCARS · Theme palette by category",
       "palette": "trueRainbow",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/truerainbow-categorypalette.png"
-    },
-    {
-      "title": "True Rainbow LCARS · Rainbow category mode",
-      "palette": "trueRainbow",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/truerainbow-rainbow.png"
-    },
-    {
-      "title": "True Rainbow LCARS · Rainbow sequence mode",
-      "palette": "trueRainbow",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/truerainbow-sequentialrainbow.png"
+      "file": "gallery-assets/icons/truerainbow-categorypalette.svg"
     },
     {
       "title": "Pastel Rainbow LCARS · Theme-matched monochrome",
       "palette": "pastelRainbow",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/pastelrainbow-thememono.png"
+      "file": "gallery-assets/icons/pastelrainbow-thememono.svg"
     },
     {
       "title": "Pastel Rainbow LCARS · Theme palette by category",
       "palette": "pastelRainbow",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/pastelrainbow-categorypalette.png"
-    },
-    {
-      "title": "Pastel Rainbow LCARS · Rainbow category mode",
-      "palette": "pastelRainbow",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/pastelrainbow-rainbow.png"
-    },
-    {
-      "title": "Pastel Rainbow LCARS · Rainbow sequence mode",
-      "palette": "pastelRainbow",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/pastelrainbow-sequentialrainbow.png"
+      "file": "gallery-assets/icons/pastelrainbow-categorypalette.svg"
     },
     {
       "title": "High Contrast · Theme-matched monochrome",
       "palette": "highContrast",
       "mode": "themeMono",
-      "file": "gallery-assets/icons/highcontrast-thememono.png"
+      "file": "gallery-assets/icons/highcontrast-thememono.svg"
     },
     {
       "title": "High Contrast · Theme palette by category",
       "palette": "highContrast",
       "mode": "categoryPalette",
-      "file": "gallery-assets/icons/highcontrast-categorypalette.png"
-    },
-    {
-      "title": "High Contrast · Rainbow category mode",
-      "palette": "highContrast",
-      "mode": "rainbow",
-      "file": "gallery-assets/icons/highcontrast-rainbow.png"
-    },
-    {
-      "title": "High Contrast · Rainbow sequence mode",
-      "palette": "highContrast",
-      "mode": "sequentialRainbow",
-      "file": "gallery-assets/icons/highcontrast-sequentialrainbow.png"
+      "file": "gallery-assets/icons/highcontrast-categorypalette.svg"
     }
   ],
   "fonts": [
@@ -1269,127 +1017,127 @@
       "title": "Federation",
       "font": "Federation",
       "note": "Recommended default for everyday launcher labels",
-      "file": "gallery-assets/fonts/federation.png"
+      "file": "gallery-assets/fonts/federation.svg"
     },
     {
       "title": "Federation Wide",
       "font": "Federation Wide",
       "note": "Broader display text",
-      "file": "gallery-assets/fonts/federation-wide.png"
+      "file": "gallery-assets/fonts/federation-wide.svg"
     },
     {
       "title": "Trek TNG Monitors",
       "font": "Trek TNG Monitors",
       "note": "More console-accurate computer readout feel",
-      "file": "gallery-assets/fonts/trek-tng-monitors.png"
+      "file": "gallery-assets/fonts/trek-tng-monitors.svg"
     },
     {
       "title": "Context Ultra Condensed",
       "font": "Context Ultra Condensed",
       "note": "Narrow LCARS label style",
-      "file": "gallery-assets/fonts/context-ultra-condensed.png"
+      "file": "gallery-assets/fonts/context-ultra-condensed.svg"
     },
     {
       "title": "Context Ultra Condensed Bold",
       "font": "Context Ultra Condensed Bold",
       "note": "Stronger narrow LCARS labels",
-      "file": "gallery-assets/fonts/context-ultra-condensed-bold.png"
+      "file": "gallery-assets/fonts/context-ultra-condensed-bold.svg"
     },
     {
       "title": "Jefferies Extended",
       "font": "Jefferies Extended",
       "note": "Elongated starship-like display text",
-      "file": "gallery-assets/fonts/jefferies-extended.png"
+      "file": "gallery-assets/fonts/jefferies-extended.svg"
     },
     {
       "title": "TOS Title",
       "font": "TOS Title",
       "note": "Original-series retro title feel",
-      "file": "gallery-assets/fonts/tos-title.png"
+      "file": "gallery-assets/fonts/tos-title.svg"
     },
     {
       "title": "Trek Movie 1",
       "font": "Trek Movie 1",
       "note": "Theatrical display styling",
-      "file": "gallery-assets/fonts/trek-movie-1.png"
+      "file": "gallery-assets/fonts/trek-movie-1.svg"
     },
     {
       "title": "Trek Movie 2",
       "font": "Trek Movie 2",
       "note": "Alternate theatrical display styling",
-      "file": "gallery-assets/fonts/trek-movie-2.png"
+      "file": "gallery-assets/fonts/trek-movie-2.svg"
     },
     {
       "title": "Starfleet",
       "font": "Starfleet",
       "note": "Starship-flavored accent text",
-      "file": "gallery-assets/fonts/starfleet.png"
+      "file": "gallery-assets/fonts/starfleet.svg"
     },
     {
       "title": "Classic Ship Hull",
       "font": "Classic Ship Hull",
       "note": "Hull marking style accent text",
-      "file": "gallery-assets/fonts/classic-ship-hull.png"
+      "file": "gallery-assets/fonts/classic-ship-hull.svg"
     },
     {
       "title": "Klingon",
       "font": "Klingon",
       "note": "Alien-script decorative accent",
-      "file": "gallery-assets/fonts/klingon.png"
+      "file": "gallery-assets/fonts/klingon.svg"
     },
     {
       "title": "Vulcan",
       "font": "Vulcan",
       "note": "Alien-script decorative accent",
-      "file": "gallery-assets/fonts/vulcan.png"
+      "file": "gallery-assets/fonts/vulcan.svg"
     },
     {
       "title": "Romulan",
       "font": "Romulan",
       "note": "Alien-script decorative accent",
-      "file": "gallery-assets/fonts/romulan.png"
+      "file": "gallery-assets/fonts/romulan.svg"
     },
     {
       "title": "Bajoran",
       "font": "Bajoran",
       "note": "Alien-script decorative accent",
-      "file": "gallery-assets/fonts/bajoran.png"
+      "file": "gallery-assets/fonts/bajoran.svg"
     },
     {
       "title": "Cardassian",
       "font": "Cardassian",
       "note": "Alien-script decorative accent",
-      "file": "gallery-assets/fonts/cardassian.png"
+      "file": "gallery-assets/fonts/cardassian.svg"
     },
     {
       "title": "Dominion",
       "font": "Dominion",
       "note": "Alien-script decorative accent",
-      "file": "gallery-assets/fonts/dominion.png"
+      "file": "gallery-assets/fonts/dominion.svg"
     },
     {
       "title": "Ferengi",
       "font": "Ferengi",
       "note": "Alien-script decorative accent",
-      "file": "gallery-assets/fonts/ferengi.png"
+      "file": "gallery-assets/fonts/ferengi.svg"
     },
     {
       "title": "Tholian",
       "font": "Tholian",
       "note": "Alien-script decorative accent",
-      "file": "gallery-assets/fonts/tholian.png"
+      "file": "gallery-assets/fonts/tholian.svg"
     },
     {
       "title": "Trill",
       "font": "Trill",
       "note": "Alien-script decorative accent",
-      "file": "gallery-assets/fonts/trill.png"
+      "file": "gallery-assets/fonts/trill.svg"
     },
     {
       "title": "Trekbats",
       "font": "Trekbats",
       "note": "Symbol/decorative accent font",
-      "file": "gallery-assets/fonts/trekbats.png"
+      "file": "gallery-assets/fonts/trekbats.svg"
     }
   ]
 }

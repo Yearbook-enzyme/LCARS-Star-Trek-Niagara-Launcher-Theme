@@ -226,34 +226,181 @@ async function exportWallpapers(browser, baseUrl) {
   return out;
 }
 
-async function exportIcons(browser, baseUrl) {
-  const page = await browser.newPage({ viewport: { width: 1600, height: 1400 } });
-  await page.goto(`${baseUrl}/docs/icon-generator.html`, { waitUntil: "networkidle" });
 
-  await page.evaluate(text => {
-    document.getElementById("appText").value = text;
-  }, sampleApps);
+function escapeXml(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
 
-  await page.click("#parseApps");
-  await page.waitForTimeout(400);
+async function writeSvg(filePath, svg) {
+  await fs.writeFile(filePath, svg, "utf8");
+}
 
+function phoneMockupSvg({ title, palette, mode = "categoryPalette", font = "system-ui", note = "" }) {
+  const colors = palette || ["#ff1744", "#ff9100", "#ffea00", "#00e676", "#00b0ff", "#7c4dff"];
+  const safeTitle = escapeXml(title);
+  const safeFont = escapeXml(font || "system-ui");
+  const safeNote = escapeXml(note || "");
+
+  const apps = [
+    ["Discord", "communication"],
+    ["Brave", "browser"],
+    ["ChatGPT", "ai"],
+    ["Grayjay", "media"],
+    ["Feeder", "reading"],
+    ["Gallery", "photography"],
+    ["Health", "health"],
+    ["Withings", "health"],
+    ["Reddit", "communication"],
+    ["Chess", "games"],
+    ["lichess", "games"],
+    ["Settings", "system"]
+  ];
+
+  const categoryIndex = {
+    communication: 0,
+    browser: 1,
+    ai: 2,
+    media: 3,
+    reading: 4,
+    photography: 5,
+    health: 1,
+    games: 2,
+    system: 4
+  };
+
+  const iconColor = (category, index) => {
+    if (mode === "themeMono") {
+      return index % 2 ? (colors[2] || colors[0]) : (colors[1] || colors[0]);
+    }
+
+    return colors[categoryIndex[category] % colors.length] || colors[0];
+  };
+
+  const appRows = apps.map(([name, category], index) => {
+    const y = 450 + index * 76;
+    const color = iconColor(category, index);
+
+    return `
+      <rect x="68" y="${y}" width="46" height="46" rx="11" fill="${color}" />
+      <rect x="75" y="${y + 6}" width="32" height="7" rx="4" fill="#ffffff" opacity="0.14" />
+      <text x="146" y="${y + 31}" class="appName">${escapeXml(name)}</text>`;
+  }).join("");
+
+  const blockHeights = [92, 132, 178, 210, 235, 190];
+  let y = 0;
+  const blocks = colors.map((color, index) => {
+    const h = blockHeights[index % blockHeights.length];
+    const out = `<rect x="512" y="${y}" width="178" height="${h}" fill="${color}" />`;
+    y += h + 16;
+    return out;
+  }).join("\n");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="1500" viewBox="0 0 760 1500">
+  <style>
+    .time, .date, .appName {
+      font-family: "${safeFont}", system-ui, sans-serif;
+      fill: #ffffff;
+    }
+
+    .time {
+      font-size: 78px;
+      letter-spacing: 2px;
+    }
+
+    .date {
+      font-size: 22px;
+      opacity: 0.9;
+    }
+
+    .appName {
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+
+    .caption {
+      font-family: system-ui, sans-serif;
+      fill: #ffd3a0;
+      font-size: 18px;
+    }
+  </style>
+
+  <rect width="760" height="1500" fill="#101010" />
+  <rect x="35" y="40" width="690" height="1420" rx="54" fill="#000000" />
+
+  <clipPath id="phoneClip">
+    <rect x="35" y="40" width="690" height="1420" rx="54" />
+  </clipPath>
+
+  <g clip-path="url(#phoneClip)">
+    <rect x="35" y="40" width="690" height="1420" fill="#000000" />
+
+    <rect x="0" y="225" width="130" height="23" fill="${colors[0] || "#ff1744"}" />
+    <rect x="135" y="225" width="166" height="23" fill="${colors[2] || "#ffea00"}" />
+    <rect x="306" y="225" width="419" height="58" rx="29" fill="${colors[1] || "#ff9100"}" />
+
+    ${blocks}
+
+    <text x="68" y="405" class="time">7:31</text>
+    <text x="68" y="438" class="date">Fri, Jun 26 · 72°</text>
+
+    ${appRows}
+
+    <text x="68" y="1380" class="caption">${safeTitle}</text>
+    ${safeNote ? `<text x="68" y="1408" class="caption" opacity="0.78">${safeNote}</text>` : ""}
+
+    <circle cx="380" cy="1432" r="10" fill="#ffffff" />
+  </g>
+</svg>`;
+}
+
+
+function paletteForName(name) {
+  const palettes = {
+    classic: ["#e8bd88", "#df5a1f", "#d62b18", "#e09a3f", "#dfb98a"],
+    tng: ["#ffcc99", "#ff9900", "#cc3300", "#cc6699", "#9999cc"],
+    ds9: ["#c8a46a", "#b8542a", "#9e271c", "#8f6238", "#c19a70"],
+    voyager: ["#f1c48e", "#d89b52", "#c96b38", "#8e5bb8", "#b9a0dd"],
+    command: ["#ffd89a", "#f0a43a", "#d65a28", "#ffc85a", "#ffe2b3"],
+    red: ["#ffc0b8", "#e45a4e", "#d62b18", "#aa1d14", "#f08a28"],
+    security: ["#ffc7c7", "#d96464", "#b32626", "#7c1d1d", "#f08a28"],
+    science: ["#c9b8ff", "#8f72d8", "#4d47a9", "#73b7e8", "#d8d0ff"],
+    medical: ["#b6ffe4", "#46c2a6", "#167f7a", "#f1c96a", "#e8d7a0"],
+    opsBlue: ["#99c9ff", "#4d8bd8", "#2f5fa3", "#9f7dd6", "#d0c3ff"],
+    lowerDecks: ["#ffd6a5", "#ff9f1c", "#e71d36", "#2ec4b6", "#cbf3f0"],
+    latinum: ["#f7d58c", "#c99732", "#8a5c1b", "#f1aa30", "#ffe0a3"],
+    romulan: ["#c8f7c5", "#65b96f", "#2e7d32", "#8fbf66", "#d4e8c3"],
+    muted: ["#c98769", "#a9482a", "#8f241c", "#d09242", "#d7b083"],
+    grayscale: ["#e8e8e8", "#b7b7b7", "#777777", "#9a9a9a", "#d8d8d8"],
+    eink: ["#f0ead8", "#c8bfa8", "#817969", "#a69a80", "#e2d7bd"],
+    terminal: ["#b7ffb7", "#5edc5e", "#1e9b1e", "#77cc77", "#d4ffd4"],
+    spectrum: ["#ff2d55", "#ff9500", "#ffd60a", "#32d74b", "#0a84ff", "#bf5af2"],
+    trueRainbow: ["#ff1744", "#ff9100", "#ffea00", "#00e676", "#00b0ff", "#7c4dff"],
+    pastelRainbow: ["#ff9aa2", "#ffb347", "#fff275", "#77dd77", "#89cff0", "#b39ddb"],
+    highContrast: ["#ffffff", "#ff9f1c", "#ff2e2e", "#ffd23f", "#f7f7f7"]
+  };
+
+  return palettes[name] || palettes.classic;
+}
+
+async function exportIcons() {
   const out = [];
 
   for (const cfg of iconMatrix) {
-    await page.evaluate(({ palette, mode }) => {
-      document.getElementById("palette").value = palette;
-      document.getElementById("colorMode").value = mode;
-      if (window.render) window.render();
-    }, cfg);
-
-    await page.waitForTimeout(150);
-
-    const preview = await page.locator(".previewWrap.widePreview").first();
-    const filename = `${slug(cfg.palette)}-${slug(cfg.mode)}.png`;
+    const filename = `${slug(cfg.palette)}-${slug(cfg.mode)}.svg`;
     const rel = `gallery-assets/icons/${filename}`;
     const abs = path.join(docsDir, rel);
 
-    await preview.screenshot({ path: abs });
+    await writeSvg(abs, phoneMockupSvg({
+      title: cfg.title,
+      palette: paletteForName(cfg.palette),
+      mode: cfg.mode,
+      note: "Niagara-style icon preview"
+    }));
 
     out.push({
       title: cfg.title,
@@ -263,86 +410,24 @@ async function exportIcons(browser, baseUrl) {
     });
   }
 
-  await page.close();
   return out;
 }
 
-function fontPageHtml(fontName, note) {
-  const safeFont = fontName.replace(/"/g, "");
-  return `<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>${safeFont}</title>
-<style>
-  body {
-    margin: 0;
-    background: #000;
-    color: #f7d7a8;
-    font-family: system-ui, sans-serif;
-  }
-  .card {
-    width: 1200px;
-    height: 420px;
-    box-sizing: border-box;
-    padding: 32px 36px;
-    border-top: 18px solid #ff9500;
-    border-right: 140px solid #d62b18;
-    border-bottom: 18px solid #bf5af2;
-    border-left: 18px solid #e8bd88;
-    background: #000;
-  }
-  .label {
-    color: #ff9500;
-    font-size: 18px;
-    letter-spacing: 0.08em;
-    margin-bottom: 18px;
-    text-transform: uppercase;
-  }
-  .title {
-    font-family: "${safeFont}", system-ui, sans-serif;
-    color: #ffffff;
-    font-size: 72px;
-    line-height: 1.0;
-    margin: 0 0 18px 0;
-  }
-  .sample {
-    font-family: "${safeFont}", system-ui, sans-serif;
-    color: #f7d7a8;
-    font-size: 34px;
-    line-height: 1.3;
-    margin: 0 0 18px 0;
-  }
-  .note {
-    color: #d7b083;
-    font-size: 20px;
-  }
-</style>
-</head>
-<body>
-  <div class="card">
-    <div class="label">LCARS Font Specimen</div>
-    <h1 class="title">${safeFont}</h1>
-    <p class="sample">Niagara Launcher • LCARS Interface • App Labels • Command Surface</p>
-    <p class="note">${note}</p>
-  </div>
-</body>
-</html>`;
-}
-
-async function exportFonts(browser) {
-  const page = await browser.newPage({ viewport: { width: 1200, height: 420 } });
+async function exportFonts() {
   const out = [];
 
   for (const cfg of fontConfigs) {
-    await page.setContent(fontPageHtml(cfg.font, cfg.note), { waitUntil: "load" });
-    await page.waitForTimeout(100);
-
-    const filename = `${slug(cfg.font)}.png`;
+    const filename = `${slug(cfg.font)}.svg`;
     const rel = `gallery-assets/fonts/${filename}`;
     const abs = path.join(docsDir, rel);
 
-    await page.screenshot({ path: abs });
+    await writeSvg(abs, phoneMockupSvg({
+      title: cfg.title,
+      palette: paletteForName("classic"),
+      mode: "categoryPalette",
+      font: cfg.font,
+      note: cfg.note
+    }));
 
     out.push({
       title: cfg.title,
@@ -352,7 +437,6 @@ async function exportFonts(browser) {
     });
   }
 
-  await page.close();
   return out;
 }
 
@@ -362,7 +446,16 @@ async function main() {
   const baseUrl = "http://127.0.0.1:4173";
 
   const launchOptions = {
-    headless: true
+    headless: true,
+    chromiumSandbox: false,
+    args: [
+      "--no-sandbox",
+      "--disable-gpu",
+      "--disable-dev-shm-usage",
+      "--disable-crash-reporter",
+      "--disable-crashpad",
+      "--disable-breakpad",
+    ]
   };
 
   if (process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH) {
@@ -393,7 +486,7 @@ async function main() {
     console.log(`Generated ${fonts.length} font specimens.`);
     console.log("Wrote docs/gallery-data.json");
   } finally {
-    await browser.close();
+    await browser.close().catch(() => {});
     server.close();
   }
 }
