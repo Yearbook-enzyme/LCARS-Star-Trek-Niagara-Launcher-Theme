@@ -81,21 +81,13 @@ body::before {
 }
 
 @media (min-width: 900px) {
-  main,
-  .page,
-  .container {
-    position: relative;
-  }
-
-  main::after,
-  .page::after,
-  .container::after {
+  body::after {
     content: "";
-    position: absolute;
-    top: 0;
-    right: -1.2rem;
+    position: fixed;
+    top: 8.5rem;
+    right: 0.55rem;
     width: 0.65rem;
-    height: min(100%, 38rem);
+    height: min(70vh, 38rem);
     border-radius: 0.5rem;
     background:
       linear-gradient(var(--lcars-gold) 0 12%, transparent 12% 14%,
@@ -103,6 +95,8 @@ body::before {
       var(--lcars-cream) 33% 48%, transparent 48% 50%,
       var(--lcars-red) 50% 100%);
     opacity: 0.75;
+    pointer-events: none;
+    z-index: 20;
   }
 }
 
