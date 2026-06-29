@@ -12,6 +12,7 @@
     targetCanvas.height = h;
 
     const c = targetCanvas.getContext("2d");
+    const paletteId = document.getElementById("palette")?.value || "classic";
     const palette = getPalette();
     const paletteLength = Math.max(1, palette.length);
 
@@ -79,6 +80,13 @@
     };
 
     const colorForPanel = (slot, fallback) => pick(mappedIndexForPanel(slot, fallback), fallback);
+
+    // Custom Palette gets a direct one-control-per-section mode.
+    // Built-in palettes still use the selected Color mapping.
+    const sectionColorForCustomPalette = (sectionIndex, slot, fallback) => {
+      if (paletteId === "custom" && paletteLength >= 11) return pick(sectionIndex, fallback);
+      return colorForPanel(slot, fallback);
+    };
 
     const rawSpineX = w * (value("spineX", 67) / 100);
     const thicknessScaleRaw = value("thickness", REF.railThickness) / REF.railThickness;
@@ -163,14 +171,14 @@
     c.fillStyle = "#000";
     c.fillRect(0, 0, w, h);
 
-    rect(c, 0, railTopY, leftSeg1W, t, colorForPanel(0, 0));
-    rect(c, leftSeg1W + leftGap, railTopY, leftSeg2W, t, colorForPanel(2, 1));
-    rect(c, 0, railBottomY, leftSeg1W, t, colorForPanel(0, 0));
-    rect(c, leftSeg1W + leftGap, railBottomY, leftSeg2W, t, colorForPanel(2, 1));
+    rect(c, 0, railTopY, leftSeg1W, t, sectionColorForCustomPalette(0, 0, 0));
+    rect(c, leftSeg1W + leftGap, railTopY, leftSeg2W, t, sectionColorForCustomPalette(1, 2, 1));
+    rect(c, 0, railBottomY, leftSeg1W, t, sectionColorForCustomPalette(2, 0, 0));
+    rect(c, leftSeg1W + leftGap, railBottomY, leftSeg2W, t, sectionColorForCustomPalette(3, 2, 1));
 
-    rect(c, spineX, topOrangeY, rightW, topOrangeH, colorForPanel(0, 1));
+    rect(c, spineX, topOrangeY, rightW, topOrangeH, sectionColorForCustomPalette(4, 0, 1));
 
-    c.fillStyle = colorForPanel(1, 2);
+    c.fillStyle = sectionColorForCustomPalette(5, 1, 2);
     c.beginPath();
     c.moveTo(railStart, railTopY);
     c.lineTo(spineX - innerW, railTopY);
@@ -183,7 +191,7 @@
     c.closePath();
     c.fill();
 
-    c.fillStyle = colorForPanel(1, 2);
+    c.fillStyle = sectionColorForCustomPalette(6, 1, 2);
     c.beginPath();
     c.moveTo(railStart, lowerRedTop);
     c.lineTo(right - outerW, lowerRedTop);
@@ -195,10 +203,10 @@
     c.closePath();
     c.fill();
 
-    rect(c, spineX, midOrangeY, rightW, midOrangeH, colorForPanel(2, 1));
-    rect(c, spineX, goldY, rightW, goldH, colorForPanel(3, 3));
-    rect(c, spineX, creamY, rightW, creamH, colorForPanel(4, 4));
-    rect(c, spineX, bottomRedY, rightW, bottomRedH, colorForPanel(5, 2));
+    rect(c, spineX, midOrangeY, rightW, midOrangeH, sectionColorForCustomPalette(7, 2, 1));
+    rect(c, spineX, goldY, rightW, goldH, sectionColorForCustomPalette(8, 3, 3));
+    rect(c, spineX, creamY, rightW, creamH, sectionColorForCustomPalette(9, 4, 4));
+    rect(c, spineX, bottomRedY, rightW, bottomRedH, sectionColorForCustomPalette(10, 5, 2));
   };
 
   function install() {

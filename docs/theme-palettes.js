@@ -99,7 +99,7 @@
 
   };
 
-  const CUSTOM_DEFAULTS = ["#e8bd88", "#df5a1f", "#d62b18", "#e09a3f", "#dfb98a", "#bf5af2"];
+  const CUSTOM_DEFAULTS = ["#e8bd88", "#df5a1f", "#d62b18", "#e09a3f", "#dfb98a", "#bf5af2", "#6f5bd8", "#e09a3f", "#dfb98a", "#ffe2b3", "#d62b18"];
   const CUSTOM_STORAGE_KEY = "lcarsCustomPaletteV1";
 
   function normalizeHex(value, fallback) {
