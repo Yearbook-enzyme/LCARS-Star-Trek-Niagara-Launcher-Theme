@@ -215,3 +215,59 @@
     install();
   }
 })();
+
+
+// Custom Palette default mapping helper.
+// Custom block colors are most intuitive as a direct Block 1 -> Block 6 sweep.
+// This hook only auto-switches from the old default LCARS role mapping to Palette sweep;
+// after the user manually chooses another mapping, it stays out of the way.
+(function () {
+  function fireChange(el) {
+    el.dispatchEvent(new Event("change", { bubbles: true }));
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+
+  function setupCustomPaletteSweepDefault() {
+    const palette = document.getElementById("palette");
+    const mapping = document.getElementById("colorMapping");
+    if (!palette || !mapping || mapping.dataset.customPaletteSweepPatch === "true") return;
+
+    mapping.dataset.customPaletteSweepPatch = "true";
+    mapping.dataset.userTouched = "false";
+    mapping.dataset.internalChange = "false";
+
+    mapping.addEventListener("change", () => {
+      if (mapping.dataset.internalChange !== "true") {
+        mapping.dataset.userTouched = "true";
+      }
+    });
+
+    function maybeUseSweep() {
+      if (
+        palette.value === "custom" &&
+        mapping.dataset.userTouched !== "true" &&
+        (mapping.value === "role" || mapping.value === "" || mapping.value == null)
+      ) {
+        mapping.dataset.internalChange = "true";
+        mapping.value = "sweep";
+        fireChange(mapping);
+        mapping.dataset.internalChange = "false";
+
+        if (typeof window.drawWallpaper === "function") {
+          window.drawWallpaper();
+        }
+      }
+    }
+
+    palette.addEventListener("change", maybeUseSweep);
+    palette.addEventListener("input", maybeUseSweep);
+    maybeUseSweep();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupCustomPaletteSweepDefault);
+  } else {
+    setupCustomPaletteSweepDefault();
+  }
+})();
+
