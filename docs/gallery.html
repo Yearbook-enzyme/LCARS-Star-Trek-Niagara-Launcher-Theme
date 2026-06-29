@@ -100,17 +100,12 @@
       gap: 14px;
     }
 
-    .searchRow {
-      display: grid;
-      grid-template-columns: minmax(220px, 1fr) auto;
-      gap: 12px;
-      align-items: center;
-    }
-
+    .searchRow,
     .filterGrid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 12px;
+      align-items: end;
     }
 
     label {
@@ -136,13 +131,9 @@
       border-color: var(--accent);
     }
 
-    button {
-      cursor: pointer;
-    }
+    button { cursor: pointer; }
 
-    .pillButton {
-      white-space: nowrap;
-    }
+    .pillButton { white-space: nowrap; }
 
     .stats {
       color: var(--muted);
@@ -169,9 +160,7 @@
       gap: 16px;
     }
 
-    details.gallerySection > summary::-webkit-details-marker {
-      display: none;
-    }
+    details.gallerySection > summary::-webkit-details-marker { display: none; }
 
     .summaryTitle {
       display: flex;
@@ -194,9 +183,7 @@
       font-size: 1.2rem;
     }
 
-    details[open] .chevron {
-      transform: rotate(90deg);
-    }
+    details[open] .chevron { transform: rotate(90deg); }
 
     .sectionBody {
       padding: 18px;
@@ -248,6 +235,105 @@
       object-fit: cover;
     }
 
+    .palettePreview {
+      height: 150px;
+      display: grid;
+      grid-template-columns: 1fr;
+      background: #000;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .paletteBars {
+      display: grid;
+      grid-template-columns: repeat(var(--swatches, 5), 1fr);
+      min-height: 70px;
+    }
+
+    .paletteBar { min-width: 0; }
+
+    .lcarsMini {
+      display: grid;
+      gap: 8px;
+      padding: 16px;
+      background: #000;
+    }
+
+    .lcarsMiniRow {
+      height: 18px;
+      border-radius: 999px 0 0 999px;
+    }
+
+    .lcarsMiniRow:nth-child(2) { width: 74%; }
+    .lcarsMiniRow:nth-child(3) { width: 88%; }
+    .lcarsMiniRow:nth-child(4) { width: 55%; }
+
+
+    .fontLivePreview {
+      min-height: 150px;
+      display: grid;
+      align-content: center;
+      gap: 10px;
+      padding: 14px;
+      background:
+        linear-gradient(90deg, transparent 0 68%, rgba(232,189,136,0.95) 68% 100%),
+        #000;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .fontPreviewReadout {
+      width: 66%;
+      min-height: 34px;
+      display: flex;
+      align-items: center;
+      padding: 0.35rem 0.55rem;
+      border-radius: 10px 0 0 10px;
+      background: #d62b18;
+      color: #fff;
+      font-size: clamp(1.15rem, 2.2vw, 2.2rem);
+      line-height: 0.95;
+      letter-spacing: 0.05em;
+      overflow: hidden;
+      text-overflow: clip;
+      white-space: nowrap;
+    }
+
+    .fontPreviewRows {
+      width: 66%;
+      display: grid;
+      gap: 6px;
+    }
+
+    .fontPreviewRows span {
+      display: block;
+      min-height: 22px;
+      padding: 0.22rem 0.55rem;
+      border-radius: 8px 0 0 8px;
+      background: #e09a3f;
+      color: #000;
+      font-size: clamp(0.9rem, 1.6vw, 1.35rem);
+      line-height: 1;
+      letter-spacing: 0.04em;
+      overflow: hidden;
+      text-overflow: clip;
+      white-space: nowrap;
+    }
+
+    .fontPreviewRows span:nth-child(2) {
+      background: #dfb98a;
+    }
+
+    .fontPreviewRows span:nth-child(3) {
+      background: #f2c18a;
+    }
+
+    .fontCardNote {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+
     .cardBody {
       padding: 14px 16px 18px;
     }
@@ -281,6 +367,12 @@
       font-weight: 700;
     }
 
+    .cardActions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
     .empty {
       display: none;
       border: 1px dashed var(--line);
@@ -291,6 +383,11 @@
       background: #070707;
     }
 
+    .sectionMore {
+      justify-self: center;
+      max-width: 280px;
+    }
+
     footer {
       padding: 30px 24px;
       border-top: 1px solid var(--line);
@@ -298,13 +395,7 @@
     }
 
     @media (max-width: 680px) {
-      .searchRow {
-        grid-template-columns: 1fr;
-      }
-
-      nav {
-        position: static;
-      }
+      nav { position: static; }
     }
   </style>
 </head>
@@ -312,8 +403,9 @@
   <header>
     <h1>LCARS Gallery</h1>
     <p class="lead">
-      Browse generated wallpaper palettes, panel rhythms, icon color systems, and font specimens
-      for the LCARS Niagara Launcher Theme project.
+      Browse shared theme palettes, generated wallpaper examples, icon color systems, and font specimens
+      for the LCARS Niagara Launcher Theme project. The palette catalog is capped by default so the page
+      stays readable as more pride, regional, faction, mood, accessibility, retro, space, and space-inspired themes are added.
     </p>
   </header>
 
@@ -322,6 +414,7 @@
     <a href="icon-generator.html">Icon Generator</a>
     <a href="fonts.html">Font Guide</a>
     <a href="about.html">About</a>
+    <a href="#themes">Theme Catalog</a>
     <a href="#wallpapers">Wallpapers</a>
     <a href="#icons">Icons</a>
     <a href="#fonts">Fonts</a>
@@ -332,12 +425,32 @@
       <div class="searchRow">
         <label>
           Search gallery
-          <input id="globalSearch" type="search" placeholder="Try rainbow, terminal, balanced, Federation, science...">
+          <input id="globalSearch" type="search" placeholder="Try trans, Klingon, Tibet, dream, terminal, science...">
         </label>
         <button id="resetFilters" class="pillButton" type="button">Reset filters</button>
       </div>
       <div class="stats" id="overallStats">Loading gallery…</div>
     </section>
+
+    <details id="themes" class="gallerySection" open>
+      <summary>
+        <span class="summaryTitle">Theme Catalog <span id="themeCount" class="count"></span></span>
+        <span class="chevron">›</span>
+      </summary>
+      <div class="sectionBody">
+        <div class="sectionFilters">
+          <label>
+            Theme category
+            <select id="themeCategoryFilter">
+              <option value="">All categories</option>
+            </select>
+          </label>
+        </div>
+        <div id="themeGrid" class="grid"></div>
+        <button id="showAllThemes" class="pillButton sectionMore" type="button">Show all theme palettes</button>
+        <div id="themeEmpty" class="empty">No theme cards match these filters.</div>
+      </div>
+    </details>
 
     <details id="wallpapers" class="gallerySection" open>
       <summary>
@@ -346,6 +459,12 @@
       </summary>
       <div class="sectionBody">
         <div class="sectionFilters">
+          <label>
+            Palette category
+            <select id="wallpaperCategoryFilter">
+              <option value="">All categories</option>
+            </select>
+          </label>
           <label>
             Palette
             <select id="wallpaperPaletteFilter">
@@ -360,6 +479,7 @@
           </label>
         </div>
         <div id="wallpaperGrid" class="grid"></div>
+        <button id="showAllWallpapers" class="pillButton sectionMore" type="button">Show all wallpaper examples</button>
         <div id="wallpaperEmpty" class="empty">No wallpaper cards match these filters.</div>
       </div>
     </details>
@@ -372,6 +492,12 @@
       <div class="sectionBody">
         <div class="sectionFilters">
           <label>
+            Palette category
+            <select id="iconCategoryFilter">
+              <option value="">All categories</option>
+            </select>
+          </label>
+          <label>
             Palette
             <select id="iconPaletteFilter">
               <option value="">All palettes</option>
@@ -380,11 +506,12 @@
           <label>
             Color mode
             <select id="iconModeFilter">
-              <option value="">All color modes</option>
+              <option value="">All color mappings</option>
             </select>
           </label>
         </div>
         <div id="iconGrid" class="grid"></div>
+        <button id="showAllIcons" class="pillButton sectionMore" type="button">Show all icon examples</button>
         <div id="iconEmpty" class="empty">No icon cards match these filters.</div>
       </div>
     </details>
@@ -404,6 +531,7 @@
           </label>
         </div>
         <div id="fontGrid" class="grid"></div>
+        <button id="showAllFonts" class="pillButton sectionMore" type="button">Show all font examples</button>
         <div id="fontEmpty" class="empty">No font cards match these filters.</div>
       </div>
     </details>
@@ -413,6 +541,7 @@
     Generated gallery for LCARS Niagara Launcher Theme.
   </footer>
 
-  <script src="gallery.js"></script>
+  <script src="theme-palettes.js?v=1"></script>
+  <script src="gallery.js?v=4"></script>
 </body>
 </html>

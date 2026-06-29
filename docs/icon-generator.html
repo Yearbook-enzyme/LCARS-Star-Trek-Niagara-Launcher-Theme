@@ -58,14 +58,37 @@
         </select>
       </label>
 
+
+      <details id="customPaletteEditor" class="notice">
+        <summary><strong>Custom palette colors</strong> — choose Custom Palette above to use these block colors.</summary>
+        <div class="customSize">
+          <label>Block 1 <input id="customPalette0" type="color" value="#e8bd88"></label>
+          <label>Block 2 <input id="customPalette1" type="color" value="#df5a1f"></label>
+          <label>Block 3 <input id="customPalette2" type="color" value="#d62b18"></label>
+          <label>Block 4 <input id="customPalette3" type="color" value="#e09a3f"></label>
+          <label>Block 5 <input id="customPalette4" type="color" value="#dfb98a"></label>
+          <label>Block 6 <input id="customPalette5" type="color" value="#bf5af2"></label>
+        </div>
+      </details>
+
       <label>
-        Color mode
+        Color mapping
         <select id="colorMode">
                     <option value="themeMono">Theme monochrome</option>
-          <option value="categoryPalette">Categorized theme palette</option>
+          <option value="categoryPalette">Theme palette by category</option>
+          <option value="paletteSequence">Palette sweep</option>
+          <option value="reverseSweep">Palette sweep reversed</option>
+          <option value="flagStripes">Flag stripes</option>
+          <option value="mirrorStripes">Mirrored stripes</option>
+          <option value="softDiagnostic">Soft diagnostic accents</option>
 
                   </select>
       </label>
+
+      <p class="hint">
+        Color mapping controls how the selected palette gets distributed across app categories.
+        Use Palette sweep or Flag stripes for rainbow, pride, and regional flag palettes.
+      </p>
 
       <label>
         Icon size
@@ -136,9 +159,11 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
-  <script src="icon-generator.js?v=1782400000"></script>
+  <script src="theme-palettes.js?v=1"></script>
+  <script src="icon-generator.js?v=1782400001"></script>
+  <script src="icon-theme-extension.js?v=1"></script>
   <footer class="siteFooter">
-    <strong>LCARS Niagara Theme · v0.2.0</strong>
+    <strong>LCARS Niagara Theme · v0.3.0</strong>
     <span>Created by Logan / Machinations</span>
     <a href="about.html">About / credits</a>
     <a href="https://blog.machinations.space/">Machinations blog</a>

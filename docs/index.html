@@ -148,6 +148,19 @@
         </select>
       </label>
 
+
+      <details id="customPaletteEditor" class="notice">
+        <summary><strong>Custom palette colors</strong> — choose Custom Palette above to use these block colors.</summary>
+        <div class="customSize">
+          <label>Block 1 <input id="customPalette0" type="color" value="#e8bd88"></label>
+          <label>Block 2 <input id="customPalette1" type="color" value="#df5a1f"></label>
+          <label>Block 3 <input id="customPalette2" type="color" value="#d62b18"></label>
+          <label>Block 4 <input id="customPalette3" type="color" value="#e09a3f"></label>
+          <label>Block 5 <input id="customPalette4" type="color" value="#dfb98a"></label>
+          <label>Block 6 <input id="customPalette5" type="color" value="#bf5af2"></label>
+        </div>
+      </details>
+
       <label>
         Spine position
         <input id="spineX" type="range" min="45" max="82" value="67">
@@ -185,6 +198,22 @@
         </select>
       </label>
 
+      <label>
+        Color mapping
+        <select id="colorMapping">
+          <option value="role">LCARS role colors</option>
+          <option value="sweep">Palette sweep</option>
+          <option value="reverseSweep">Palette sweep reversed</option>
+          <option value="flagStripes">Flag stripes</option>
+          <option value="mirrorStripes">Mirrored stripes</option>
+        </select>
+      </label>
+
+      <p class="hint">
+        Panel rhythm controls proportions. Color mapping controls how palette slots are assigned to the LCARS blocks.
+        Use Palette sweep or Flag stripes for rainbow, pride, and regional flag palettes.
+      </p>
+
       <p class="hint">
         Panel rhythm changes the static color-block proportions while keeping the LCARS elbow shape intact.
       </p>
@@ -201,10 +230,12 @@
     </section>
   </main>
 
-  <script src="app.js?v=21"></script>
+  <script src="theme-palettes.js?v=1"></script>
+  <script src="app.js?v=22"></script>
+  <script src="wallpaper-theme-extension.js?v=1"></script>
   <script src="ui-polish.js?v=1782400300"></script>
   <footer class="siteFooter">
-    <strong>LCARS Niagara Theme · v0.2.0</strong>
+    <strong>LCARS Niagara Theme · v0.3.0</strong>
     <span>Created by Logan / Machinations</span>
     <a href="about.html">About / credits</a>
     <a href="https://blog.machinations.space/">Machinations blog</a>
