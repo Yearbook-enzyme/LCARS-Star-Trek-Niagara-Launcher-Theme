@@ -27,26 +27,26 @@
 <main id="main-content" class="layout">
     <section class="panel">
       <h1 data-i18n="siteTitle">LCARS Niagara Launcher Theme</h1>
-      <p>Download the Niagara theme file and generate matching LCARS wallpapers.</p>
+      <p data-i18n="siteSubtitle">Download the Niagara theme file and generate matching LCARS wallpapers.</p>
 
-      <a class="button" href="downloads/shared_theme_20260615_201914.nlt" download>
+      <a class="button" href="downloads/shared_theme_20260615_201914.nlt" download data-i18n="downloadTheme">
         Download Theme File
       </a>
 
-      <a class="button secondary" href="icon-generator.html">Open Icon Generator</a>
-      <a class="button secondary" href="fonts.html">Open Font Guide</a>
-      <a class="button secondary" href="about.html">About / Credits</a>
-      <a class="button secondary" href="gallery.html">Browse Gallery</a>
+      <a class="button secondary" href="icon-generator.html" data-i18n="openIconGenerator">Open Icon Generator</a>
+      <a class="button secondary" href="fonts.html" data-i18n="openFontGuide">Open Font Guide</a>
+      <a class="button secondary" href="about.html" data-i18n="aboutCredits">About / Credits</a>
+      <a class="button secondary" href="gallery.html" data-i18n="browseGallery">Browse Gallery</a>
 
       <section class="quickStart">
-        <h2>Setup path</h2>
+        <h2 data-i18n="setupPathTitle">Setup path</h2>
         <ol>
-          <li><strong>Download the Niagara theme file.</strong> Import the included <code>.nlt</code> file into Niagara Launcher.</li>
-          <li><strong>Generate a matching LCARS wallpaper.</strong> Pick your device size, palette, spine position, thickness, segment length, and panel rhythm.</li>
-          <li><strong>Install Trek-inspired fonts locally.</strong> Open the Font Guide, install fonts from their original sources, then preview them against a Niagara-style app list.</li>
-          <li><strong>Export your Niagara app list.</strong> Use Niagara's export so the icon generator can categorize your actual apps.</li>
-          <li><strong>Build the LCARS icon pack.</strong> Review categories, fix anything weird, and build the signed APK.</li>
-          <li><strong>Apply and iterate.</strong> Use the theme, wallpaper, font choice, and icon pack together; share reviewed mappings to improve future matching.</li>
+          <li data-i18n-html="setupStep1"><strong>Download the Niagara theme file.</strong> Import the included <code>.nlt</code> file into Niagara Launcher.</li>
+          <li data-i18n-html="setupStep2"><strong>Generate a matching LCARS wallpaper.</strong> Pick your device size, palette, spine position, thickness, segment length, and panel rhythm.</li>
+          <li data-i18n-html="setupStep3"><strong>Install Trek-inspired fonts locally.</strong> Open the Font Guide, install fonts from their original sources, then preview them against a Niagara-style app list.</li>
+          <li data-i18n-html="setupStep4"><strong>Export your Niagara app list.</strong> Use Niagara's export so the icon generator can categorize your actual apps.</li>
+          <li data-i18n-html="setupStep5"><strong>Build the LCARS icon pack.</strong> Review categories, fix anything weird, and build the signed APK.</li>
+          <li data-i18n-html="setupStep6"><strong>Apply and iterate.</strong> Use the theme, wallpaper, font choice, and icon pack together; share reviewed mappings to improve future matching.</li>
         </ol>
       </section>
 
@@ -55,10 +55,10 @@
         <p data-i18n="accessibilityNoteBody">For better color distinction, try the High Contrast, Grayscale LCARS, or E-Ink Soft palettes. The webpage also includes keyboard focus outlines, skip links, screen-reader status messages, and a text description of the wallpaper preview.</p>
       </section>
 
-      <h2>Wallpaper Generator</h2>
+      <h2 data-i18n="wallpaperGeneratorTitle">Wallpaper Generator</h2>
 
       <label>
-        Device preset
+        <span data-i18n="devicePreset">Device preset</span>
         <select id="preset">
           <optgroup label="Popular Android phones">
             <option value="1080x2400">Modern Android — 1080×2400 — 20:9</option>
@@ -117,18 +117,18 @@
 
       <div id="customSize" class="customSize" hidden>
         <label>
-          Width
+          <span data-i18n="width">Width</span>
           <input id="customW" type="number" min="200" max="10000" value="1080">
         </label>
 
         <label>
-          Height
+          <span data-i18n="height">Height</span>
           <input id="customH" type="number" min="200" max="10000" value="2400">
         </label>
       </div>
 
       <label>
-        Palette
+        <span data-i18n="palette">Palette</span>
         <select id="palette">
           <option value="classic">Classic Warm LCARS</option>
           <option value="tng">TNG Pastel LCARS</option>
@@ -156,7 +156,7 @@
 
 
       <details id="customPaletteEditor" class="notice">
-        <summary><strong>Custom section colors</strong> — choose Custom Palette above to color each wallpaper section directly.</summary>
+        <summary data-i18n-html="customSectionColorsSummary"><strong>Custom section colors</strong> — choose Custom Palette above to color each wallpaper section directly.</summary>
         <div class="customSize customPaletteGrid">
           <label>1 Upper left rail A <input id="customPalette0" type="color" value="#e8bd88"></label>
           <label>2 Upper left rail B <input id="customPalette1" type="color" value="#df5a1f"></label>
@@ -173,32 +173,32 @@
       </details>
 
       <label>
-        Spine position
+        <span data-i18n="spinePosition">Spine position</span>
         <input id="spineX" type="range" min="45" max="82" value="67">
       </label>
 
       <label>
-        Horizontal line height
+        <span data-i18n="horizontalLineHeight">Horizontal line height</span>
         <input id="barY" type="range" min="10" max="45" value="19">
       </label>
 
       <label>
-        Thickness / scale
+        <span data-i18n="thicknessScale">Thickness / scale</span>
         <input id="thickness" type="range" min="12" max="64" value="26">
       </label>
 
       <label>
-        Horizontal segment length
+        <span data-i18n="horizontalSegmentLength">Horizontal segment length</span>
         <input id="segmentScale" type="range" min="70" max="135" value="100">
       </label>
 
       <label>
-        Right edge safety margin
+        <span data-i18n="rightEdgeSafetyMargin">Right edge safety margin</span>
         <input id="edgeInset" type="range" min="0" max="12" value="4">
       </label>
 
       <label>
-        Panel rhythm
+        <span data-i18n="panelRhythm">Panel rhythm</span>
         <select id="panelRhythm">
           <option value="standard">Standard LCARS stack</option>
           <option value="stepped">Stepped color rhythm</option>
@@ -210,7 +210,7 @@
       </label>
 
       <label>
-        Color mapping
+        <span data-i18n="colorMapping">Color mapping</span>
         <select id="colorMapping">
           <option value="role">LCARS role colors</option>
           <option value="sweep">Palette sweep</option>
@@ -220,26 +220,26 @@
         </select>
       </label>
 
-      <p class="hint">
+      <p class="hint" data-i18n="panelRhythmHint">
         Panel rhythm controls proportions. Color mapping controls how palette slots are assigned to the LCARS blocks.
         Use Palette sweep or Flag stripes for rainbow, pride, and regional flag palettes.
       </p>
 
-      <p class="hint">
+      <p class="hint" data-i18n="panelRhythmHint2">
         Panel rhythm changes the static color-block proportions while keeping the LCARS elbow shape intact.
       </p>
 
-      <button id="download">Download Wallpaper PNG</button>
+      <button id="download" data-i18n="downloadWallpaper">Download Wallpaper PNG</button>
 
-      <p class="hint">
+      <p class="hint" data-i18n="resolutionHint">
         Resolution presets are focused on Android devices for Niagara Launcher. Use Custom exact size when your device is not listed.
       </p>
     </section>
 
     <section class="previewWrap" aria-labelledby="previewHeading">
-      <h2 id="previewHeading" class="sr-only">Wallpaper preview</h2>
+      <h2 id="previewHeading" class="sr-only" data-i18n="wallpaperPreview">Wallpaper preview</h2>
       <canvas id="preview" role="img" aria-describedby="previewDescription"></canvas>
-      <p id="previewDescription" class="hint" aria-live="polite">
+      <p id="previewDescription" class="hint" aria-live="polite" data-i18n="previewFallback">
         Preview updates after you change wallpaper settings.
       </p>
     </section>
