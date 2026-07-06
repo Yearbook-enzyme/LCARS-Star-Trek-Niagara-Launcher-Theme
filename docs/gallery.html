@@ -398,11 +398,51 @@
       nav { position: static; }
     }
   </style>
+
+  <style id="gallery-accessibility-fixes">
+    .skip-link {
+      position: absolute;
+      top: 0.75rem;
+      left: -999rem;
+      z-index: 9999;
+      width: auto;
+      max-width: calc(100vw - 2rem);
+      background: #ffffff;
+      color: #000000;
+      border-radius: 999px;
+      padding: 0.75rem 1rem;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .skip-link:focus {
+      left: 0.75rem;
+    }
+
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip-path: inset(50%) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    :focus-visible {
+      outline: 3px solid #ffffff;
+      outline-offset: 4px;
+    }
+  </style>
+
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
   <header>
     <h1>LCARS Gallery</h1>
+      <h2 id="gallerySectionHeading" class="sr-only">Generated gallery items</h2>
     <p class="lead">
       Browse shared theme palettes, generated wallpaper examples, icon color systems, and font specimens
       for the LCARS Niagara Launcher Theme project. The palette catalog is capped by default so the page
