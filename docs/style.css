@@ -1031,3 +1031,22 @@ a:focus-visible {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* LCARS language picker and accessibility note */
+.languagePicker {
+  display: block;
+  margin: 0 0 1rem;
+  max-width: 18rem;
+}
+
+.accessibilityNote {
+  background: #080808;
+  border: 1px solid rgba(242, 201, 149, 0.3);
+  border-radius: 1.25rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.accessibilityNote h2 {
+  margin-top: 0;
+}
