@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +23,8 @@
   <link rel="stylesheet" href="ui-polish.css?v=1781832014">
 </head>
 <body>
-<main class="layout">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+<main id="main-content" class="layout">
     <section class="panel">
       <h1>LCARS Niagara Launcher Theme</h1>
       <p>Download the Niagara theme file and generate matching LCARS wallpapers.</p>
@@ -230,8 +231,12 @@
       </p>
     </section>
 
-    <section class="previewWrap">
-      <canvas id="preview"></canvas>
+    <section class="previewWrap" aria-labelledby="previewHeading">
+      <h2 id="previewHeading" class="sr-only">Wallpaper preview</h2>
+      <canvas id="preview" role="img" aria-describedby="previewDescription"></canvas>
+      <p id="previewDescription" class="hint" aria-live="polite">
+        Preview updates after you change wallpaper settings.
+      </p>
     </section>
   </main>
 

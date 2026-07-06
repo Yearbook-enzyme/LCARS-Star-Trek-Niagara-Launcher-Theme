@@ -182,7 +182,7 @@
           <button type="button" id="lcarsShowNeedsReview" class="secondary">Show only needs review</button>
           <button type="button" id="lcarsShowAll" class="secondary">Show all</button>
         </div>
-        <div id="lcarsReviewCounts" class="lcars-review-counts">Parse an app list to review categories.</div>
+        <div id="lcarsReviewCounts" class="lcars-review-counts" role="status" aria-live="polite">Parse an app list to review categories.</div>
       `;
       parseButton.closest("section, form, div")?.insertAdjacentElement("afterend", toolbar);
 

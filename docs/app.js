@@ -342,9 +342,36 @@ function updateCustomVisibility() {
   customSize.hidden = document.getElementById("preset").value !== "custom";
 }
 
+
+function selectedText(id) {
+  const el = document.getElementById(id);
+  return el?.selectedOptions?.[0]?.textContent?.trim() || el?.value || "";
+}
+
+function updatePreviewDescription() {
+  const desc = document.getElementById("previewDescription");
+  const previewCanvas = document.getElementById("preview");
+  if (!desc) return;
+
+  const size = getSize();
+  const palette = selectedText("palette") || "selected palette";
+  const preset = selectedText("preset") || `${size.w} by ${size.h}`;
+  const rhythm = selectedText("panelRhythm") || "selected panel rhythm";
+  const mapping = selectedText("colorMapping") || "selected color mapping";
+  const spine = document.getElementById("spineX")?.value || "";
+  const barY = document.getElementById("barY")?.value || "";
+  const thickness = document.getElementById("thickness")?.value || "";
+
+  const text = `Preview: ${palette}. ${size.w} by ${size.h} pixels. Device preset: ${preset}. Panel rhythm: ${rhythm}. Color mapping: ${mapping}. Spine position ${spine} percent. Horizontal line height ${barY} percent. Thickness setting ${thickness}.`;
+
+  desc.textContent = text;
+  if (previewCanvas) previewCanvas.setAttribute("aria-label", text);
+}
+
 function updateAll() {
   updateCustomVisibility();
   redrawPreview();
+  updatePreviewDescription();
 }
 
 document.querySelectorAll("select, input").forEach((el) => {
@@ -352,7 +379,7 @@ document.querySelectorAll("select, input").forEach((el) => {
   el.addEventListener("change", updateAll);
 });
 
-window.addEventListener("resize", redrawPreview);
+window.addEventListener("resize", updateAll);
 
 document.getElementById("download").addEventListener("click", () => {
   const exportCanvas = document.createElement("canvas");

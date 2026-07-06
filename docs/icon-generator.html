@@ -1,12 +1,14 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LCARS Icon Generator</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="layout">
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <main id="main-content" class="layout">
     <section class="panel">
       <h1>LCARS Icon Generator</h1>
       <p>Generate blank rounded-square Android/Niagara icon sets from an app list. Everything runs locally in your browser unless you choose a future APK build option.</p>
@@ -126,10 +128,10 @@
 
       <button id="submitMappings" class="secondary">Submit Reviewed Mappings</button>
 
-      <p id="status" class="hint">No app list loaded yet.</p>
+      <p id="status" class="hint" role="status" aria-live="polite">No app list loaded yet.</p>
 
       <div id="apkBuildPanel" class="apkBuildPanel" hidden>
-        <p id="apkBuildStatus" class="hint">APK builder idle.</p>
+        <p id="apkBuildStatus" class="hint" role="status" aria-live="polite">APK builder idle.</p>
         <a id="apkDownloadLink" class="button" href="#" hidden>Download Signed APK</a>
       </div>
     </section>
@@ -137,11 +139,12 @@
     <section class="previewWrap widePreview">
       <div>
         <h2>Parsed Apps</h2>
-        <div id="summary" class="hint"></div>
+        <div id="summary" class="hint" role="status" aria-live="polite"></div>
         <div id="iconPreview" class="iconPreview"></div>
 
         <div class="tableWrap">
           <table id="appsTable">
+              <caption class="sr-only">Parsed app list with package names, categories, and category source.</caption>
             <thead>
               <tr>
                 <th>Icon</th>
