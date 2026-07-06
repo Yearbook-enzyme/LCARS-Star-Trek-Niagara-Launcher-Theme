@@ -21,7 +21,7 @@
   },
   "app.accrescent.client": {
     "label": "Accrescent",
-    "category": "unknown",
+    "category": "shopping",
     "component": "app.accrescent.client/app.accrescent.client.ui.MainActivity"
   },
   "app.attestation.auditor": {
@@ -121,23 +121,8 @@
   },
   "co.hinge.app": {
     "label": "Hinge",
-    "category": "unknown",
-    "component": "co.hinge.app/co.hinge.app.ui.AppActivity"
-  },
-  "com.IceWaterGames.Viridi": {
-    "label": "Viridi",
-    "category": "games",
-    "component": "com.IceWaterGames.Viridi/com.unity3d.player.UnityPlayerActivity"
-  },
-  "com.Ringotan": {
-    "label": "Ringotan",
-    "category": "reading",
-    "component": "com.Ringotan/crc64a464ddfb21a204d7.MainActivity"
-  },
-  "com.Slack": {
-    "label": "Slack",
     "category": "communication",
-    "component": "com.Slack/slack.features.home.HomeActivity"
+    "component": "co.hinge.app/co.hinge.app.ui.AppActivity"
   },
   "com.aircoookie.WLED": {
     "label": "WLED",
@@ -222,7 +207,7 @@
   "com.android.virtualization.terminal": {
     "label": "Terminal",
     "category": "system",
-    "component": "com.android.virtualization.terminal/com.android.virtualization.terminal.MainActivity"
+    "component": "com.android.virtualization.terminal/com.android.virtualization.terminal.LauncherActivity"
   },
   "com.andymstone.metronome": {
     "label": "Metronome",
@@ -321,7 +306,7 @@
   },
   "com.bumble.app": {
     "label": "Bumble",
-    "category": "unknown",
+    "category": "communication",
     "component": "com.bumble.app/com.bumble.app.ui.launcher.BumbleLauncherActivity"
   },
   "com.care.android.careview.providerapp": {
@@ -429,11 +414,6 @@
     "category": "communication",
     "component": "com.facebook.orca/com.facebook.orca.auth.StartScreenActivity"
   },
-  "com.facer.Xu4dfKJzshSE": {
-    "label": "Xu4dfKJzshSE",
-    "category": "system",
-    "component": "com.facer.Xu4dfKJzshSE/com.facer.companion.IndividualStartActivity"
-  },
   "com.facer.constellation": {
     "label": "Constellation",
     "category": "system",
@@ -443,6 +423,11 @@
     "label": "Ultraretrodigital",
     "category": "system",
     "component": "com.facer.ultraretrodigital/com.facer.companion.IndividualStartActivity"
+  },
+  "com.facer.Xu4dfKJzshSE": {
+    "label": "Xu4dfKJzshSE",
+    "category": "system",
+    "component": "com.facer.Xu4dfKJzshSE/com.facer.companion.IndividualStartActivity"
   },
   "com.facer.yTWy6G6hRsSE": {
     "label": "YTWy6G6hRsSE",
@@ -499,15 +484,15 @@
     "category": "tools",
     "component": "com.formagrid.airtable/com.formagrid.airtable.activity.session.SessionLoaderActivity"
   },
-  "com.fujifilm.xapp": {
-    "label": "Xapp",
-    "category": "photography",
-    "component": "com.fujifilm.xapp/com.fujifilm.xapp.MainActivity"
-  },
   "com.fujifilm_dsc.app.remoteshooter": {
     "label": "Remoteshooter",
     "category": "photography",
     "component": "com.fujifilm_dsc.app.remoteshooter/com.fujifilm_dsc.app.remoteshooter.InitializeActivity"
+  },
+  "com.fujifilm.xapp": {
+    "label": "Xapp",
+    "category": "photography",
+    "component": "com.fujifilm.xapp/com.fujifilm.xapp.MainActivity"
   },
   "com.futo.platformplayer": {
     "label": "Platformplayer",
@@ -733,6 +718,11 @@
     "category": "system",
     "component": "com.honeywell.android.lyric/com.honeywell.granite.graniteui.presentation.activity.dashboard.DashBoardActivity"
   },
+  "com.IceWaterGames.Viridi": {
+    "label": "Viridi",
+    "category": "games",
+    "component": "com.IceWaterGames.Viridi/com.unity3d.player.UnityPlayerActivity"
+  },
   "com.ichi2.anki": {
     "label": "Anki",
     "category": "productivity",
@@ -930,7 +920,7 @@
   },
   "com.myfetch.android": {
     "label": "Myfetch",
-    "category": "unknown",
+    "category": "communication",
     "component": "com.myfetch.android/com.precise.petcare.MainActivity"
   },
   "com.nianticlabs.scaniverse": {
@@ -1030,7 +1020,7 @@
   },
   "com.petbacker.android": {
     "label": "Petbacker",
-    "category": "unknown",
+    "category": "communication",
     "component": "com.petbacker.android/com.petbacker.android.MainActivity"
   },
   "com.philips.cdp.ohc.tuscany": {
@@ -1106,11 +1096,11 @@
   "com.reddit.frontpage": {
     "label": "Reddit",
     "category": "communication",
-    "component": "com.reddit.frontpage/launcher.worldcup2026"
+    "component": "com.reddit.frontpage/launcher.default"
   },
   "com.redfin.android": {
     "label": "Redfin",
-    "category": "unknown",
+    "category": "browser",
     "component": "com.redfin.android/com.redfin.android.core.activity.launch.DefaultLaunchActivity"
   },
   "com.renshuu.renshuu_org": {
@@ -1123,14 +1113,19 @@
     "category": "security",
     "component": "com.ringapp/com.ring.launch.LaunchActivity"
   },
+  "com.Ringotan": {
+    "label": "Ringotan",
+    "category": "reading",
+    "component": "com.Ringotan/crc64a464ddfb21a204d7.MainActivity"
+  },
   "com.route.app": {
     "label": "Route",
-    "category": "unknown",
+    "category": "shopping",
     "component": "com.route.app/com.route.app.ui.MainActivity"
   },
   "com.rover.android": {
     "label": "Rover",
-    "category": "unknown",
+    "category": "communication",
     "component": "com.rover.android/com.rover.android.deeplink.DeepLinkWithSplashActivity"
   },
   "com.sac.zippass": {
@@ -1263,6 +1258,11 @@
     "category": "communication",
     "component": "com.skemailmobileapp/com.skemailmobileapp.MainActivity"
   },
+  "com.Slack": {
+    "label": "Slack",
+    "category": "communication",
+    "component": "com.Slack/slack.features.home.HomeActivity"
+  },
   "com.slavabarkov.tidy": {
     "label": "Tidy",
     "category": "photography",
@@ -1360,7 +1360,7 @@
   },
   "com.trulia.android": {
     "label": "Trulia",
-    "category": "unknown",
+    "category": "browser",
     "component": "com.trulia.android/com.trulia.android.activity.LoadingActivity"
   },
   "com.trustedhousesitters.TrustedHousesitters": {
@@ -1375,7 +1375,7 @@
   },
   "com.twentythreeandme.app": {
     "label": "Twentythreeandme",
-    "category": "unknown",
+    "category": "health",
     "component": "com.twentythreeandme.app/com.twentythreeandme.app.nux.NuxIntroductionActivity"
   },
   "com.underthing.focus.friend": {
@@ -1455,7 +1455,7 @@
   },
   "com.wildohio.app": {
     "label": "Wildohio",
-    "category": "unknown",
+    "category": "maps",
     "component": "com.wildohio.app/com.wildohio.app.MainActivity"
   },
   "com.wireguard.android": {
@@ -1610,7 +1610,7 @@
   },
   "im.vector.app": {
     "label": "Vector",
-    "category": "unknown",
+    "category": "communication",
     "component": "im.vector.app/im.vector.application.features.Alias"
   },
   "io.anuke.mindustry.be": {
@@ -1885,7 +1885,7 @@
   },
   "org.olympic.app.mobile": {
     "label": "Olympic",
-    "category": "unknown",
+    "category": "reading",
     "component": "org.olympic.app.mobile/com.android.app.MainActivity"
   },
   "org.oxycblt.auxio": {
@@ -1909,7 +1909,7 @@
   },
   "org.torproject.android": {
     "label": "Torproject",
-    "category": "unknown",
+    "category": "browser",
     "component": "org.torproject.android/org.torproject.android.OrbotActivity"
   },
   "org.torproject.torbrowser": {
