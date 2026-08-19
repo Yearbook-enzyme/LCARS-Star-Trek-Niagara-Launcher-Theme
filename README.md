@@ -1,3 +1,5 @@
+
+
 # LCARS Niagara Launcher Theme
 
 <p align="center">
@@ -164,6 +166,8 @@ The live site includes a generated gallery that showcases the breadth of the pro
 * Every wallpaper palette across every panel rhythm
 * Icon palette examples across every icon color mode
 * Locally rendered font specimen images for Trek-inspired font directions
+
+The gallery can be regenerated from the repository root with `npm run export:gallery`.
 
 Gallery:
 https://yearbook-enzyme.github.io/LCARS-Star-Trek-Niagara-Launcher-Theme/gallery.html
