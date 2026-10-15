@@ -21,8 +21,13 @@
   },
   "app.accrescent.client": {
     "label": "Accrescent",
-    "category": "unknown",
+    "category": "tools",
     "component": "app.accrescent.client/app.accrescent.client.ui.MainActivity"
+  },
+  "app.alextran.immich": {
+    "label": "Immich",
+    "category": "media",
+    "component": "app.alextran.immich/app.alextran.immich.MainActivity"
   },
   "app.attestation.auditor": {
     "label": "Auditor",
@@ -59,6 +64,11 @@
     "category": "tools",
     "component": "app.melon.icompass/app.melon.icompass.CompassActivi"
   },
+  "app.organicmaps": {
+    "label": "Organicmaps",
+    "category": "maps",
+    "component": "app.organicmaps/app.organicmaps.DownloadResourcesActivity"
+  },
   "app.symfonik.music.player": {
     "label": "Player",
     "category": "media",
@@ -88,6 +98,11 @@
     "label": "Bitpit",
     "category": "unknown",
     "component": "bitpit.launcher/bitpit.launcher.ui.HomeActivity"
+  },
+  "br.com.zetabit.ios_standby": {
+    "label": "Ios Standby",
+    "category": "tools",
+    "component": "br.com.zetabit.ios_standby/br.com.zetabit.ios_standby.MainActivity"
   },
   "bubble.level.ar.measure.tape.ruler": {
     "label": "Ruler",
@@ -121,7 +136,7 @@
   },
   "co.hinge.app": {
     "label": "Hinge",
-    "category": "unknown",
+    "category": "communication",
     "component": "co.hinge.app/co.hinge.app.ui.AppActivity"
   },
   "com.IceWaterGames.Viridi": {
@@ -222,7 +237,7 @@
   "com.android.virtualization.terminal": {
     "label": "Terminal",
     "category": "system",
-    "component": "com.android.virtualization.terminal/com.android.virtualization.terminal.MainActivity"
+    "component": "com.android.virtualization.terminal/com.android.virtualization.terminal.LauncherActivity"
   },
   "com.andymstone.metronome": {
     "label": "Metronome",
@@ -321,7 +336,7 @@
   },
   "com.bumble.app": {
     "label": "Bumble",
-    "category": "unknown",
+    "category": "communication",
     "component": "com.bumble.app/com.bumble.app.ui.launcher.BumbleLauncherActivity"
   },
   "com.care.android.careview.providerapp": {
@@ -348,6 +363,11 @@
     "label": "Chesstempo",
     "category": "games",
     "component": "com.chesstempo.mobile/com.chesstempo.mobile.MainActivity"
+  },
+  "com.cibc.android.mobi": {
+    "label": "Mobi",
+    "category": "finance",
+    "component": "com.cibc.android.mobi/com.cibc.android.mobi.banking.main.activities.MainActivity"
   },
   "com.cisco.connect.cloud": {
     "label": "Cloud",
@@ -403,6 +423,16 @@
     "label": "Dolby234",
     "category": "media",
     "component": "com.dolby.dolby234/com.dolby.sessions.Launcher"
+  },
+  "com.donnnno.arcticons": {
+    "label": "Arcticons",
+    "category": "unknown",
+    "component": "com.donnnno.arcticons/com.donnnno.arcticons.activities.MainActivity"
+  },
+  "com.draco.ladb": {
+    "label": "Ladb",
+    "category": "tools",
+    "component": "com.draco.ladb/com.draco.ladb.views.MainActivity"
   },
   "com.ecw.healow": {
     "label": "Healow",
@@ -498,6 +528,11 @@
     "label": "Airtable",
     "category": "tools",
     "component": "com.formagrid.airtable/com.formagrid.airtable.activity.session.SessionLoaderActivity"
+  },
+  "com.formulaone.production": {
+    "label": "Production",
+    "category": "media",
+    "component": "com.formulaone.production/com.avs.f1.ui.splash.SplashActivity"
   },
   "com.fujifilm.xapp": {
     "label": "Xapp",
@@ -598,6 +633,11 @@
     "label": "Bard",
     "category": "system",
     "component": "com.google.android.apps.bard/com.google.android.apps.bard.shellapp.BardEntryPointActivity"
+  },
+  "com.google.android.apps.chromecast.app": {
+    "label": "Chromecast",
+    "category": "tools",
+    "component": "com.google.android.apps.chromecast.app/com.google.android.apps.chromecast.app.DiscoveryActivity"
   },
   "com.google.android.apps.docs": {
     "label": "Docs",
@@ -778,6 +818,11 @@
     "category": "system",
     "component": "com.instructure.candroid/com.instructure.student.activity.LoginActivity"
   },
+  "com.investorsgroup.igwealth": {
+    "label": "Igwealth",
+    "category": "finance",
+    "component": "com.investorsgroup.igwealth/com.follow.investorsgroup.MainActivity"
+  },
   "com.ionicframework.wagandroid554504": {
     "label": "Wagandroid554504",
     "category": "system",
@@ -792,6 +837,11 @@
     "label": "Ivuu",
     "category": "photography",
     "component": "com.ivuu/com.ivuu.BrandingActivityCompat"
+  },
+  "com.jellycine.app": {
+    "label": "Jellycine",
+    "category": "media",
+    "component": "com.jellycine.app/com.jellycine.app.ui.activity.JellyCineActivity"
   },
   "com.jeremysteckling.facerrel": {
     "label": "Facerrel",
@@ -817,6 +867,11 @@
     "label": "Engine",
     "category": "tools",
     "component": "com.k2fsa.sherpa.onnx.tts.engine/com.k2fsa.sherpa.onnx.tts.engine.MainActivity"
+  },
+  "com.kevinforeman.nzb360": {
+    "label": "Nzb360",
+    "category": "tools",
+    "component": "com.kevinforeman.nzb360/com.kevinforeman.nzb360.StartupLauncher"
   },
   "com.krisdb.wearcasts": {
     "label": "Wearcasts",
@@ -858,15 +913,30 @@
     "category": "health",
     "component": "com.lucidcode.lucidscribe/com.lucidcode.lucidscribe.MainActivity"
   },
+  "com.lumiunited.aqarahome.play": {
+    "label": "Play",
+    "category": "tools",
+    "component": "com.lumiunited.aqarahome.play/com.lumiunited.aqara.main.SplashActivity"
+  },
   "com.lutron.mmw": {
     "label": "Mmw",
     "category": "tools",
     "component": "com.lutron.mmw/com.lutron.mmw.activity.MyHomeActivity"
   },
+  "com.marianatek.fiithousewellness": {
+    "label": "Fiithousewellness",
+    "category": "health",
+    "component": "com.marianatek.fiithousewellness/com.marianatek.gritty.ui.launcher.LaunchActivity"
+  },
   "com.maxmpz.audioplayer": {
     "label": "Poweramp",
     "category": "media",
     "component": "com.maxmpz.audioplayer/com.maxmpz.audioplayer.standard_adaptive"
+  },
+  "com.mb.android": {
+    "label": "Mb",
+    "category": "media",
+    "component": "com.mb.android/com.mb.android.MainActivity"
   },
   "com.mcdonalds.app": {
     "label": "Mcdonalds",
@@ -930,8 +1000,13 @@
   },
   "com.myfetch.android": {
     "label": "Myfetch",
-    "category": "unknown",
+    "category": "shopping",
     "component": "com.myfetch.android/com.precise.petcare.MainActivity"
+  },
+  "com.nelko.printer": {
+    "label": "Printer",
+    "category": "unknown",
+    "component": "com.nelko.printer/com.print.android.edit.ui.account.SplashActivity"
   },
   "com.nianticlabs.scaniverse": {
     "label": "Scaniverse",
@@ -1030,7 +1105,7 @@
   },
   "com.petbacker.android": {
     "label": "Petbacker",
-    "category": "unknown",
+    "category": "shopping",
     "component": "com.petbacker.android/com.petbacker.android.MainActivity"
   },
   "com.philips.cdp.ohc.tuscany": {
@@ -1062,6 +1137,11 @@
     "label": "Luminousblack",
     "category": "media",
     "component": "com.poweramp.v3.luminousblack/com.poweramp.v3.luminousblack.LauncherAlias"
+  },
+  "com.pryshedko.mtisland": {
+    "label": "Mtisland",
+    "category": "unknown",
+    "component": "com.pryshedko.mtisland/com.pryshedko.mtisland.MainAppActivity"
   },
   "com.psperl.projectM": {
     "label": "ProjectM",
@@ -1103,14 +1183,19 @@
     "category": "tools",
     "component": "com.razeeman.util.simpletimetracker/com.example.util.simpletimetracker.ui.MainActivity"
   },
+  "com.rbc.mobile.android": {
+    "label": "Rbc",
+    "category": "finance",
+    "component": "com.rbc.mobile.android/com.rbc.mobile.bud.pre_auth.common.activity.SplashActivity"
+  },
   "com.reddit.frontpage": {
     "label": "Reddit",
     "category": "communication",
-    "component": "com.reddit.frontpage/launcher.worldcup2026"
+    "component": "com.reddit.frontpage/launcher.default"
   },
   "com.redfin.android": {
     "label": "Redfin",
-    "category": "unknown",
+    "category": "shopping",
     "component": "com.redfin.android/com.redfin.android.core.activity.launch.DefaultLaunchActivity"
   },
   "com.renshuu.renshuu_org": {
@@ -1123,14 +1208,19 @@
     "category": "security",
     "component": "com.ringapp/com.ring.launch.LaunchActivity"
   },
+  "com.roborock.smart": {
+    "label": "Smart",
+    "category": "tools",
+    "component": "com.roborock.smart/com.roborock.smart.refactor.ui.splash.SplashActivity"
+  },
   "com.route.app": {
     "label": "Route",
-    "category": "unknown",
+    "category": "shopping",
     "component": "com.route.app/com.route.app.ui.MainActivity"
   },
   "com.rover.android": {
     "label": "Rover",
-    "category": "unknown",
+    "category": "shopping",
     "component": "com.rover.android/com.rover.android.deeplink.DeepLinkWithSplashActivity"
   },
   "com.sac.zippass": {
@@ -1228,6 +1318,11 @@
     "category": "photography",
     "component": "com.sec.android.gallery3d/com.samsung.android.gallery.app.activity.GalleryActivity"
   },
+  "com.server.auditor.ssh.client": {
+    "label": "SSH",
+    "category": "tools",
+    "component": "com.server.auditor.ssh.client/com.server.auditor.ssh.client.navigation.MainActivity"
+  },
   "com.servicecu.servicecu": {
     "label": "Servicecu",
     "category": "finance",
@@ -1273,10 +1368,20 @@
     "category": "system",
     "component": "com.sony.songpal.mdr/com.sony.songpal.mdr.vim.activity.MdrMainActivity"
   },
+  "com.sparkine.muvizedge": {
+    "label": "Muvizedge",
+    "category": "tools",
+    "component": "com.sparkine.muvizedge/com.sparkine.muvizedge.activity.HomeActivity"
+  },
   "com.sparkine.watchfaces": {
     "label": "Watchfaces",
     "category": "system",
     "component": "com.sparkine.watchfaces/com.sparkine.watchfaces.activity.OnboardActivity"
+  },
+  "com.spond.spond": {
+    "label": "Spond",
+    "category": "communication",
+    "component": "com.spond.spond/com.spond.view.activities.LaunchActivity"
   },
   "com.spotify.music": {
     "label": "Spotify",
@@ -1293,6 +1398,11 @@
     "category": "media",
     "component": "com.streamdev.aiostreamer/com.streamdev.aiostreamer.mobile.ui.lock.MainActivity"
   },
+  "com.sunlife.ca.mysunlife": {
+    "label": "Mysunlife",
+    "category": "finance",
+    "component": "com.sunlife.ca.mysunlife/com.sunlife.ca.mysunlife.LauncherAlias"
+  },
   "com.t4a.tuner.bass": {
     "label": "Bass",
     "category": "tools",
@@ -1308,10 +1418,20 @@
     "category": "games",
     "component": "com.taketaketake.mate/com.taketaketake.mate.MainActivity"
   },
+  "com.td.mbna": {
+    "label": "Mbna",
+    "category": "finance",
+    "component": "com.td.mbna/com.td.mbna.splash.SplashActivity"
+  },
   "com.teladoc.members": {
     "label": "Members",
     "category": "health",
     "component": "com.teladoc.members/com.teladoc.members.AppMainActivity"
+  },
+  "com.telus.myaccount": {
+    "label": "Myaccount",
+    "category": "finance",
+    "component": "com.telus.myaccount/com.telus.mytelusapp.MainActivity"
   },
   "com.termux": {
     "label": "Termux",
@@ -1353,6 +1473,11 @@
     "category": "tools",
     "component": "com.tplink.tpm5/com.tplink.tpm5.component.account.welcome.view.WelcomeActivity"
   },
+  "com.tracearr.mobile": {
+    "label": "Tracearr",
+    "category": "media",
+    "component": "com.tracearr.mobile/com.tracearr.mobile.MainActivity"
+  },
   "com.truebill": {
     "label": "Truebill",
     "category": "finance",
@@ -1360,7 +1485,7 @@
   },
   "com.trulia.android": {
     "label": "Trulia",
-    "category": "unknown",
+    "category": "shopping",
     "component": "com.trulia.android/com.trulia.android.activity.LoadingActivity"
   },
   "com.trustedhousesitters.TrustedHousesitters": {
@@ -1375,8 +1500,28 @@
   },
   "com.twentythreeandme.app": {
     "label": "Twentythreeandme",
-    "category": "unknown",
+    "category": "health",
     "component": "com.twentythreeandme.app/com.twentythreeandme.app.nux.NuxIntroductionActivity"
+  },
+  "com.ubercab": {
+    "label": "Ubercab",
+    "category": "maps",
+    "component": "com.ubercab/com.ubercab.presidio.app.core.root.RootActivity"
+  },
+  "com.ubnt.easyunifi": {
+    "label": "Easyunifi",
+    "category": "tools",
+    "component": "com.ubnt.easyunifi/com.ubnt.unifi.network.splashscreen.SplashScreenActivity"
+  },
+  "com.ubnt.unifi.protect": {
+    "label": "Protect",
+    "category": "tools",
+    "component": "com.ubnt.unifi.protect/com.ubnt.sections.splash.AuthenticationActivity"
+  },
+  "com.ubnt.usurvey": {
+    "label": "Usurvey",
+    "category": "unknown",
+    "component": "com.ubnt.usurvey/com.ubnt.usurvey.ui.splash.SplashActivity"
   },
   "com.underthing.focus.friend": {
     "label": "Friend",
@@ -1412,6 +1557,11 @@
     "label": "Flagship",
     "category": "unknown",
     "component": "com.visiblemobile.flagship/com.visiblemobile.flagship.splash.ui.SplashActivity"
+  },
+  "com.vitastudio.mahjong": {
+    "label": "Mahjong",
+    "category": "games",
+    "component": "com.vitastudio.mahjong/com.meevii.vitastudio.VitaDelegateActivity"
   },
   "com.vrem.wifianalyzer": {
     "label": "Wifianalyzer",
@@ -1455,7 +1605,7 @@
   },
   "com.wildohio.app": {
     "label": "Wildohio",
-    "category": "unknown",
+    "category": "maps",
     "component": "com.wildohio.app/com.wildohio.app.MainActivity"
   },
   "com.wireguard.android": {
@@ -1493,6 +1643,11 @@
     "category": "tools",
     "component": "com.zaneschepke.wireguardautotunnel/com.zaneschepke.wireguardautotunnel.MainActivity"
   },
+  "com.zhfahim.anchor": {
+    "label": "Anchor",
+    "category": "tools",
+    "component": "com.zhfahim.anchor/com.zhfahim.anchor.MainActivity"
+  },
   "com.zillow.android.zillowmap": {
     "label": "Zillowmap",
     "category": "system",
@@ -1512,6 +1667,11 @@
     "label": "Paperless Mobile",
     "category": "productivity",
     "component": "de.astubenbord.paperless_mobile/de.astubenbord.paperless_mobile.MainActivity"
+  },
+  "de.danoeh.antennapod": {
+    "label": "Antennapod",
+    "category": "media",
+    "component": "de.danoeh.antennapod/de.danoeh.antennapod.activity.SplashActivity"
   },
   "de.nulide.findmydevice": {
     "label": "Findmydevice",
@@ -1563,6 +1723,16 @@
     "category": "security",
     "component": "dev.imranr.obtainium.fdroid/dev.imranr.obtainium.MainActivity"
   },
+  "dev.jdtech.jellyfin": {
+    "label": "Jellyfin",
+    "category": "media",
+    "component": "dev.jdtech.jellyfin/dev.jdtech.jellyfin.MainActivity"
+  },
+  "dev.octoshrimpy.quik": {
+    "label": "Quik",
+    "category": "communication",
+    "component": "dev.octoshrimpy.quik/dev.octoshrimpy.quik.feature.main.MainActivity"
+  },
   "edu.osumc.healthassistant.app": {
     "label": "Healthassistant",
     "category": "health",
@@ -1606,11 +1776,11 @@
   "im.molly.app": {
     "label": "Molly",
     "category": "communication",
-    "component": "im.molly.app/org.thoughtcrime.securesms.RoutingActivity"
+    "component": "im.molly.app/org.thoughtcrime.securesms.RoutingActivityAltChat"
   },
   "im.vector.app": {
     "label": "Vector",
-    "category": "unknown",
+    "category": "communication",
     "component": "im.vector.app/im.vector.application.features.Alias"
   },
   "io.anuke.mindustry.be": {
@@ -1627,6 +1797,11 @@
     "label": "Openvideoeditor",
     "category": "media",
     "component": "io.github.devhyper.openvideoeditor/io.github.devhyper.openvideoeditor.main.MainActivity"
+  },
+  "io.github.samolego.canta": {
+    "label": "Canta",
+    "category": "tools",
+    "component": "io.github.samolego.canta/io.github.samolego.canta.MainActivity"
   },
   "io.heckel.ntfy": {
     "label": "Ntfy",
@@ -1647,6 +1822,11 @@
     "label": "Wearlivehr",
     "category": "system",
     "component": "io.local.wearlivehr/io.local.wearlivehr.MainActivity"
+  },
+  "io.music_assistant.client": {
+    "label": "Music Assistant",
+    "category": "media",
+    "component": "io.music_assistant.client/io.music_assistant.client.MainActivity"
   },
   "jp.co.canon.ic.cameraconnect": {
     "label": "Cameraconnect",
@@ -1693,6 +1873,21 @@
     "category": "productivity",
     "component": "md.obsidian/md.obsidian.MainActivity"
   },
+  "me.proton.android.calendar": {
+    "label": "Calendar",
+    "category": "productivity",
+    "component": "me.proton.android.calendar/me.proton.android.calendar.presentation.main.MainActivity"
+  },
+  "me.proton.android.drive": {
+    "label": "Drive",
+    "category": "productivity",
+    "component": "me.proton.android.drive/me.proton.android.drive.ui.MainActivity"
+  },
+  "me.proton.android.lumo": {
+    "label": "Lumo",
+    "category": "ai",
+    "component": "me.proton.android.lumo/me.proton.android.lumo.MainActivity"
+  },
   "me.sleep.app": {
     "label": "Sleep",
     "category": "health",
@@ -1726,7 +1921,7 @@
   "net.dinglisch.android.taskerm": {
     "label": "Taskerm",
     "category": "tools",
-    "component": "net.dinglisch.android.taskerm/com.joaomgcd.taskerm.util.ActivitySecondaryApp"
+    "component": "net.dinglisch.android.taskerm/net.dinglisch.android.taskerm.Tasker"
   },
   "net.gsantner.markor": {
     "label": "Markor",
@@ -1758,6 +1953,11 @@
     "category": "communication",
     "component": "nie.translator.rtranslator/nie.translator.rtranslator.LoadingActivity"
   },
+  "nl.jknaapen.fladder": {
+    "label": "Fladder",
+    "category": "media",
+    "component": "nl.jknaapen.fladder/nl.jknaapen.fladder.MainActivity"
+  },
   "nl.privacydragon.bookwyrm": {
     "label": "Bookwyrm",
     "category": "reading",
@@ -1767,6 +1967,16 @@
     "label": "Mcp",
     "category": "system",
     "component": "no.nordicsemi.android.mcp/no.nordicsemi.android.mcp.MainActivity"
+  },
+  "no.nrk.yr": {
+    "label": "Yr",
+    "category": "tools",
+    "component": "no.nrk.yr/no.nrk.yr.MainActivity"
+  },
+  "org.breezyweather": {
+    "label": "Breezyweather",
+    "category": "tools",
+    "component": "org.breezyweather/org.breezyweather.ui.main.MainActivity"
   },
   "org.bryanjohnson.blueprint": {
     "label": "Blueprint",
@@ -1878,6 +2088,11 @@
     "category": "media",
     "component": "org.moire.ultrasonic/org.moire.ultrasonic.activity.NavigationActivity"
   },
+  "org.moonfin.androidtv": {
+    "label": "Androidtv",
+    "category": "unknown",
+    "component": "org.moonfin.androidtv/org.moonfin.androidtv.MainActivity"
+  },
   "org.mozilla.firefox": {
     "label": "Firefox",
     "category": "browser",
@@ -1885,7 +2100,7 @@
   },
   "org.olympic.app.mobile": {
     "label": "Olympic",
-    "category": "unknown",
+    "category": "media",
     "component": "org.olympic.app.mobile/com.android.app.MainActivity"
   },
   "org.oxycblt.auxio": {
@@ -1909,13 +2124,18 @@
   },
   "org.torproject.android": {
     "label": "Torproject",
-    "category": "unknown",
+    "category": "security",
     "component": "org.torproject.android/org.torproject.android.OrbotActivity"
   },
   "org.torproject.torbrowser": {
     "label": "Torbrowser",
     "category": "browser",
     "component": "org.torproject.torbrowser/org.torproject.torbrowser.App"
+  },
+  "org.videolan.vlc": {
+    "label": "Vlc",
+    "category": "media",
+    "component": "org.videolan.vlc/org.videolan.vlc.StartActivity"
   },
   "org.wikipedia.alpha": {
     "label": "Alpha",
@@ -1956,6 +2176,11 @@
     "label": "Aiostore",
     "category": "shopping",
     "component": "ru.execbit.aiostore/ru.execbit.aiostore.MainActivity"
+  },
+  "spivi.club.login.android": {
+    "label": "Login",
+    "category": "unknown",
+    "component": "spivi.club.login.android/spivi.club.login.android.MainActivity"
   },
   "top.jtmonster.jhentai": {
     "label": "Jhentai",
